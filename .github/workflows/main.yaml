@@ -43,29 +43,30 @@ jobs:
       - name: Build and analyze (Customer)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_CUSTOMER }}
+          SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_CUSTOMER }}
         run: cd Customer && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=nl.softwarestrijders.waiter:Customer
 
       - name: Build and analyze (Delivery)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_DELIVERY }}
+          SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_DELIVERY }}
         run: cd Delivery && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=nl.softwarestrijders.waiter:Delivery
 
       - name: Build and analyze (Order)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_ORDER }}
+          SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_ORDER }}
         run: cd Order && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=nl.softwarestrijders.waiter:Order
 
       - name: Build and analyze (Product)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_PRODUCT }}
+          SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_PRODUCT }}
         run: cd Product && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=nl.softwarestrijders.waiter:Product
 
       - name: Build and analyze (Review)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_REVIEW }}
+          SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_REVIEW }}
         run: cd Review && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=nl.softwarestrijders.waiter:Review
+        
