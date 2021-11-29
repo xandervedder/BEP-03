@@ -2,22 +2,13 @@ name: Analyze
 
 on:
   push:
-    paths-ignore:
-      - 'Delivery/**'
-      - 'Order/**'
-      - 'Product/**'
-      - 'Review/**'
     branches: [ master ]
+    paths:
+      - 'Customer/**'
   pull_request:
-    paths-ignore:
-      - 'Delivery/**'
-      - 'Order/**'
-      - 'Product/**'
-      - 'Review/**'
     branches: [ master ]
-
-  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
-
+    paths:
+      - 'Customer/**'
 
 jobs:
   build:
