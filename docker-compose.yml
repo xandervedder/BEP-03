@@ -6,8 +6,8 @@ services:
       - "5672:5672"
       - "15672:15672"
     volumes:
-      - ./rabbitmq/volume/data/:/var/lib/rabbitmq/
-      - ./rabbitmq/volume/log/:/var/log/rabbitmq/
+      - ./development/rabbitmq/volume/data/:/var/lib/rabbitmq/
+      - ./development/rabbitmq/volume/log/:/var/log/rabbitmq/
 
   mongodb:
     image: "mongo:latest"
@@ -17,4 +17,4 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./mongodb/volume/data/:/data/db/
+      - ./development/mongodb/volume/data/:/data/db/
