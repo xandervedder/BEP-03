@@ -3,11 +3,11 @@ name: CI
 on:
   push:
     paths:
-      - 'Customer'
+      - 'Customer/**'
     branches: [ master ]
   pull_request:
     paths:
-      - 'Customer'
+      - 'Customer/**'
     branches: [ master ]
 
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
