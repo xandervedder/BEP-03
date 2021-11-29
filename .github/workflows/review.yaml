@@ -1,4 +1,4 @@
-name: CI
+name: Analyze
 
 on:
   push:
@@ -15,7 +15,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: review
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -44,7 +44,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Build and analyze (Review)
+      - name: Build and analyze (review)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_REVIEW }}
