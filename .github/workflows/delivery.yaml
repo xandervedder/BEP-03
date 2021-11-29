@@ -2,11 +2,6 @@ name: Analyze
 
 on:
   push:
-    branches: [ master ]
-    paths:
-      - 'Delivery/**'
-  pull_request:
-    branches: [ master ]
     paths:
       - 'Delivery/**'
 
