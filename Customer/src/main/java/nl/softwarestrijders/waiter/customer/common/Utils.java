@@ -18,9 +18,6 @@ public class Utils {
 
 		var pattern = Pattern.compile(emailRegex);
 
-		if (email == null)
-			return false;
-
 		return pattern.matcher(email).matches();
 	}
 }
