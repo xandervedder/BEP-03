@@ -3,7 +3,7 @@ package nl.softwarestrijders.waiter.customer.common;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
- * Utility class with static methods to aid
+ * Utility class with static methods to aid with common things that can be easily extracted.
  */
 public class Utils {
 	private Utils() {

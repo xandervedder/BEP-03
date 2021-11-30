@@ -54,9 +54,8 @@ public class Address {
 	public void setHouseNumber(int number) {
 		char[] numberChars = String.valueOf(number).toCharArray();
 		for (char c : numberChars)
-			if (! Character.isDigit(c))
+			if (!Character.isDigit(c))
 				throw new InvalidHouseNumberException();
-
 
 		this.houseNumber = number;
 	}
@@ -73,7 +72,7 @@ public class Address {
 	public void setAddition(String addition) {
 		char[] additionChars = addition.toCharArray();
 		for (char c : additionChars)
-			if (! Character.isLetterOrDigit(c) && ! Character.isWhitespace(c))
+			if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c))
 				throw new InvalidAdditionException();
 
 		this.addition = addition;
@@ -94,10 +93,10 @@ public class Address {
 		int listSize = streetChars.length;
 		for (int i = 0; i < streetChars.length; i++) {
 			char c = streetChars[i];
-			if (i == listSize - 1 && ! Character.isLetterOrDigit(c))
+			if (i == listSize - 1 && !Character.isLetterOrDigit(c))
 				throw new InvalidStreetException("Streetname must end with a letter or a number");
 
-			if (c != '-' && ! Character.isLetterOrDigit(c) && ! Character.isWhitespace(c))
+			if (c != '-' && !Character.isLetterOrDigit(c) && !Character.isWhitespace(c))
 				throw new InvalidStreetException("Streetname must consist of numbers, letters and dashes only");
 		}
 
@@ -125,9 +124,9 @@ public class Address {
 		for (int i = 0; i < postalCodeChars.length; i++) {
 			char c = postalCodeChars[i];
 			if (i < 4) {
-				if (! Character.isDigit(c))
+				if (!Character.isDigit(c))
 					throw new InvalidPostalCodeException("First four characters of postalcode must consist of numbers only");
-			} else if (! Character.isLetter(c))
+			} else if (!Character.isLetter(c))
 				throw new InvalidPostalCodeException("Last two characters of postalcode must consist of letters only");
 		}
 
@@ -146,7 +145,7 @@ public class Address {
 	public void setCity(String city) {
 		char[] cityChars = city.toCharArray();
 		for (char c : cityChars)
-			if (! Character.isLetterOrDigit(c))
+			if (!Character.isLetterOrDigit(c))
 				throw new InvalidCityException();
 
 		this.city = city;

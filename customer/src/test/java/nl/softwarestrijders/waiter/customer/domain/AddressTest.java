@@ -38,17 +38,17 @@ class AddressTest {
 	@Test
 	@DisplayName("Should throw InvalidHouseNumberException if housenumber is invalid")
 	void shouldThrowWhenInvalidHouseNumber() {
-		assertThrows(InvalidHouseNumberException.class, () -> new Address(- 1, addition, street, postalCode, city));
+		assertThrows(InvalidHouseNumberException.class, () -> new Address(-1, addition, street, postalCode, city));
 	}
 
 	@Test
 	@DisplayName("Should throw if addition is invalid")
-	void shouldTrowWhenInvalidAddition() {
+	void shouldThrowWhenInvalidAddition() {
 		assertThrows(InvalidAdditionException.class, () -> new Address(houseNumber, "-", street, postalCode, city));
 	}
 
 	@Test
-	@DisplayName("Should throw if addition contains whitespaces")
+	@DisplayName("Should not throw if addition contains whitespaces")
 	void shouldNotThrowWhenAdditionContainsWhiteSpace() {
 		assertDoesNotThrow(() -> new Address(houseNumber, "A 4", street, postalCode, city));
 	}
@@ -61,7 +61,7 @@ class AddressTest {
 
 	@Test
 	@DisplayName("Should Throw if streetname ends with something else than a number or a letter")
-	void shouldTrowWhenInvalidStreet() {
+	void shouldThrowWhenInvalidStreet() {
 		assertThrows(InvalidStreetException.class, () -> new Address(houseNumber, addition, "Test-Street-", postalCode, city));
 	}
 
@@ -79,43 +79,43 @@ class AddressTest {
 
 	@Test
 	@DisplayName("Should throw when Postal code contains too many numbers")
-	void shouldTrowWhenPostalcodeContainsTooManyNumbers() {
+	void shouldThrowWhenPostalcodeContainsTooManyNumbers() {
 		assertThrows(InvalidPostalCodeException.class, () -> new Address(houseNumber, addition, street, "2211AGA", city));
 	}
 
 	@Test
 	@DisplayName("Should throw when Postal code contains letters in the digit part")
-	void shouldTrowWhenPostalcodeContainsLettersInDigitPart() {
+	void shouldThrowWhenPostalcodeContainsLettersInDigitPart() {
 		assertThrows(InvalidPostalCodeException.class, () -> new Address(houseNumber, addition, street, "2A11AA", city));
 	}
 
 	@Test
 	@DisplayName("Should throw when postal code contains to many letters")
-	void shouldTrowWhenPostalcodeContainsTooManyLetters() {
+	void shouldThrowWhenPostalcodeContainsTooManyLetters() {
 		assertThrows(InvalidPostalCodeException.class, () -> new Address(houseNumber, addition, street, "22111A", city));
 	}
 
 	@Test
 	@DisplayName("Should throw if postal code contains invalid characters")
-	void shouldTrowWhenPostalcodeContainsinvalidCharacters() {
+	void shouldThrowWhenPostalcodeContainsinvalidCharacters() {
 		assertThrows(InvalidPostalCodeException.class, () -> new Address(houseNumber, addition, street, "2211*A", city));
 	}
 
 	@Test
 	@DisplayName("Should throw when city contains invalid characters")
-	void shouldTrowWhenCityContainsInvalidCharacter() {
+	void shouldThrowWhenCityContainsInvalidCharacter() {
 		assertThrows(InvalidCityException.class, () -> new Address(houseNumber, addition, street, postalCode, "TestC*ty"));
 	}
 
 	@Test
 	@DisplayName("Should throw when city contains numbers")
-	void shouldNotTrowWhenCityContainsNumbers() {
+	void shouldNotThrowWhenCityContainsNumbers() {
 		assertDoesNotThrow(() -> new Address(houseNumber, addition, street, postalCode, "TestC1ty"));
 	}
 
 	@Test
 	@DisplayName("Getters and setters test for JaCoCo")
-	void getterSetterTets() {
+	void getterSetterTests() {
 		var address = new Address(houseNumber, addition, street, postalCode, city);
 		assertDoesNotThrow(() -> address.setId("1"));
 		assertDoesNotThrow(address::getHouseNumber); //int cannot be null

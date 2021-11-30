@@ -50,13 +50,12 @@ public class Customer {
 	public void setFirstName(String firstName) {
 		char[] firstNameChars = firstName.toCharArray();
 
-		if (! Character.isUpperCase(firstNameChars[0]))
+		if (!Character.isUpperCase(firstNameChars[0]))
 			throw new InvalidNameStartException();
 
 		for (char c : firstNameChars)
-			if (! Character.isLetter(c))
+			if (!Character.isLetter(c))
 				throw new InvalidNameException(c);
-
 
 		this.firstName = firstName;
 	}
@@ -74,11 +73,11 @@ public class Customer {
 	public void setLastName(String lastName) {
 		char[] lastNameChars = lastName.toCharArray();
 
-		if (! Character.isUpperCase(lastNameChars[0]))
+		if (!Character.isUpperCase(lastNameChars[0]))
 			throw new InvalidNameStartException();
 
 		for (char c : lastNameChars)
-			if (! Character.isLetter(c))
+			if (!Character.isLetter(c))
 				throw new InvalidNameException(c);
 
 		this.lastName = lastName;

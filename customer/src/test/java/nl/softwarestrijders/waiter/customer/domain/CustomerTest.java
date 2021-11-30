@@ -62,19 +62,19 @@ class CustomerTest {
 
 	@Test
 	@DisplayName("Should throw InvalidEmailException if there is a double @ in the email address")
-	void shouldTrowInvalidEmailExceptionIfEmailHasDoubleAt() {
+	void shouldThrowInvalidEmailExceptionIfEmailHasDoubleAt() {
 		assertThrows(InvalidEmailException.class, () -> new Customer("Danial", "Gebrail", "dani@@try.com", address));
 	}
 
 	@Test
 	@DisplayName("Should throw InvalidEmailException if there is a double . at the end of the email address")
-	void shouldTrowInvalidEmailExceptionIfEmailHasDoubleDot() {
+	void shouldThrowInvalidEmailExceptionIfEmailHasDoubleDot() {
 		assertThrows(InvalidEmailException.class, () -> new Customer("Zora", "Bult", "z.bult@twieger..com", address));
 	}
 
 	@Test
 	@DisplayName("Getters and setters test for JaCoCo")
-	void getterSetterTets() {
+	void getterSetterTests() {
 		var customer = new Customer("Test", "Test", "test@test.nl", address);
 		assertDoesNotThrow(() -> customer.setId("1"));
 		assertDoesNotThrow(() -> customer.setAddress(address));
