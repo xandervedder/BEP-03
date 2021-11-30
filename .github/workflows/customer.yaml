@@ -1,13 +1,13 @@
-name: Analyze
+name: Analyze customer
 
 on:
   push:
     paths:
-      - 'Customer/**'
+      - 'customer/**'
 
 jobs:
   build:
-    name: customer
+    name: SonarCloud
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -40,4 +40,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_CUSTOMER }}
-        run: cd Customer && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=nl.softwarestrijders.waiter:Customer
+        run: cd customer && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=nl.softwarestrijders.waiter:customer
