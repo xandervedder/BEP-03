@@ -2,6 +2,7 @@ name: Analyze review
 
 on:
   push:
+    branches: [ master ]
     paths:
       - 'review/**'
   pull_request:

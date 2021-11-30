@@ -2,6 +2,7 @@ name: Analyze order
 
 on:
   push:
+    branches: [ master ]
     paths:
       - 'order/**'
   pull_request:

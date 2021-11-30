@@ -2,6 +2,7 @@ name: Analyze product
 
 on:
   push:
+    branches: [ master ]
     paths:
       - 'product/**'
   pull_request:
