@@ -2,12 +2,6 @@ name: Linter
 
 on:
   push:
-    paths:
-      - 'customer/**'
-      - 'delivery/**'
-      - 'order/**'
-      - 'product/**'
-      - 'review/**'
 
 jobs:
   build:
