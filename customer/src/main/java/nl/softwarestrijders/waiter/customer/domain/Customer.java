@@ -18,6 +18,7 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private Address address;
 
 	/**
 	 * Constructor of the {@link Customer} class. This constructor calls
@@ -27,10 +28,11 @@ public class Customer {
 	 * @param firstName the Customer's first name.
 	 * @param lastName  the Customer's last name.
 	 */
-	public Customer(String firstName, String lastName, String email) {
+	public Customer(String firstName, String lastName, String email, Address address) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setEmail(email);
+		this.address = address;
 	}
 
 	/**
@@ -100,6 +102,10 @@ public class Customer {
 		this.id = id;
 	}
 
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -114,5 +120,9 @@ public class Customer {
 
 	public String getEmail() {
 		return email;
+	}
+
+	public Address getAddress() {
+		return address;
 	}
 }
