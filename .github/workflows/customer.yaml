@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'customer/**'
+  pull_request:
+    paths:
+      - 'customer/**'
 
 jobs:
   build:
