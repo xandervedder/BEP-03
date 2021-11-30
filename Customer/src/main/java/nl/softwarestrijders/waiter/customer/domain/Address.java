@@ -2,16 +2,16 @@ package nl.softwarestrijders.waiter.customer.domain;
 
 import nl.softwarestrijders.waiter.customer.domain.exceptions.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Class containing {@link Address} data like the house number, addition, street,
  * postal code and city.
  */
+@Document(collation = "address")
 public class Address {
 	@Id
-	private MongoId id;
-
+	private String id;
 	private int houseNumber;
 	private String addition;
 	private String street;
@@ -152,11 +152,11 @@ public class Address {
 		this.city = city;
 	}
 
-	public void setId(MongoId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public MongoId getId() {
+	public String getId() {
 		return id;
 	}
 
