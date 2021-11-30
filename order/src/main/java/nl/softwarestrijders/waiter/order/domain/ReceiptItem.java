@@ -1,5 +1,7 @@
 package nl.softwarestrijders.waiter.order.domain;
 
+import java.util.Objects;
+
 public class ReceiptItem {
 
     private ReceiptItemId id;
@@ -43,5 +45,18 @@ public class ReceiptItem {
         }
 
         return this.amount -= amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReceiptItem that = (ReceiptItem) o;
+        return amount == that.amount && Objects.equals(id, that.id) && Objects.equals(productId, that.productId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, productId);
     }
 }
