@@ -13,7 +13,7 @@ public class Price {
         this.vat = vat;
     }
 
-    public static Price calculatePrice(Reciept reciept) {
+    public static Price calculatePrice(Receipt reciept) {
         return new Price();
     }
 }
