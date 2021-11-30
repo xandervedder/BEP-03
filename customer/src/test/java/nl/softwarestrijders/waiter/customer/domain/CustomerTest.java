@@ -6,8 +6,7 @@ import nl.softwarestrijders.waiter.customer.domain.exceptions.InvalidNameStartEx
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerTest {
 	@Test
@@ -68,5 +67,16 @@ class CustomerTest {
 	@DisplayName("Should throw InvalidEmailException if there is a double . at the end of the email address")
 	void shouldTrowInvalidEmailExceptionIfEmailHasDoubleDot() {
 		assertThrows(InvalidEmailException.class, () -> new Customer("Zora", "Bult", "z.bult@twieger..com"));
+	}
+
+	@Test
+	@DisplayName("Getters and setters test for JaCoCo")
+	void getterSetterTets() {
+		var customer = new Customer("Test", "Test", "test@test.nl");
+		assertDoesNotThrow(() -> customer.setId("1"));
+		assertNotNull(customer.getId());
+		assertNotNull(customer.getFirstName());
+		assertNotNull(customer.getLastName());
+		assertNotNull(customer.getEmail());
 	}
 }

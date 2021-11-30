@@ -112,4 +112,18 @@ class AddressTest {
 	void shouldNotTrowWhenCityContainsNumbers() {
 		assertDoesNotThrow(() -> new Address(houseNumber, addition, street, postalCode, "TestC1ty"));
 	}
+
+	@Test
+	@DisplayName("Getters and setters test for JaCoCo")
+	void getterSetterTets() {
+		var address = new Address(houseNumber, addition, street, postalCode, city);
+		assertDoesNotThrow(() -> address.setId("1"));
+		assertDoesNotThrow(address::getHouseNumber); //int cannot be null
+		assertNotNull(address.getId());
+		assertNotNull(address.getAddition());
+		assertNotNull(address.getStreet());
+		assertNotNull(address.getPostalCode());
+		assertNotNull(address.getCity());
+
+	}
 }
