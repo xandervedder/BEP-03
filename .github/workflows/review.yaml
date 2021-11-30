@@ -7,7 +7,7 @@ on:
       - 'review/**'
   pull_request:
     paths:
-      - 'customer/**'
+      - 'review/**'
 
 jobs:
   build:
