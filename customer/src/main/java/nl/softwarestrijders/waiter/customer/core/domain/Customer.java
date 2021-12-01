@@ -1,20 +1,22 @@
-package nl.softwarestrijders.waiter.customer.domain;
+package nl.softwarestrijders.waiter.customer.core.domain;
 
 
-import nl.softwarestrijders.waiter.customer.common.Utils;
-import nl.softwarestrijders.waiter.customer.domain.exceptions.InvalidEmailException;
-import nl.softwarestrijders.waiter.customer.domain.exceptions.InvalidNameException;
-import nl.softwarestrijders.waiter.customer.domain.exceptions.InvalidNameStartException;
+import nl.softwarestrijders.waiter.customer.core.common.Utils;
+import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidEmailException;
+import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameException;
+import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameStartException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.UUID;
 
 /**
  * Class containing {@link Customer} data like first name, last name and email.
  */
-@Document
+@Document(collation = "customer")
 public class Customer {
 	@Id
-	private String id;
+	private UUID id;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -97,7 +99,7 @@ public class Customer {
 			throw new InvalidEmailException();
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -105,7 +107,7 @@ public class Customer {
 		this.address = address;
 	}
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 

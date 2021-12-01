@@ -1,8 +1,10 @@
-package nl.softwarestrijders.waiter.customer.domain;
+package nl.softwarestrijders.waiter.customer.core.domain;
 
-import nl.softwarestrijders.waiter.customer.domain.exceptions.*;
+import nl.softwarestrijders.waiter.customer.core.domain.exceptions.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.UUID;
 
 /**
  * Class containing {@link Address} data like the house number, addition, street,
@@ -11,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collation = "address")
 public class Address {
 	@Id
-	private String id;
+	private UUID id;
 	private int houseNumber;
 	private String addition;
 	private String street;
@@ -151,11 +153,11 @@ public class Address {
 		this.city = city;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 

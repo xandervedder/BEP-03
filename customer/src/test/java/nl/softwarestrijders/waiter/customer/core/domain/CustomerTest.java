@@ -1,10 +1,12 @@
-package nl.softwarestrijders.waiter.customer.domain;
+package nl.softwarestrijders.waiter.customer.core.domain;
 
-import nl.softwarestrijders.waiter.customer.domain.exceptions.InvalidEmailException;
-import nl.softwarestrijders.waiter.customer.domain.exceptions.InvalidNameException;
-import nl.softwarestrijders.waiter.customer.domain.exceptions.InvalidNameStartException;
+import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidEmailException;
+import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameException;
+import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameStartException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -76,7 +78,7 @@ class CustomerTest {
 	@DisplayName("Getters and setters test for JaCoCo")
 	void getterSetterTests() {
 		var customer = new Customer("Test", "Test", "test@test.nl", address);
-		assertDoesNotThrow(() -> customer.setId("1"));
+		assertDoesNotThrow(() -> customer.setId(new UUID(1, 1)));
 		assertDoesNotThrow(() -> customer.setAddress(address));
 		assertNotNull(customer.getId());
 		assertNotNull(customer.getFirstName());

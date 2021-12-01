@@ -1,4 +1,4 @@
-package nl.softwarestrijders.waiter.customer.common;
+package nl.softwarestrijders.waiter.customer.core.common;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
