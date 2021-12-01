@@ -1,5 +1,8 @@
 package nl.softwarestrijders.waiter.order.domain;
 
+import nl.softwarestrijders.waiter.order.domain.id.ProductId;
+import nl.softwarestrijders.waiter.order.domain.id.ReceiptItemId;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

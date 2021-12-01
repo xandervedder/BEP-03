@@ -1,5 +1,9 @@
 package nl.softwarestrijders.waiter.order.domain;
 
+import nl.softwarestrijders.waiter.order.common.annotation.TestExcludeGenerated;
+import nl.softwarestrijders.waiter.order.domain.id.ProductId;
+import nl.softwarestrijders.waiter.order.domain.id.ReceiptItemId;
+
 import java.util.Objects;
 
 public class ReceiptItem {
@@ -48,14 +52,16 @@ public class ReceiptItem {
     }
 
     @Override
+    @TestExcludeGenerated
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReceiptItem that = (ReceiptItem) o;
-        return amount == that.amount && Objects.equals(id, that.id) && Objects.equals(productId, that.productId);
+        return Objects.equals(id, that.id) || Objects.equals(productId, that.productId);
     }
 
     @Override
+    @TestExcludeGenerated
     public int hashCode() {
         return Objects.hash(id, productId);
     }

@@ -1,5 +1,9 @@
 package nl.softwarestrijders.waiter.order.domain;
 
+import nl.softwarestrijders.waiter.order.common.annotation.TestExcludeGenerated;
+import nl.softwarestrijders.waiter.order.domain.id.OrderId;
+import nl.softwarestrijders.waiter.order.domain.id.ProductId;
+
 public class Order {
 
     private OrderId id;

@@ -1,12 +1,15 @@
-package nl.softwarestrijders.waiter.order.domain;
+package nl.softwarestrijders.waiter.order.domain.id;
+
+import nl.softwarestrijders.waiter.order.common.annotation.TestExcludeGenerated;
 
 import java.util.Objects;
 
-public class OrderId {
+@TestExcludeGenerated
+public class ProductId {
 
     private int id;
 
-    public OrderId(int id) {
+    public ProductId(int id) {
         this.id = id;
     }
 
@@ -16,11 +19,10 @@ public class OrderId {
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderId orderId = (OrderId) o;
-        return id == orderId.id;
+        ProductId productId = (ProductId) o;
+        return id == productId.id;
     }
 
     @Override
