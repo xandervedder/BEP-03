@@ -1,5 +1,6 @@
 package nl.softwarestrijders.waiter.product.domain;
 
+import nl.softwarestrijders.waiter.product.common.Generated;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -83,16 +84,17 @@ public class Product {
         this.description = description;
     }
 
+    @Generated
     public UUID getId() {return id;}
-
+    @Generated
     public double getPrice() {return price;}
-
+    @Generated
     public String getDescription() {return description;}
-
+    @Generated
     public String getName() {return name;}
-
+    @Generated
     public NutritionalValue getNutritionalValue() {return nutritionalValue;}
-
+    @Generated
     public int getWeight() {return weight;}
 
     /**
