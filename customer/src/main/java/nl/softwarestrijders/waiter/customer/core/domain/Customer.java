@@ -1,6 +1,5 @@
 package nl.softwarestrijders.waiter.customer.core.domain;
 
-
 import nl.softwarestrijders.waiter.customer.core.common.Utils;
 import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidEmailException;
 import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameException;

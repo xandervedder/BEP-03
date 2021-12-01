@@ -1,4 +1,4 @@
-package nl.softwarestrijders.waiter.customer.storage;
+package nl.softwarestrijders.waiter.customer.core.port.storage;
 
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
 import org.springframework.data.mongodb.repository.MongoRepository;
