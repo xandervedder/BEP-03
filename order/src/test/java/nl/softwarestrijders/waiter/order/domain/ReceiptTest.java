@@ -64,5 +64,4 @@ class ReceiptTest {
 
         assertEquals(1, this.receipt.getItemByProductId(product).getAmount());
     }
-
 }
