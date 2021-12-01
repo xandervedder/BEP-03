@@ -68,7 +68,7 @@ public class Review {
     /**
      * Sets the type of the {@link Review}
      *
-     * @param type the type of the {@link Review}.
+     * @param type The type of the {@link Review}.
      * @throws NullPointerException Providing null will throw this.
      */
     public void setType(ReviewType type) {
@@ -122,7 +122,7 @@ public class Review {
     /**
      * Sets the {@link Rating} of the {@link Review}
      *
-     * @param rating the {@link Rating} of the {@link Review}.
+     * @param rating The {@link Rating} of the {@link Review}.
      * @throws NullPointerException Providing null will throw this.
      */
     public void setRating(Rating rating) {

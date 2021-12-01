@@ -10,7 +10,7 @@ public record Rating(int value) {
     /**
      * Constructor of the {@link Rating} record, checks if the value is between the min value and max value.
      *
-     * @param value the value of the rating
+     * @param value The value of the rating
      */
     public Rating {
         if (value < MIN_VALUE) {
