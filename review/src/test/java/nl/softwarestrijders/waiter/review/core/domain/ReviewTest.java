@@ -18,8 +18,10 @@ class ReviewTest {
     private static final String LONG_DESCRIPTION = """
             This description is going to be too long. It isn't there yet, but it will be, you'll see.
             The previous sentence was almost one fourth of the total characters allowed. See, it's easy.
+            Actually I lied, that wasn't one fourth at all. I actually don't know how far we are.
             Just like that, we've made it halfway there, or did we? Frankly I don't know anymore.
             What I do know, however, is that this sentence is going to be the nail in the coffin, we're done.
+            Not yet, almost. Just a little bit more. I can see it, we are here.
             """;
 
     @ParameterizedTest
