@@ -32,19 +32,19 @@ public class ReceiptItem {
         return amount;
     }
 
-    public int addAmount(int amount) {
+    public void addAmount(int amount) {
         if(amount < 0)
-            throw new RuntimeException("Cannot add a negative amount");
+            throw new RuntimeException("This modification cannot be done");
 
-        return this.amount += amount;
+        this.amount += amount;
     }
 
-    public int removeAmount(int amount) {
-        if(amount < 0) {
-            throw new RuntimeException("Cannot remove a negative amount");
+    public void removeAmount(int amount) {
+        if(amount < 0 || this.amount - amount <= 0) {
+            throw new RuntimeException("This modification cannot be done");
         }
 
-        return this.amount -= amount;
+        this.amount -= amount;
     }
 
     @Override

@@ -43,6 +43,13 @@ class OrderTest {
     }
 
     @Test
+    @DisplayName("Should throw exception when adding a negative amount")
+    void shouldThrowAddProductNegativeAmount() {
+        var product = new ProductId(1);
+        assertThrows(RuntimeException.class, () -> this.order.addProduct(product, -2));
+    }
+
+    @Test
     @DisplayName("Should remove product with amount 1 of order")
     void shouldRemoveAmountProductOfOrder() {
         var product = new ProductId(1);
@@ -58,5 +65,12 @@ class OrderTest {
         this.order.removeProduct(product, 2);
 
         assertNull(this.order.getReceipt().getItemByProductId(product));
+    }
+
+    @Test
+    @DisplayName("Should throw exception when removing a negative amount")
+    void shouldThrowRemoveProductNegativeAmount() {
+        var product = new ProductId(1);
+        assertThrows(RuntimeException.class, () -> this.order.removeProduct(product, -2));
     }
 }

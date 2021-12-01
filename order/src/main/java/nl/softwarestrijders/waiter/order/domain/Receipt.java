@@ -29,8 +29,10 @@ public class Receipt {
         var item = this.getItemByProductId(productId);
 
         // If the amount in the list is more than the amount we need to remove, we remove the whole entry.
-        if(amount >= item.getAmount())
+        if(amount >= item.getAmount()) {
             this.items.remove(item);
+            return;
+        }
 
         item.removeAmount(amount);
     }
