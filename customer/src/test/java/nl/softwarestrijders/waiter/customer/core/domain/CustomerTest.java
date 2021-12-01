@@ -78,7 +78,7 @@ class CustomerTest {
 	@DisplayName("Getters and setters test for JaCoCo")
 	void getterSetterTests() {
 		var customer = new Customer("Test", "Test", "test@test.nl", address);
-		assertDoesNotThrow(() -> customer.setId(new UUID(1, 1)));
+		assertDoesNotThrow(() -> customer.setId(UUID.randomUUID()));
 		assertDoesNotThrow(() -> customer.setAddress(address));
 		assertNotNull(customer.getId());
 		assertNotNull(customer.getFirstName());

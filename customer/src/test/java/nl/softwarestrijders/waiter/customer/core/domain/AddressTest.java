@@ -119,7 +119,7 @@ class AddressTest {
 	@DisplayName("Getters and setters test for JaCoCo")
 	void getterSetterTests() {
 		var address = new Address(houseNumber, addition, street, postalCode, city);
-		assertDoesNotThrow(() -> address.setId(new UUID(1, 1)));
+		assertDoesNotThrow(() -> address.setId(UUID.randomUUID()));
 		assertDoesNotThrow(address::getHouseNumber); //int cannot be null
 		assertNotNull(address.getId());
 		assertNotNull(address.getAddition());
