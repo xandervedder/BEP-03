@@ -1,9 +1,11 @@
-package nl.softwarestrijders.waiter.customer.domain;
+package nl.softwarestrijders.waiter.customer.core.domain;
 
-import nl.softwarestrijders.waiter.customer.domain.exceptions.*;
+import nl.softwarestrijders.waiter.customer.core.domain.exceptions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -117,7 +119,7 @@ class AddressTest {
 	@DisplayName("Getters and setters test for JaCoCo")
 	void getterSetterTests() {
 		var address = new Address(houseNumber, addition, street, postalCode, city);
-		assertDoesNotThrow(() -> address.setId("1"));
+		assertDoesNotThrow(() -> address.setId(UUID.randomUUID()));
 		assertDoesNotThrow(address::getHouseNumber); //int cannot be null
 		assertNotNull(address.getId());
 		assertNotNull(address.getAddition());
