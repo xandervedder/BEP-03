@@ -4,10 +4,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Class that contains data and logic to make a {@link Review} on a {@link ReviewType#PRODUCT} or
- * {@link ReviewType#DELIVERY}.
+ * Class that contains data and logic to make a {@link ReviewBase} that are both shared by {@link ProductReview} and
+ * {@link DeliveryReview}.
  */
-public class Review {
+public sealed class ReviewBase permits ProductReview, DeliveryReview {
     private static final int MIN_TITLE_LENGTH = 3; // Allows for titles like 'Bad' and 'Good'
     private static final int MAX_TITLE_LENGTH = 32; // Disallow large sentences (those are meant for the description)
     private static final int MIN_DESCRIPTION_LENGTH = 32;
@@ -15,31 +15,26 @@ public class Review {
 
     private final UUID id; // Might change from final to non-final, maybe it's possible with MongoDB (or not)
     private UUID customerId;
-    private ReviewType type; // Not sure about this, but will do for now
     private String title;
     private String description;
     private Rating rating;
 
     /**
-     * Constructor of the {@link Review} class.
+     * Constructor of the {@link ReviewBase} class.
      *
-     * @param customerId The Id of the customer.
-     * @param type The {@link ReviewType} of Review.
-     * @param title The title of the review.
+     * @param customerId  The Id of the customer.
+     * @param title       The title of the review.
      * @param description The description of the review.
-     * @param rating The rating of the review.
-     *
+     * @param rating      The rating of the review.
      * @see #setCustomerId(UUID)
-     * @see #setType(ReviewType)
      * @see #setTitle(String)
      * @see #setDescription(String)
      * @see #setRating(Rating)
      */
-    public Review(UUID customerId, ReviewType type, String title, String description, Rating rating) {
+    public ReviewBase(UUID customerId, String title, String description, Rating rating) {
         this.id = UUID.randomUUID();
 
         this.setCustomerId(customerId);
-        this.setType(type);
         this.setTitle(title);
         this.setDescription(description);
         this.setRating(rating);
@@ -50,7 +45,7 @@ public class Review {
     }
 
     /**
-     * Sets the customers' id of the {@link Review}.
+     * Sets the customers' id of the {@link ReviewBase}.
      *
      * @param customerId The id of the customer.
      * @throws NullPointerException Providing null will throw this.
@@ -66,25 +61,9 @@ public class Review {
     }
 
     /**
-     * Sets the type of the {@link Review}
+     * Sets the title of the {@link ReviewBase}.
      *
-     * @param type The type of the {@link Review}.
-     * @throws NullPointerException Providing null will throw this.
-     */
-    public void setType(ReviewType type) {
-        Objects.requireNonNull(type);
-
-        this.type = type;
-    }
-
-    public ReviewType getType() {
-        return type;
-    }
-
-    /**
-     * Sets the title of the {@link Review}.
-     *
-     * @param title The title of the {@link Review}.
+     * @param title The title of the {@link ReviewBase}.
      * @throws NullPointerException Providing null will throw this.
      * @throws IllegalArgumentException If the title is blank or outside the minimum range it will throw this exception.
      */
@@ -101,9 +80,9 @@ public class Review {
     }
 
     /**
-     * Sets the description of the {@link Review}.
+     * Sets the description of the {@link ReviewBase}.
      *
-     * @param description The description of the {@link Review}.
+     * @param description The description of the {@link ReviewBase}.
      * @throws NullPointerException Providing null will throw this.
      * @throws IllegalArgumentException If the title is blank or outside the minimum range it will throw this exception.
      */
@@ -120,9 +99,9 @@ public class Review {
     }
 
     /**
-     * Sets the {@link Rating} of the {@link Review}
+     * Sets the {@link Rating} of the {@link ReviewBase}
      *
-     * @param rating The {@link Rating} of the {@link Review}.
+     * @param rating The {@link Rating} of the {@link ReviewBase}.
      * @throws NullPointerException Providing null will throw this.
      */
     public void setRating(Rating rating) {
