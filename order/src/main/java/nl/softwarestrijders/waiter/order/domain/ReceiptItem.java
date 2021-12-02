@@ -1,6 +1,7 @@
 package nl.softwarestrijders.waiter.order.domain;
 
 import nl.softwarestrijders.waiter.order.common.annotation.TestExcludeGenerated;
+import nl.softwarestrijders.waiter.order.common.exception.InvalidModificationException;
 import nl.softwarestrijders.waiter.order.domain.id.ProductId;
 import nl.softwarestrijders.waiter.order.domain.id.ReceiptItemId;
 
@@ -38,14 +39,14 @@ public class ReceiptItem {
 
     public void addAmount(int amount) {
         if(amount < 0)
-            throw new RuntimeException("This modification cannot be done");
+            throw new InvalidModificationException("This modification cannot be done");
 
         this.amount += amount;
     }
 
     public void removeAmount(int amount) {
         if(amount < 0 || this.amount - amount <= 0)
-            throw new RuntimeException("This modification cannot be done");
+            throw new InvalidModificationException("This modification cannot be done");
 
         this.amount -= amount;
     }

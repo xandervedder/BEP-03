@@ -1,5 +1,6 @@
 package nl.softwarestrijders.waiter.order.domain;
 
+import nl.softwarestrijders.waiter.order.common.exception.InvalidModificationException;
 import nl.softwarestrijders.waiter.order.domain.id.OrderId;
 import nl.softwarestrijders.waiter.order.domain.id.ProductId;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,7 +51,7 @@ class OrderTest {
     @DisplayName("Should throw exception when adding a negative amount")
     void shouldThrowAddProductNegativeAmount() {
         var product = new ProductId(UUID.randomUUID());
-        assertThrows(RuntimeException.class, () -> this.order.addProduct(product, -2));
+        assertThrows(InvalidModificationException.class, () -> this.order.addProduct(product, -2));
     }
 
     @Test
@@ -75,6 +76,6 @@ class OrderTest {
     @DisplayName("Should throw exception when removing a negative amount")
     void shouldThrowRemoveProductNegativeAmount() {
         var product = new ProductId(UUID.randomUUID());
-        assertThrows(RuntimeException.class, () -> this.order.removeProduct(product, -2));
+        assertThrows(InvalidModificationException.class, () -> this.order.removeProduct(product, -2));
     }
 }

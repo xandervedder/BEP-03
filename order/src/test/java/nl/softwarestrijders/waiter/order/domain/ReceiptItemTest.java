@@ -1,5 +1,6 @@
 package nl.softwarestrijders.waiter.order.domain;
 
+import nl.softwarestrijders.waiter.order.common.exception.InvalidModificationException;
 import nl.softwarestrijders.waiter.order.domain.id.ProductId;
 import nl.softwarestrijders.waiter.order.domain.id.ReceiptItemId;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,20 +63,20 @@ class ReceiptItemTest {
     @Test
     @DisplayName("Should throw if new amount will be below 1")
     void shouldThrowIfAmountWillBeBelow1() {
-        assertThrows(RuntimeException.class, () -> this.item.removeAmount(2));
+        assertThrows(InvalidModificationException.class, () -> this.item.removeAmount(2));
 
     }
 
     @Test
     @DisplayName("Should throw if amount to be added is negative")
     void shouldThrowIfAmountToAddIsNegative() {
-        assertThrows(RuntimeException.class, () -> this.item.addAmount(-2));
+        assertThrows(InvalidModificationException.class, () -> this.item.addAmount(-2));
     }
 
     @Test
     @DisplayName("Should throw if amount to be removed is negative")
     void shouldThrowIfAmountToRemoveIsNegative() {
-        assertThrows(RuntimeException.class, () -> this.item.removeAmount(-2));
+        assertThrows(InvalidModificationException.class, () -> this.item.removeAmount(-2));
     }
 
     @Test
