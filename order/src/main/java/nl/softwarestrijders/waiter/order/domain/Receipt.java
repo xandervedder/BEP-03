@@ -19,7 +19,6 @@ public class Receipt {
         return Collections.unmodifiableList(this.items);
     }
 
-    //TODO: If ReceiptItem with that productId is already in the list we just need to add the amount.
     //TODO: Generate new id for each receipt item
     public void addItem(ProductId product, int amount) {
         if(this.getItemByProductId(product) != null)

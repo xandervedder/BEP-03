@@ -44,9 +44,8 @@ public class ReceiptItem {
     }
 
     public void removeAmount(int amount) {
-        if(amount < 0 || this.amount - amount <= 0) {
+        if(amount < 0 || this.amount - amount <= 0)
             throw new RuntimeException("This modification cannot be done");
-        }
 
         this.amount -= amount;
     }

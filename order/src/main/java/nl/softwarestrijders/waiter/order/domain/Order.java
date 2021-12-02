@@ -1,6 +1,5 @@
 package nl.softwarestrijders.waiter.order.domain;
 
-import nl.softwarestrijders.waiter.order.common.annotation.TestExcludeGenerated;
 import nl.softwarestrijders.waiter.order.domain.id.OrderId;
 import nl.softwarestrijders.waiter.order.domain.id.ProductId;
 
@@ -16,12 +15,12 @@ public class Order {
     }
 
     public void addProduct(ProductId product, int amount) {
-        receipt.addItem(product, amount);
+        this.receipt.addItem(product, amount);
         this.price = this.calculatePrice();
     }
 
     public void removeProduct(ProductId productId, int amount) {
-        receipt.removeItem(productId, amount);
+        this.receipt.removeItem(productId, amount);
         this.price = this.calculatePrice();
     }
 
