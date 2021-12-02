@@ -38,14 +38,14 @@ public class ReceiptItem {
     }
 
     public void addAmount(int amount) {
-        if(amount < 0)
+        if (amount < 0)
             throw new InvalidModificationException("This modification cannot be done");
 
         this.amount += amount;
     }
 
     public void removeAmount(int amount) {
-        if(amount < 0 || this.amount - amount <= 0)
+        if (amount < 0 || this.amount - amount <= 0)
             throw new InvalidModificationException("This modification cannot be done");
 
         this.amount -= amount;
