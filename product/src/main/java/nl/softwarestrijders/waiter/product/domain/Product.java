@@ -21,11 +21,11 @@ public class Product {
 
     /**
      * Constructor of {@link Product} class.
-     * @param price - The price of the product in euro's.
-     * @param name - The name of the product.
+     * @param price The price of the product in euro's.
+     * @param name The name of the product.
      * @param description - The description of the product.
-     * @param weight - The weight of the product in grams.
-     * @param nutritionalValue - The nutritional values {@link NutritionalValue} of the product.
+     * @param weight The weight of the product in grams.
+     * @param nutritionalValue The nutritional values {@link NutritionalValue} of the product.
      */
     public Product(double price, String name, String description, int weight, NutritionalValue nutritionalValue) {
         this.id = UUID.randomUUID();
@@ -39,7 +39,7 @@ public class Product {
 
     /**
      * Sets the weight of the product.
-     * @param weight - weight of the product in grams.
+     * @param weight weight of the product in grams.
      */
     public void setWeight(int weight) {
         if (weight < 0) throw new IllegalArgumentException("Product weight has to be bigger than 0");
@@ -48,7 +48,7 @@ public class Product {
 
     /**
      * Sets the nutritional value {@link NutritionalValue} of the product.
-     * @param nutritionalValue - nutritional values of the product.
+     * @param nutritionalValue nutritional values of the product.
      */
     public void setNutritionalValue(NutritionalValue nutritionalValue) {
         Objects.requireNonNull(nutritionalValue, "The product needs to have nutritional values");
@@ -57,7 +57,7 @@ public class Product {
 
     /**
      * Sets the price of the product.
-     * @param price - price of the product.
+     * @param price price of the product.
      */
     public void setPrice(double price) {
         if (price < 0) throw new IllegalArgumentException("Product price has to be bigger than 0");
@@ -66,7 +66,7 @@ public class Product {
 
     /**
      * Sets the name of the product.
-     * @param name - name of the product.
+     * @param name name of the product.
      */
     public void setName(String name) {
         Objects.requireNonNull(name, "Product needs to have a name.");
@@ -76,7 +76,7 @@ public class Product {
 
     /**
      * Sets the description of the product.
-     * @param description - description of the product.
+     * @param description description of the product.
      */
     public void setDescription(String description) {
         Objects.requireNonNull(description, "Product needs to have a description.");
@@ -99,8 +99,8 @@ public class Product {
 
     /**
      * Checks if value is empty or blank.
-     * @param value - The value that needs to be checked.
-     * @param attributeType - Type of attribute used in the exception.
+     * @param value The value that needs to be checked.
+     * @param attributeType Type of attribute used in the exception.
      */
     private static void requireNonBlankOrEmpty(String value, String attributeType) {
         if (value.isEmpty() || value.isBlank()) {
