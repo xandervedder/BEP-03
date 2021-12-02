@@ -12,7 +12,8 @@ import java.util.UUID;
  */
 @Document
 public class Product {
-    private @Id UUID id;
+    private @Id
+    UUID id;
     private double price;
     private String name;
     private String description;
@@ -21,10 +22,11 @@ public class Product {
 
     /**
      * Constructor of {@link Product} class.
-     * @param price The price of the product in euro's.
-     * @param name The name of the product.
-     * @param description - The description of the product.
-     * @param weight The weight of the product in grams.
+     *
+     * @param price            The price of the product in euro's.
+     * @param name             The name of the product.
+     * @param description      - The description of the product.
+     * @param weight           The weight of the product in grams.
      * @param nutritionalValue The nutritional values {@link NutritionalValue} of the product.
      */
     public Product(double price, String name, String description, int weight, NutritionalValue nutritionalValue) {
@@ -39,6 +41,7 @@ public class Product {
 
     /**
      * Sets the weight of the product.
+     *
      * @param weight weight of the product in grams.
      */
     public void setWeight(int weight) {
@@ -48,6 +51,7 @@ public class Product {
 
     /**
      * Sets the nutritional value {@link NutritionalValue} of the product.
+     *
      * @param nutritionalValue nutritional values of the product.
      */
     public void setNutritionalValue(NutritionalValue nutritionalValue) {
@@ -57,6 +61,7 @@ public class Product {
 
     /**
      * Sets the price of the product.
+     *
      * @param price price of the product.
      */
     public void setPrice(double price) {
@@ -66,6 +71,7 @@ public class Product {
 
     /**
      * Sets the name of the product.
+     *
      * @param name name of the product.
      */
     public void setName(String name) {
@@ -76,6 +82,7 @@ public class Product {
 
     /**
      * Sets the description of the product.
+     *
      * @param description description of the product.
      */
     public void setDescription(String description) {
@@ -85,21 +92,39 @@ public class Product {
     }
 
     @Generated
-    public UUID getId() {return id;}
+    public UUID getId() {
+        return id;
+    }
+
     @Generated
-    public double getPrice() {return price;}
+    public double getPrice() {
+        return price;
+    }
+
     @Generated
-    public String getDescription() {return description;}
+    public String getDescription() {
+        return description;
+    }
+
     @Generated
-    public String getName() {return name;}
+    public String getName() {
+        return name;
+    }
+
     @Generated
-    public NutritionalValue getNutritionalValue() {return nutritionalValue;}
+    public NutritionalValue getNutritionalValue() {
+        return nutritionalValue;
+    }
+
     @Generated
-    public int getWeight() {return weight;}
+    public int getWeight() {
+        return weight;
+    }
 
     /**
      * Checks if value is correct.
-     * @param value The value that needs to be checked.
+     *
+     * @param value         The value that needs to be checked.
      * @param attributeType Type of attribute used in the exception.
      * @throws IllegalArgumentException When value is blank or empty.
      */

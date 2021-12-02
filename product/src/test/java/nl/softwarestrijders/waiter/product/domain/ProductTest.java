@@ -7,31 +7,32 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ProductTest {
-    private static final NutritionalValue nutritionalValue = new NutritionalValue(1,1,1,1,1);
+    private static final NutritionalValue nutritionalValue = new NutritionalValue(1, 1, 1, 1, 1);
 
     @Test
-    void shouldNotThrowWithCorrectValues(){
-        assertDoesNotThrow(() -> new Product(1,"test", "test", 100, nutritionalValue));
+    void shouldNotThrowWithCorrectValues() {
+        assertDoesNotThrow(() -> new Product(1, "test", "test", 100, nutritionalValue));
     }
 
     @ParameterizedTest
     @MethodSource("valuesWithNull")
-    void shouldThrowWhenValueIsNull(double price, String name, String description, int weight, NutritionalValue nutritionalValue){
+    void shouldThrowWhenValueIsNull(double price, String name, String description, int weight, NutritionalValue nutritionalValue) {
         assertThrows(NullPointerException.class, () -> new Product(price, name, description, weight, nutritionalValue));
     }
 
     @ParameterizedTest
     @MethodSource("valuesWithEmptyString")
-    void shouldThrowWhenValueIsEmptyString(double price, String name, String description, int weight, NutritionalValue nutritionalValue){
+    void shouldThrowWhenValueIsEmptyString(double price, String name, String description, int weight, NutritionalValue nutritionalValue) {
         assertThrows(IllegalArgumentException.class, () -> new Product(price, name, description, weight, nutritionalValue));
     }
 
     @ParameterizedTest
     @MethodSource("lessThanZeroValues")
-    void shouldThrowWhenValueIsLessThanZero(double price, String name, String description, int weight, NutritionalValue nutritionalValue){
+    void shouldThrowWhenValueIsLessThanZero(double price, String name, String description, int weight, NutritionalValue nutritionalValue) {
         assertThrows(IllegalArgumentException.class, () -> new Product(price, name, description, weight, nutritionalValue));
     }
 
