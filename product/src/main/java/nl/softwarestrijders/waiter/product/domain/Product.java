@@ -98,9 +98,10 @@ public class Product {
     public int getWeight() {return weight;}
 
     /**
-     * Checks if value is empty or blank.
+     * Checks if value is correct.
      * @param value The value that needs to be checked.
      * @param attributeType Type of attribute used in the exception.
+     * @throws IllegalArgumentException When value is blank or empty.
      */
     private static void requireNonBlankOrEmpty(String value, String attributeType) {
         if (value.isEmpty() || value.isBlank()) {

@@ -7,7 +7,8 @@ import java.util.List;
  */
 public record NutritionalValue(int kcal, int fats, int carbs, int proteins, int salts) {
     /**
-     * Constructor that checks if any value is smaller than 0. if true, throw exception.
+     * Constructor that checks if values are correct.
+     * @throws IllegalArgumentException If value is less than 0.
      */
     public NutritionalValue {
         for(var value : List.of(kcal, fats, carbs, proteins, salts))
