@@ -14,13 +14,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderTest {
 
     Order order;
+    ProductId productId;
 
     @BeforeEach
     void initialize() {
         this.order = new Order(new OrderId(UUID.randomUUID()));
 
-        var product = new ProductId(UUID.randomUUID());
-        this.order.addProduct(product, 2);
+        this.productId = new ProductId(UUID.randomUUID());
+        this.order.addProduct(this.productId, 2);
     }
 
     @Test
@@ -41,41 +42,36 @@ class OrderTest {
     @Test
     @DisplayName("Should add amount to existing product in order")
     void shouldAddAmountToExistingProductInOrder() {
-        var product = new ProductId(UUID.randomUUID());
-        this.order.addProduct(product, 1);
+        this.order.addProduct(this.productId, 1);
 
-        assertEquals(3, this.order.getReceipt().getItemByProductId(product).getAmount());
+        assertEquals(3, this.order.getReceipt().getItemByProductId(this.productId).getAmount());
     }
 
     @Test
     @DisplayName("Should throw exception when adding a negative amount")
     void shouldThrowAddProductNegativeAmount() {
-        var product = new ProductId(UUID.randomUUID());
-        assertThrows(InvalidModificationException.class, () -> this.order.addProduct(product, -2));
+        assertThrows(InvalidModificationException.class, () -> this.order.addProduct(this.productId, -2));
     }
 
     @Test
     @DisplayName("Should remove product with amount 1 of order")
     void shouldRemoveAmountProductOfOrder() {
-        var product = new ProductId(UUID.randomUUID());
-        this.order.removeProduct(product, 1);
+        this.order.removeProduct(this.productId, 1);
 
-        assertEquals(1, this.order.getReceipt().getItemByProductId(product).getAmount());
+        assertEquals(1, this.order.getReceipt().getItemByProductId(this.productId).getAmount());
     }
 
     @Test
     @DisplayName("Should remove entry of product in order")
     void shouldRemoveProductInOrder() {
-        var product = new ProductId(UUID.randomUUID());
-        this.order.removeProduct(product, 2);
+        this.order.removeProduct(this.productId, 2);
 
-        assertNull(this.order.getReceipt().getItemByProductId(product));
+        assertNull(this.order.getReceipt().getItemByProductId(this.productId));
     }
 
     @Test
     @DisplayName("Should throw exception when removing a negative amount")
     void shouldThrowRemoveProductNegativeAmount() {
-        var product = new ProductId(UUID.randomUUID());
-        assertThrows(InvalidModificationException.class, () -> this.order.removeProduct(product, -2));
+        assertThrows(InvalidModificationException.class, () -> this.order.removeProduct(this.productId, -2));
     }
 }

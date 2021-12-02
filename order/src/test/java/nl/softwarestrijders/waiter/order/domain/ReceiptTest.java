@@ -7,17 +7,19 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ReceiptTest {
 
     Receipt receipt;
+    ProductId productId;
 
     @BeforeEach
     void initialize() {
         this.receipt = new Receipt();
-        this.receipt.addItem(new ProductId(UUID.randomUUID()), 2);
+        this.productId = new ProductId(UUID.randomUUID());
+        this.receipt.addItem(productId, 2);
+
     }
 
     @Test
@@ -44,27 +46,24 @@ class ReceiptTest {
     @Test
     @DisplayName("Add product should add amount product")
     void shouldAddProductToItemList() {
-        var product = new ProductId(UUID.randomUUID());
-        this.receipt.addItem(product, 1);
+        this.receipt.addItem(productId, 1);
 
-        assertEquals(3, this.receipt.getItemByProductId(product).getAmount());
+        assertEquals(3, this.receipt.getItemByProductId(productId).getAmount());
     }
 
     @Test
     @DisplayName("Add product should remove product entirely")
     void shouldRemoveProductFromItemList() {
-        var product = new ProductId(UUID.randomUUID());
-        this.receipt.removeItem(product, 2);
+        this.receipt.removeItem(productId, 2);
 
-        assertNull(this.receipt.getItemByProductId(product));
+        assertNull(this.receipt.getItemByProductId(productId));
     }
 
     @Test
     @DisplayName("Add product remove product")
     void shouldRemoveProductAmountFromItemList() {
-        var product = new ProductId(UUID.randomUUID());
-        this.receipt.removeItem(product, 1);
+        this.receipt.removeItem(productId, 1);
 
-        assertEquals(1, this.receipt.getItemByProductId(product).getAmount());
+        assertEquals(1, this.receipt.getItemByProductId(productId).getAmount());
     }
 }

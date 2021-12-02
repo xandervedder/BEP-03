@@ -1,6 +1,5 @@
 package nl.softwarestrijders.waiter.order.domain;
 
-import nl.softwarestrijders.waiter.order.common.exception.ProductNotFoundException;
 import nl.softwarestrijders.waiter.order.domain.id.ProductId;
 import nl.softwarestrijders.waiter.order.domain.id.ReceiptItemId;
 
@@ -42,7 +41,7 @@ public class Receipt {
     }
 
     public ReceiptItem getItemByProductId(ProductId id) {
-        var item = this.items.stream().filter(i -> i.getProductId().equals(id)).findFirst();
-        return item.orElse(item.orElseThrow(() -> new ProductNotFoundException("Could not find product with id: " + id.toString())));
+        var item = this.items.stream().filter(i -> i.getProductId().id().equals(id.id())).findFirst();
+        return item.orElse(null);
     }
 }

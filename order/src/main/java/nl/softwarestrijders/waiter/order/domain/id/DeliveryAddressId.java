@@ -5,4 +5,5 @@ import nl.softwarestrijders.waiter.order.common.annotation.TestExcludeGenerated;
 import java.util.UUID;
 
 @TestExcludeGenerated
-public record DeliveryAddressId(UUID id) {}
+public record DeliveryAddressId(UUID id) {
+}
