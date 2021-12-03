@@ -41,7 +41,7 @@ public class Receipt {
     }
 
     public ReceiptItem getItemByProductId(ProductId id) {
-        var item = this.items.stream().filter(i -> i.getProductId().id().equals(id.id())).findFirst();
+        var item = this.items.stream().filter(i -> i.getProductId().equals(id)).findFirst();
         return item.orElse(null);
     }
 }
