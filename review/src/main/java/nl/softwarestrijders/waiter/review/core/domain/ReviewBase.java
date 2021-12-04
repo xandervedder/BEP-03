@@ -1,5 +1,7 @@
 package nl.softwarestrijders.waiter.review.core.domain;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,7 +15,8 @@ public sealed class ReviewBase permits ProductReview, DeliveryReview {
     private static final int MIN_DESCRIPTION_LENGTH = 32;
     private static final int MAX_DESCRIPTION_LENGTH = 512; // Is this not enough? Should it be more?
 
-    private final UUID id; // Might change from final to non-final, maybe it's possible with MongoDB (or not)
+    @Id
+    private UUID id; // Field cannot be final, since this would break MongoDb instantiation
     private UUID customerId;
     private String title;
     private String description;
