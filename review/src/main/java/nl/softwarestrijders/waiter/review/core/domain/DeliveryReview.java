@@ -3,6 +3,11 @@ package nl.softwarestrijders.waiter.review.core.domain;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Class that represents a {@link DeliveryReview}. The reason this is very similar to the
+ * {@link ProductReview} is because we want seperate {@link org.springframework.data.mongodb.core.mapping.Document}'s
+ * for the different types of reviews. This makes retrieving reviews of certain types easier.
+ */
 public final class DeliveryReview extends ReviewBase {
     private final UUID deliveryId; // Check if 'final' is possible with MongoDb
 
