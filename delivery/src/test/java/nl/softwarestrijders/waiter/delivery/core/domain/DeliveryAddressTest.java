@@ -57,4 +57,14 @@ class DeliveryAddressTest {
                 Arguments.of("11111AA")
         );
     }
+
+    @Test
+    void gettersTestForJacocoCoverage() {
+        var address = new DeliveryAddress("Spinozaweg", 71, "", "3532SE", "Utrecht");
+        assertNotNull(address.streetName());
+        assertNotNull(address.addition());
+        assertNotNull(address.postalCode());
+        assertNotNull(address.city());
+        assertEquals(71, address.houseNumber());
+    }
 }

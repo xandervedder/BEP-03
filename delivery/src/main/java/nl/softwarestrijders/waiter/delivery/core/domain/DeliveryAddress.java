@@ -23,29 +23,4 @@ public record DeliveryAddress(String streetName, int houseNumber, String additio
             throw new InvalidPostalCodeException();
         Objects.requireNonNull(city);
     }
-
-    @Generated
-    public String streetName() {
-        return streetName;
-    }
-
-    @Generated
-    public int houseNumber() {
-        return houseNumber;
-    }
-
-    @Generated
-    public String addition() {
-        return addition;
-    }
-
-    @Generated
-    public String postalCode() {
-        return postalCode;
-    }
-
-    @Generated
-    public String city() {
-        return city;
-    }
 }

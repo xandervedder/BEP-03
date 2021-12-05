@@ -15,9 +15,9 @@ import java.util.UUID;
 public class Delivery {
     @Id
     private UUID id;
-    private final DeliveryAddress address;
+    private DeliveryAddress address;
     private Status status;
-    private final UUID orderId;
+    private UUID orderId;
 
     /**
      * Constructor of {@link Delivery} class.
@@ -27,11 +27,9 @@ public class Delivery {
      * @param orderId The Id of the order related to the delivery.
      */
     public Delivery(DeliveryAddress address, Status status, UUID orderId) {
-        Objects.requireNonNull(address, "Need an address to be able to deliver the order");
-        this.address = address;
+        setAddress(address);
         setStatus(status);
-        Objects.requireNonNull(orderId, "Cannot make a delivery without an order reference");
-        this.orderId = orderId;
+        setOrderId(orderId);
     }
 
     /**
@@ -48,6 +46,14 @@ public class Delivery {
             case DELIVERED, FAILED -> throw new InvalidStatusUpdateException();
             default -> this.status = status;
         }
+    }
+
+    public void setAddress(DeliveryAddress address) {
+        this.address = Objects.requireNonNull(address, "Need an address to be able to deliver the order");
+    }
+
+    public void setOrderId(UUID orderId) {
+        this.orderId = Objects.requireNonNull(orderId, "Cannot make a delivery without an order reference");
     }
 
     @Generated
