@@ -13,7 +13,7 @@ public sealed class ReviewBase permits ProductReview, DeliveryReview {
     private static final int MIN_TITLE_LENGTH = 3; // Allows for titles like 'Bad' and 'Good'
     private static final int MAX_TITLE_LENGTH = 32; // Disallow large sentences (those are meant for the description)
     private static final int MIN_DESCRIPTION_LENGTH = 32;
-    private static final int MAX_DESCRIPTION_LENGTH = 512; // Is this not enough? Should it be more?
+    private static final int MAX_DESCRIPTION_LENGTH = 512;
 
     @Id
     private UUID id; // Field cannot be final, since this would break MongoDb instantiation
