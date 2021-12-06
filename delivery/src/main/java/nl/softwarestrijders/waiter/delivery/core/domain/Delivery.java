@@ -11,7 +11,7 @@ import java.util.UUID;
 /**
  * Class that contains the information about the Delivery
  */
-@Document
+@Document(collection = "delivery")
 public class Delivery {
     @Id
     private UUID id;
@@ -30,6 +30,7 @@ public class Delivery {
         setAddress(address);
         setStatus(status);
         setOrderId(orderId);
+        this.id = UUID.randomUUID();
     }
 
     /**
