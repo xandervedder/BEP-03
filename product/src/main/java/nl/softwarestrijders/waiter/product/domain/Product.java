@@ -10,10 +10,9 @@ import java.util.UUID;
 /**
  * Class that contains all product information.
  */
-@Document
+@Document(collection = "product")
 public class Product {
-    private @Id
-    UUID id;
+    private @Id UUID id;
     private double price;
     private String name;
     private String description;
