@@ -39,13 +39,9 @@ public class Delivery {
      * @param status the updated status of the delivery
      */
     public void setStatus(Status status) {
-        Objects.requireNonNull(status, "Need a valid status to set or update");
-        if (this.status == null)
-            this.status = status;
-        switch (this.status) {
-            case DELIVERED, FAILED -> throw new InvalidStatusUpdateException();
-            default -> this.status = status;
-        }
+        if (this.status == Status.DELIVERED || this.status == Status.FAILED)
+            throw new InvalidStatusUpdateException();
+        this.status = Objects.requireNonNull(status, "Need a valid status to set or update");
     }
 
     public void setAddress(DeliveryAddress address) {
