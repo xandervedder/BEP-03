@@ -78,6 +78,8 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/ReviewApplication.**</exclude>
+                                <exclude>**/infrastructure/*.**</exclude>
+                                <exclude>**/domain/event/*.**</exclude>
                             </excludes>
                             <rules>
                                 <rule>
