@@ -37,6 +37,7 @@ public class Address {
 	 * @see #setCity(String) setCity()
 	 */
 	public Address(int houseNumber, String addition, String street, String postalCode, String city) {
+		this.id = UUID.randomUUID();
 		setHouseNumber(houseNumber);
 		setAddition(addition);
 		setStreet(street);
