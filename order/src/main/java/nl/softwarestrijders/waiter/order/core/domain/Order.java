@@ -1,21 +1,33 @@
-package nl.softwarestrijders.waiter.order.domain;
+package nl.softwarestrijders.waiter.order.core.domain;
 
-import nl.softwarestrijders.waiter.order.domain.id.OrderId;
-import nl.softwarestrijders.waiter.order.domain.id.ProductId;
+import nl.softwarestrijders.waiter.order.core.domain.id.CustomerId;
+import nl.softwarestrijders.waiter.order.core.domain.id.OrderId;
+import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "orders")
 public class Order {
 
     @Id
     private OrderId id;
+
+
     private Receipt receipt;
+
+    @Field("customer")
+    private CustomerId customerId;
+
     private Price price;
 
     public Order(OrderId id) {
         this.id = id;
         this.receipt = new Receipt();
+    }
+
+    public OrderId getId() {
+        return id;
     }
 
     public void addProduct(ProductId product, int amount) {
@@ -32,8 +44,18 @@ public class Order {
         return this.receipt;
     }
 
-    // TODO: Get this function to calculate prices from product service.
-    // TODO: Write tests for this method.
+    public CustomerId getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(CustomerId customerId) {
+        this.customerId = customerId;
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
     private Price calculatePrice() {
         return Price.calculatePrice(this.receipt);
     }

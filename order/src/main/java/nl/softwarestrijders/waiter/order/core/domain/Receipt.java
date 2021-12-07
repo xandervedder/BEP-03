@@ -1,6 +1,6 @@
-package nl.softwarestrijders.waiter.order.domain;
+package nl.softwarestrijders.waiter.order.core.domain;
 
-import nl.softwarestrijders.waiter.order.domain.id.ProductId;
+import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
 
 import java.util.ArrayList;
 import java.util.Collections;

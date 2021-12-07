@@ -1,6 +1,6 @@
-package nl.softwarestrijders.waiter.order.domain;
+package nl.softwarestrijders.waiter.order.core.domain;
 
-import nl.softwarestrijders.waiter.order.domain.id.ProductId;
+import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,13 +1,17 @@
-package nl.softwarestrijders.waiter.order.domain;
+package nl.softwarestrijders.waiter.order.core.domain;
 
 import nl.softwarestrijders.waiter.order.common.annotation.TestExcludeGenerated;
 import nl.softwarestrijders.waiter.order.common.exception.InvalidModificationException;
-import nl.softwarestrijders.waiter.order.domain.id.ProductId;
+import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Objects;
 
 public class ReceiptItem {
+
+    @Field("product")
     private ProductId productId;
+
     private int amount;
 
     public ReceiptItem() {}
