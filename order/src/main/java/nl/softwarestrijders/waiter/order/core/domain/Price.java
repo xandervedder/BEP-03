@@ -1,5 +1,9 @@
 package nl.softwarestrijders.waiter.order.core.domain;
 
+import nl.softwarestrijders.waiter.order.common.annotation.TestExcludeGenerated;
+
+// This class doesn't do anything atm and is useless to test.
+@TestExcludeGenerated
 public class Price {
 
     private double subTotal;
