@@ -41,7 +41,7 @@ public class RabbitMqConfig {
     }
 
     @Bean
-    public RabbitMqEventPublisher EventPublisher(RabbitTemplate template) {
+    public RabbitMqEventPublisher eventPublisher(RabbitTemplate template) {
         return new RabbitMqEventPublisher(template, this.waiterExchangeName);
     }
 
