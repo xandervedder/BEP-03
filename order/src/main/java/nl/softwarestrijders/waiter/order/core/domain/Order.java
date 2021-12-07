@@ -5,7 +5,6 @@ import nl.softwarestrijders.waiter.order.core.domain.id.OrderId;
 import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "orders")
 public class Order {
@@ -13,10 +12,8 @@ public class Order {
     @Id
     private OrderId id;
 
-
     private Receipt receipt;
 
-    @Field("customer")
     private CustomerId customerId;
 
     private Price price;
