@@ -1,12 +1,10 @@
 package nl.softwarestrijders.waiter.order.domain;
 
 import nl.softwarestrijders.waiter.order.domain.id.ProductId;
-import nl.softwarestrijders.waiter.order.domain.id.ReceiptItemId;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 public class Receipt {
 
@@ -20,12 +18,11 @@ public class Receipt {
         return Collections.unmodifiableList(this.items);
     }
 
-    //TODO: Generate new id for each receipt item
     public void addItem(ProductId product, int amount) {
         if (this.getItemByProductId(product) != null)
             this.getItemByProductId(product).addAmount(amount);
 
-        this.items.add(new ReceiptItem(new ReceiptItemId(UUID.randomUUID()), product, amount));
+        this.items.add(new ReceiptItem(product, amount));
     }
 
     public void removeItem(ProductId productId, int amount) {

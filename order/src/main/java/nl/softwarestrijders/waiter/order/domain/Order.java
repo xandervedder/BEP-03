@@ -2,9 +2,13 @@ package nl.softwarestrijders.waiter.order.domain;
 
 import nl.softwarestrijders.waiter.order.domain.id.OrderId;
 import nl.softwarestrijders.waiter.order.domain.id.ProductId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "orders")
 public class Order {
 
+    @Id
     private OrderId id;
     private Receipt receipt;
     private Price price;

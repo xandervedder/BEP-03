@@ -3,30 +3,22 @@ package nl.softwarestrijders.waiter.order.domain;
 import nl.softwarestrijders.waiter.order.common.annotation.TestExcludeGenerated;
 import nl.softwarestrijders.waiter.order.common.exception.InvalidModificationException;
 import nl.softwarestrijders.waiter.order.domain.id.ProductId;
-import nl.softwarestrijders.waiter.order.domain.id.ReceiptItemId;
 
 import java.util.Objects;
 
 public class ReceiptItem {
-
-    private ReceiptItemId id;
     private ProductId productId;
     private int amount;
 
-    public ReceiptItem(ReceiptItemId id, ProductId productId) {
-        this.id = id;
+    public ReceiptItem() {}
+    public ReceiptItem(ProductId productId) {
         this.productId = productId;
         this.amount = 1;
     }
 
-    public ReceiptItem(ReceiptItemId id, ProductId productId, int amount) {
-        this.id = id;
+    public ReceiptItem(ProductId productId, int amount) {
         this.productId = productId;
         this.amount = amount;
-    }
-
-    public ReceiptItemId getId() {
-        return id;
     }
 
     public ProductId getProductId() {
@@ -57,12 +49,12 @@ public class ReceiptItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReceiptItem that = (ReceiptItem) o;
-        return Objects.equals(id, that.id) || Objects.equals(productId, that.productId);
+        return Objects.equals(productId, that.productId);
     }
 
     @Override
     @TestExcludeGenerated
     public int hashCode() {
-        return Objects.hash(id, productId);
+        return Objects.hash(productId);
     }
 }

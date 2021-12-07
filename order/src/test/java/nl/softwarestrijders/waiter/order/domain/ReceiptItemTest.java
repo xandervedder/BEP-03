@@ -2,7 +2,6 @@ package nl.softwarestrijders.waiter.order.domain;
 
 import nl.softwarestrijders.waiter.order.common.exception.InvalidModificationException;
 import nl.softwarestrijders.waiter.order.domain.id.ProductId;
-import nl.softwarestrijders.waiter.order.domain.id.ReceiptItemId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,24 +18,15 @@ class ReceiptItemTest {
     @BeforeEach
     void initialize() {
         this.productId = new ProductId(UUID.randomUUID());
-        this.item = new ReceiptItem(new ReceiptItemId(UUID.randomUUID()), this.productId, 2);
+        this.item = new ReceiptItem(this.productId, 2);
     }
 
     @Test
     @DisplayName("Should create receiptitem with amount 1")
     void shouldCreateNewItemWithAmount1() {
-        var item = new ReceiptItem(new ReceiptItemId(UUID.randomUUID()), this.productId);
+        var item = new ReceiptItem(this.productId);
 
         assertEquals(1, item.getAmount());
-    }
-
-    @Test
-    @DisplayName("Should return correct Id")
-    void shouldReturnCorrectItemId() {
-        var id = new ReceiptItemId(UUID.randomUUID());
-        var item = new ReceiptItem(id, this.productId);
-
-        assertEquals(id, item.getId());
     }
 
     @Test
@@ -82,7 +72,7 @@ class ReceiptItemTest {
     @Test
     @DisplayName("Should be same object")
     void shouldBeSameObject() {
-        var item = new ReceiptItem(new ReceiptItemId(UUID.randomUUID()), this.productId);
+        var item = new ReceiptItem(this.productId);
         assertEquals(this.item, item);
 
     }
