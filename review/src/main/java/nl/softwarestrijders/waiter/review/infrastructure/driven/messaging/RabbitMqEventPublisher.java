@@ -6,15 +6,15 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 public class RabbitMqEventPublisher implements ReviewEventPublisher {
     private final RabbitTemplate rabbitTemplate;
-    private final String jobBoardExchange;
+    private final String waiterExchange;
 
-    public RabbitMqEventPublisher(RabbitTemplate rabbitTemplate, String jobBoardExchange) {
+    public RabbitMqEventPublisher(RabbitTemplate rabbitTemplate, String waiterExchange) {
         this.rabbitTemplate = rabbitTemplate;
-        this.jobBoardExchange = jobBoardExchange;
+        this.waiterExchange = waiterExchange;
     }
 
     @Override
     public void publish(ReviewEvent event) {
-        this.rabbitTemplate.convertAndSend(this.jobBoardExchange, event.key(), event);
+        this.rabbitTemplate.convertAndSend(this.waiterExchange, event.key(), event);
     }
 }
