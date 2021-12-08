@@ -22,11 +22,11 @@ public class RabbitMqConfig {
     @Value("${messaging.exchange.waiter}")
     private String waiterExchangeName;
 
-    @Value("${messaging.queue.order}")
-    private String orderQueueName;
+    @Value("${messaging.queue.delivery}")
+    private String deliveryQueueName;
 
-    @Value("${messaging.routing-key.order}")
-    private String orderRoutingKey;
+    @Value("${messaging.routing-key.delivery}")
+    private String deliveryRoutingKey;
 
     @Bean
     public TopicExchange waiterExchange() {
@@ -34,13 +34,13 @@ public class RabbitMqConfig {
     }
 
     @Bean
-    public Queue orderQueue() {
-        return QueueBuilder.durable(orderQueueName).build();
+    public Queue deliveryQueue() {
+        return QueueBuilder.durable(deliveryQueueName).build();
     }
 
     @Bean
     public Binding deliveryBinding() {
-        return BindingBuilder.bind(orderQueue()).to(waiterExchange()).with(orderRoutingKey);
+        return BindingBuilder.bind(deliveryQueue()).to(waiterExchange()).with(deliveryRoutingKey);
     }
 
     @Bean
