@@ -1,5 +1,7 @@
 package nl.softwarestrijders.waiter.product.domain;
 
+import nl.softwarestrijders.waiter.product.core.domain.NutritionalValue;
+import nl.softwarestrijders.waiter.product.core.domain.Product;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

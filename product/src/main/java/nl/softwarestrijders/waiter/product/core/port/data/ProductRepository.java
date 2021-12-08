@@ -1,6 +1,6 @@
-package nl.softwarestrijders.waiter.product.data;
+package nl.softwarestrijders.waiter.product.core.port.data;
 
-import nl.softwarestrijders.waiter.product.domain.Product;
+import nl.softwarestrijders.waiter.product.core.domain.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.UUID;

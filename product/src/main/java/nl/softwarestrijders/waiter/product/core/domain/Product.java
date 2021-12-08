@@ -1,6 +1,6 @@
-package nl.softwarestrijders.waiter.product.domain;
+package nl.softwarestrijders.waiter.product.core.domain;
 
-import nl.softwarestrijders.waiter.product.common.Generated;
+import nl.softwarestrijders.waiter.product.core.common.Generated;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

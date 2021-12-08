@@ -1,4 +1,4 @@
-package nl.softwarestrijders.waiter.product.domain;
+package nl.softwarestrijders.waiter.product.core.domain;
 
 import java.util.List;
 
