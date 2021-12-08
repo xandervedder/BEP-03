@@ -1,4 +1,4 @@
-package nl.softwarestrijders.waiter.product.common;
+package nl.softwarestrijders.waiter.product.core.common;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
