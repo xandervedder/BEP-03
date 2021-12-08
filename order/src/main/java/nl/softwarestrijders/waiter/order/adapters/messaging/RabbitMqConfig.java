@@ -1,6 +1,5 @@
-package nl.softwarestrijders.waiter.delivery.infrastructure.config;
+package nl.softwarestrijders.waiter.order.adapters.messaging;
 
-import nl.softwarestrijders.waiter.delivery.infrastructure.driven.messaging.RabbitMqEventPublisher;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -15,46 +14,39 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 public class RabbitMqConfig {
     @Value("${spring.rabbitmq.host}")
     private String host;
-
     @Value("${spring.rabbitmq.port}")
     private int port;
 
     @Value("${messaging.exchange.waiter}")
     private String waiterExchangeName;
-
     @Value("${messaging.queue.order}")
-    private String orderQueueName;
-
+    private String reviewMessageQueue;
     @Value("${messaging.routing-key.order}")
-    private String orderRoutingKey;
+    private String reviewRoutingKey;
 
     @Bean
     public TopicExchange waiterExchange() {
-        return new TopicExchange(waiterExchangeName);
+        return new TopicExchange(this.waiterExchangeName);
     }
 
     @Bean
-    public Queue orderQueue() {
-        return QueueBuilder.durable(orderQueueName).build();
+    public Queue reviewQueue() {
+        return QueueBuilder.durable(this.reviewMessageQueue).build();
     }
 
     @Bean
-    public Binding deliveryBinding() {
-        return BindingBuilder.bind(orderQueue()).to(waiterExchange()).with(orderRoutingKey);
+    public Binding reviewBinding() {
+        return BindingBuilder.bind(reviewQueue()).to(waiterExchange()).with(this.reviewRoutingKey);
     }
 
     @Bean
     public RabbitMqEventPublisher eventPublisher(RabbitTemplate template) {
-        return new RabbitMqEventPublisher(template, waiterExchangeName);
+        return new RabbitMqEventPublisher(template, this.waiterExchangeName);
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(Jackson2JsonMessageConverter converter) {
-        var rabbitTemplate = new RabbitTemplate();
-        rabbitTemplate.setConnectionFactory(connectionFactory());
-        rabbitTemplate.setMessageConverter(converter);
-
-        return rabbitTemplate;
+    public ConnectionFactory connectionFactory() {
+        return new CachingConnectionFactory(this.host, this.port);
     }
 
     @Bean
@@ -67,7 +59,11 @@ public class RabbitMqConfig {
     }
 
     @Bean
-    public ConnectionFactory connectionFactory() {
-        return new CachingConnectionFactory(host, port);
+    public RabbitTemplate rabbitTemplate(Jackson2JsonMessageConverter converter) {
+        var template = new RabbitTemplate();
+        template.setConnectionFactory(this.connectionFactory());
+        template.setMessageConverter(converter);
+
+        return template;
     }
 }
