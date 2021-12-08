@@ -6,7 +6,7 @@ import java.util.List;
  * Record that contains all nutritional values of the {@link Product}.
  */
 
-record NutritionalValue(int kcal, int fats, int carbs, int proteins, int salts) {
+public record NutritionalValue(int kcal, int fats, int carbs, int proteins, int salts) {
     /**
      * Constructor that checks if values are correct.
      *
