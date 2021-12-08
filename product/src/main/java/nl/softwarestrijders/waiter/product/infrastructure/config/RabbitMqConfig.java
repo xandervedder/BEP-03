@@ -29,10 +29,14 @@ public class RabbitMqConfig {
     private String productRoutingKey;
 
     @Bean
-    public TopicExchange waiterExchange() { return new TopicExchange(this.waiterExchangeName); }
+    public TopicExchange waiterExchange() {
+        return new TopicExchange(this.waiterExchangeName);
+    }
 
     @Bean
-    public Queue productQueue() { return QueueBuilder.durable(this.productQueueName).build(); }
+    public Queue productQueue() {
+        return QueueBuilder.durable(this.productQueueName).build();
+    }
 
     @Bean
     public Binding productBinding() {
