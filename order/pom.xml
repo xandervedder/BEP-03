@@ -17,7 +17,7 @@
         <java.version>17</java.version>
         <sonar.organization>xandervedder</sonar.organization>
         <sonar.host.url>https://sonarcloud.io/</sonar.host.url>
-        <sonar.exclusions>**/OrderApplication.java</sonar.exclusions>
+        <sonar.exclusions>**/OrderApplication.java, **/core/common/*, **/core/domain/events/*, **/adapters/**/*</sonar.exclusions>
     </properties>
     <dependencies>
         <dependency>
@@ -77,6 +77,9 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/OrderApplication.**</exclude>
+                                <exclude>**/adapters/**/*</exclude>
+                                <exclude>**/core/common/*</exclude>
+                                <exclude>**/core/domain/events/*</exclude>
                             </excludes>
                             <rules>
                                 <rule>
