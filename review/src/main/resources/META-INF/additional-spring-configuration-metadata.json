@@ -1,0 +1,39 @@
+{
+  "properties": [
+    {
+      "name": "messaging.exchange.waiter",
+      "type": "java.lang.String",
+      "description": "The exchange used by this micro-service."
+    },
+    {
+      "name": "messaging.queue.create-review",
+      "type": "java.lang.String",
+      "description": "Description for messaging.queue.create-review."
+    },
+    {
+      "name": "messaging.routing-key.create-review",
+      "type": "java.lang.String",
+      "description": "Description for messaging.routing-key.create-review."
+    },
+    {
+      "name": "messaging.queue.edit-review",
+      "type": "java.lang.String",
+      "description": "Description for messaging.queue.edit-review."
+    },
+    {
+      "name": "messaging.routing-key.edit-review",
+      "type": "java.lang.String",
+      "description": "Description for messaging.routing-key.edit-review."
+    },
+    {
+      "name": "messaging.queue.delete-review",
+      "type": "java.lang.String",
+      "description": "Description for messaging.queue.delete-review."
+    },
+    {
+      "name": "messaging.routing-key.delete-review",
+      "type": "java.lang.String",
+      "description": "Description for messaging.routing-key.delete-review."
+    }
+  ]
+}
