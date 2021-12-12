@@ -30,6 +30,7 @@ public class Customer {
 	 * @param lastName  the Customer's last name.
 	 */
 	public Customer(String firstName, String lastName, String email, Address address) {
+		this.id = UUID.randomUUID();
 		setFirstName(firstName);
 		setLastName(lastName);
 		setEmail(email);
