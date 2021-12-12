@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RabbitMqEventListener {
-	@RabbitListener(queues = "#{'${messaging.queue.review}'}")
+	@RabbitListener(queues = "#{'${messaging.queue.customer}'}")
 	public void listen(CustomerOnRegistrationEvent event) {
 		// TODO: Implement listening to the different events
 	}

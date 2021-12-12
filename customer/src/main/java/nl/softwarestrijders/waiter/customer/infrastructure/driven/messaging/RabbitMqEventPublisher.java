@@ -6,16 +6,16 @@ import nl.softwarestrijders.waiter.customer.core.port.messaging.CustomerEventPub
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 public class RabbitMqEventPublisher implements CustomerEventPublisher {
-    private final RabbitTemplate rabbitTemplate;
-    private final String waiterExchange;
+	private final RabbitTemplate rabbitTemplate;
+	private final String waiterExchange;
 
-    public RabbitMqEventPublisher(RabbitTemplate rabbitTemplate, String waiterExchange) {
-        this.rabbitTemplate = rabbitTemplate;
-        this.waiterExchange = waiterExchange;
-    }
+	public RabbitMqEventPublisher(RabbitTemplate rabbitTemplate, String waiterExchange) {
+		this.rabbitTemplate = rabbitTemplate;
+		this.waiterExchange = waiterExchange;
+	}
 
-    @Override
-    public void publish(CustomerEvent event) {
-        this.rabbitTemplate.convertAndSend(this.waiterExchange, event.key(), event);
-    }
+	@Override
+	public void publish(CustomerEvent event) {
+		this.rabbitTemplate.convertAndSend(this.waiterExchange, event.key(), event);
+	}
 }

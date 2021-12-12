@@ -20,9 +20,9 @@ public class RabbitMqConfig {
 
 	@Value("${messaging.exchange.waiter}")
 	private String waiterExchangeName;
-	@Value("${messaging.queue.review}")
+	@Value("${messaging.queue.customer}")
 	private String customerMessageQueue;
-	@Value("${messaging.routing-key.review}")
+	@Value("${messaging.routing-key.customer}")
 	private String customerRoutingKey;
 
 	@Bean
@@ -31,13 +31,13 @@ public class RabbitMqConfig {
 	}
 
 	@Bean
-	public Queue reviewQueue() {
+	public Queue customerQueue() {
 		return QueueBuilder.durable(this.customerMessageQueue).build();
 	}
 
 	@Bean
-	public Binding reviewBinding() {
-		return BindingBuilder.bind(reviewQueue()).to(waiterExchange()).with(this.customerRoutingKey);
+	public Binding customerBinding() {
+		return BindingBuilder.bind(customerQueue()).to(waiterExchange()).with(this.customerRoutingKey);
 	}
 
 	@Bean
