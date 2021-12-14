@@ -1,10 +1,12 @@
 package nl.softwarestrijders.waiter.customer.core.domain;
 
 import nl.softwarestrijders.waiter.customer.core.common.Utils;
+import nl.softwarestrijders.waiter.customer.core.domain.event.CustomerEvent;
 import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidEmailException;
 import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameException;
 import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameStartException;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class Customer {
 	private Address address;
 	private List<UUID> orders;
 	private List<UUID> reviews;
+	@Transient
+	private List<CustomerEvent> events = new ArrayList<>();
 
 	/**
 	 * Constructor of the {@link Customer} class. This constructor calls
@@ -161,6 +165,23 @@ public class Customer {
 	public void removeReview(UUID reviewId) {
 		this.reviews.remove(reviewId);
 	}
+
+	/**
+	 * Function that lists all {@link CustomerEvent CustomerEvents}
+	 *
+	 * @return list of {@link CustomerEvent CustomerEvents}
+	 */
+	public List<CustomerEvent> listEvents() {
+		return events;
+	}
+
+	/**
+	 * Function that clears all {@link CustomerEvent CustomerEvents}
+	 */
+	public void clearEvents() {
+		this.events.clear();
+	}
+
 
 	public void setId(UUID id) {
 		this.id = id;
