@@ -7,6 +7,9 @@ import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameSt
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -20,6 +23,8 @@ public class Customer {
 	private String lastName;
 	private String email;
 	private Address address;
+	private List<UUID> orders;
+	private List<UUID> reviews;
 
 	/**
 	 * Constructor of the {@link Customer} class. This constructor calls
@@ -28,6 +33,8 @@ public class Customer {
 	 *
 	 * @param firstName the Customer's first name.
 	 * @param lastName  the Customer's last name.
+	 * @param email     the Customer's email address.
+	 * @param address   the Customer's address.
 	 */
 	public Customer(String firstName, String lastName, String email, Address address) {
 		this.id = UUID.randomUUID();
@@ -35,6 +42,8 @@ public class Customer {
 		setLastName(lastName);
 		setEmail(email);
 		this.address = address;
+		this.orders = new ArrayList<>();
+		this.reviews = new ArrayList<>();
 	}
 
 	/**
@@ -99,6 +108,60 @@ public class Customer {
 			throw new InvalidEmailException();
 	}
 
+	/**
+	 * Function that adds the given orderId to the list of orderId's.
+	 *
+	 * @param orderId orderId
+	 */
+	public void addOrder(UUID orderId) {
+		this.orders.add(orderId);
+	}
+
+	/**
+	 * Function that removes the given orderId to the list of orderId's.
+	 *
+	 * @param orderId orderId
+	 */
+	public void removeOrder(UUID orderId) {
+		this.orders.remove(orderId);
+	}
+
+	/**
+	 * Function that adds the given orderIds to the list of orderId's.
+	 *
+	 * @param orderIds orderIds
+	 */
+	public void addOrders(List<UUID> orderIds) {
+		this.orders.addAll(orderIds);
+	}
+
+	/**
+	 * Function that adds the given orderId to the list of orderId's.
+	 *
+	 * @param reviewId reviewId
+	 */
+	public void addReview(UUID reviewId) {
+		this.reviews.add(reviewId);
+	}
+
+	/**
+	 * Function that adds the given reviewIds to the list of orderId's.
+	 *
+	 * @param reviewIds reviewIds
+	 */
+	public void addReviews(List<UUID> reviewIds) {
+		this.reviews.addAll(reviewIds);
+	}
+
+	/**
+	 * Function that removes the given orderId to the list of orderId's.
+	 *
+	 * @param reviewId reviewId
+	 */
+	public void removeReview(UUID reviewId) {
+		this.reviews.remove(reviewId);
+	}
+
 	public void setId(UUID id) {
 		this.id = id;
 	}
@@ -125,5 +188,13 @@ public class Customer {
 
 	public Address getAddress() {
 		return address;
+	}
+
+	public List<UUID> getOrders() {
+		return Collections.unmodifiableList(orders);
+	}
+
+	public List<UUID> getReviews() {
+		return Collections.unmodifiableList(reviews);
 	}
 }
