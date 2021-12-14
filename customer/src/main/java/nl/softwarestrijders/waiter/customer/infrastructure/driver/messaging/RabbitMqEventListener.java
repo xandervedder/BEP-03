@@ -10,4 +10,3 @@ public class RabbitMqEventListener {
 		// TODO: Implement listening to the different events
 	}
 }
-
