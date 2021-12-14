@@ -7,5 +7,10 @@ public enum Status {
     CONVEYING, // Courier is under way
     DELIVERED, // Courier delivered the order
     DELAYED, // Delivery got delayed
-    FAILED, // Delivery failed (something went wrong)
+    FAILED; // Delivery failed (something went wrong)
+
+    @Override
+    public String toString() {
+        return name();
+    }
 }
