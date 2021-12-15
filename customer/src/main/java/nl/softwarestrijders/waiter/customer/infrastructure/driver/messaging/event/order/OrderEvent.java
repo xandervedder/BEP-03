@@ -1,4 +1,6 @@
 package nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging.event.order;
 
-public abstract class OrderEvent {
+import java.util.UUID;
+
+public record OrderEvent(String eventKey, UUID customerId, UUID orderId) {
 }

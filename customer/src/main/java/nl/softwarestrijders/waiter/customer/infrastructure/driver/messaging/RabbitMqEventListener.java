@@ -31,7 +31,8 @@ public class RabbitMqEventListener {
 		var customerId = event.customerId();
 		var orderId = event.orderId();
 		switch (event.eventKey()) {
-			//TODO: create implementation
+			case "customer.order.added" -> this.commandHandler.handleOrderAdded(customerId, orderId);
+			case "customer.order.deleted" -> this.commandHandler.handleOrderRemoved(customerId, orderId);
 		}
 	}
 

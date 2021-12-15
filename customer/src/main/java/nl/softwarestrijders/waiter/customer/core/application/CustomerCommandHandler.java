@@ -42,6 +42,18 @@ public class CustomerCommandHandler {
 		this.customerRepository.save(customer);
 	}
 
+	public void handleOrderAdded(UUID customerId, UUID orderId) {
+		var customer = this.findCustomerById(customerId);
+		customer.addOrder(orderId);
+		this.customerRepository.save(customer);
+	}
+
+	public void handleOrderRemoved(UUID customerId, UUID orderId) {
+		var customer = this.findCustomerById(customerId);
+		customer.removeOrder(orderId);
+		this.customerRepository.save(customer);
+	}
+
 	private void publishEventsFor(Customer customer) {
 		List<CustomerEvent> events = customer.listEvents();
 		events.forEach(eventPublisher::publish);

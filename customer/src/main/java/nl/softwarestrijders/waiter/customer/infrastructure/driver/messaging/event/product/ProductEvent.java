@@ -1,4 +1,4 @@
 package nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging.event.product;
 
-public abstract class ProductEvent {
+public record ProductEvent(String eventKey) {
 }

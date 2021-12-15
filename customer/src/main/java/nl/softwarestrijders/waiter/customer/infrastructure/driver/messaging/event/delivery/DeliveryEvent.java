@@ -1,4 +1,4 @@
 package nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging.event.delivery;
 
-public abstract class ReviewEvent {
+public record DeliveryEvent(String eventKey) {
 }
