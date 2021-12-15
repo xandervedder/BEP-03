@@ -19,9 +19,6 @@ public class RabbitMqEventListener {
         switch (event.eventKey) {
             case "delivery.status" -> this.commandHandler.handleStatusChange(event.delivery, event.status);
             case "delivery.address" -> this.commandHandler.handleChangeDeliveryAddress(event.delivery, event.address);
-//            case "order.created" -> this.commandHandler.handleRegisterDelivery()
         }
     }
-
-
 }
