@@ -9,3 +9,8 @@ The application is built using a microservice architecture.
 Waiter will be a distributed system and will contain the following services:
 
 ![Context Map](docs/images/context_map_transparent.png)
+
+
+## Documentation
+
+### [Review micro-service](./review/README.md)
