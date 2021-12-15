@@ -1,7 +1,6 @@
 package nl.softwarestrijders.waiter.review.core.port.storage;
 
 import nl.softwarestrijders.waiter.review.core.domain.Review;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
