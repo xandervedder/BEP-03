@@ -16,7 +16,7 @@ This micro-service deals with (almost) everything related to reviewing. Most of 
 | [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=nl.softwarestrijders.waiter%3Areview&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=nl.softwarestrijders.waiter%3Areview)               |
 
 ## Events
-In this section it will become clear what events the Review micro-service consumes and produces. These events will be described with the exact json that they require or deliver. 
+In this section it will become clear what events the Review micro-service consumes and produces. These events will be described with the exact JSON that they require or deliver. 
 
 ### Consumes
 The events this micro-service consumes.
@@ -31,23 +31,21 @@ When recieving this event, this micro-service creates the Review with the given 
 `review.create`.
 
 ##### Fields
-The expected information is as following:
-
 | Key            | Value  | Extra information                               |
 |----------------|--------|-------------------------------------------------|
 | customerId     | UUID   | —                                               |
-| reviewedItemId | UUID   | —                                               |
-| reviewType     | String | can be `product` or `delivery`                  |
+| conceptId      | UUID   | Id of Product or Delivery                       |
+| reviewType     | String | Can be `product` or `delivery`                  |
 | title          | String | Minimum length of `3`, maximum length of `32`   |
 | description    | String | Minimum length of `32`, maximum length of `512` |
-| rating         | int    | between `1` or `5`                              |
+| rating         | int    | Between `1` or `5`                              |
 
 ##### JSON Example
 For example, the JSON looks like this:
 ```json
 {
     "customerId": "62bc28c1-db80-4e4e-9bcd-8a9845943633",
-    "reviewedItemId": "bd72ef09-d700-4e6f-a3b3-96425cce6376",
+    "conceptId": "bd72ef09-d700-4e6f-a3b3-96425cce6376",
     "reviewType": "product",
     "title": "Very good!",
     "description": "This food is the most delicious food I have ever tasted!",
@@ -78,7 +76,7 @@ For example, the JSON looks like this:
 ```
 
 #### EditReviewEvent
-This message is very similar to the [CreateReviewEvent](#createreviewevent). Though this event doesn't need a `customerId` or `reviewedItemId`, but simple a `reviewId`. There is also no need for the `reviewType` field.
+This message is very similar to the [CreateReviewEvent](#createreviewevent). Though this event doesn't need a `customerId` or `conceptId`, but simply a `reviewId`. There is also no need for the `reviewType` field.
 
 ##### Queue name
 `edit-review`.
@@ -89,7 +87,7 @@ This message is very similar to the [CreateReviewEvent](#createreviewevent). Tho
 ##### Fields
 | Key         | Value  | Extra information                               |
 |-------------|--------|-------------------------------------------------|
-| ReviewId    | UUID   | —                                               |
+| reviewId    | UUID   | —                                               |
 | title       | String | Minimum length of `3`, maximum length of `32`   |
 | description | String | Minimum length of `32`, maximum length of `512` |
 | rating      | int    | between `1` or `5`                              |
@@ -99,7 +97,6 @@ For example the JSON looks like this:
 ```json
 {
     "reviewId": "62bc28c1-db80-4e4e-9bcd-8a9845943633",
-    "reviewType": "product",
     "title": "Awful...",
     "description": "This food is the worst food I have ever tasted!",
     "rating": 1
@@ -150,5 +147,5 @@ Not clear at the moment.
 }
 ```
 
-### REST
+## REST
 —
