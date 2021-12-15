@@ -155,7 +155,7 @@ public class Review {
      * @throws NullPointerException Providing null will throw this.
      */
     public void setRating(Rating rating) {
-        this.rating = Objects.requireNonNull(rating);;
+        this.rating = Objects.requireNonNull(rating);
     }
 
     public Rating getRating() {
