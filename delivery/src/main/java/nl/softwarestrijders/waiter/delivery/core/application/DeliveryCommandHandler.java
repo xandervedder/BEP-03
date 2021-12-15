@@ -22,22 +22,22 @@ public class DeliveryCommandHandler {
     public void handleStatusChange(UUID id, Status status) {
         var delivery = this.getDeliveryById(id);
         delivery.changeStatus(status);
-        this.publishEventsFor(delivery);
         this.repository.save(delivery);
+        this.publishEventsFor(delivery);
     }
 
     public void handleChangeDeliveryAddress(UUID id, DeliveryAddress address) {
         var delivery = this.getDeliveryById(id);
         delivery.changeAddress(address);
-        this.publishEventsFor(delivery);
         this.repository.save(delivery);
+        this.publishEventsFor(delivery);
     }
 
     // Will eventually be used by the Controller
     public Delivery handleRegisterDelivery(DeliveryAddress address, UUID orderId) {
         var delivery = new Delivery(address, Status.REGISTERED, orderId);
-        this.publishEventsFor(delivery);
         this.repository.save(delivery);
+        this.publishEventsFor(delivery);
         return delivery;
     }
 

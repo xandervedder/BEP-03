@@ -9,10 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Class that contains the information about the Delivery
@@ -92,11 +89,15 @@ public class Delivery {
         return orderId;
     }
 
+    public void addEvent(DeliveryEvent event) {
+        this.events.add(event);
+    }
+
     public void clearEvents() {
         this.events.clear();
     }
 
     public List<DeliveryEvent> listEvents() {
-        return this.events;
+        return Collections.unmodifiableList(this.events);
     }
 }

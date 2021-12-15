@@ -75,8 +75,8 @@ class DeliveryTest {
     @Test
     void shouldClearEventListCorrectly() {
         var delivery = new Delivery(this.address, Status.REGISTERED, id);
-        delivery.listEvents().add(new DeliveryAddressChanged(id, address));
-        delivery.listEvents().add(new DeliveryStatusChanged(id, Status.REGISTERED));
+        delivery.addEvent(new DeliveryAddressChanged(id, address));
+        delivery.addEvent(new DeliveryStatusChanged(id, Status.REGISTERED));
         delivery.clearEvents();
         assertEquals(new ArrayList<>(), delivery.listEvents());
     }
