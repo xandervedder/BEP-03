@@ -18,8 +18,10 @@
         <sonar.organization>xandervedder</sonar.organization>
         <sonar.host.url>https://sonarcloud.io/</sonar.host.url>
         <sonar.exclusions>
-            **/ReviewApplication.java,
+            **/application/**,
+            **/domain/event/**,
             **/infrastructure/**,
+            **/ReviewApplication.java,
         </sonar.exclusions>
     </properties>
     <dependencies>
@@ -85,9 +87,10 @@
                         </goals>
                         <configuration>
                             <excludes>
-                                <exclude>**/ReviewApplication.**</exclude>
-                                <exclude>**/infrastructure/**/*.**</exclude>
+                                <exclude>**/application/**/*.**</exclude>
                                 <exclude>**/domain/event/**/*.**</exclude>
+                                <exclude>**/infrastructure/**/*.**</exclude>
+                                <exclude>**/ReviewApplication.**</exclude>
                             </excludes>
                             <rules>
                                 <rule>
