@@ -1,12 +1,15 @@
 package nl.softwarestrijders.waiter.delivery.core.domain;
 
 import nl.softwarestrijders.waiter.delivery.core.common.Generated;
+import nl.softwarestrijders.waiter.delivery.core.domain.event.DeliveryAddressChanged;
+import nl.softwarestrijders.waiter.delivery.core.domain.event.DeliveryEvent;
+import nl.softwarestrijders.waiter.delivery.core.domain.event.DeliveryStatusChanged;
 import nl.softwarestrijders.waiter.delivery.core.domain.exceptions.InvalidStatusUpdateException;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Class that contains the information about the Delivery
@@ -18,6 +21,9 @@ public class Delivery {
     private DeliveryAddress address;
     private Status status;
     private UUID orderId;
+
+    @Transient
+    private List<DeliveryEvent> events = new ArrayList<>();
 
     /**
      * Constructor of {@link Delivery} class.
@@ -31,6 +37,16 @@ public class Delivery {
         setStatus(status);
         setOrderId(orderId);
         this.id = UUID.randomUUID();
+    }
+
+    public void changeStatus(Status status) {
+        setStatus(status);
+        this.events.add(new DeliveryStatusChanged(this.id, status));
+    }
+
+    public void changeAddress(DeliveryAddress address) {
+        setAddress(address);
+        this.events.add(new DeliveryAddressChanged(this.id, address));
     }
 
     /**
@@ -71,5 +87,17 @@ public class Delivery {
     @Generated
     public UUID getOrderId() {
         return orderId;
+    }
+
+    public void addEvent(DeliveryEvent event) {
+        this.events.add(event);
+    }
+
+    public void clearEvents() {
+        this.events.clear();
+    }
+
+    public List<DeliveryEvent> listEvents() {
+        return Collections.unmodifiableList(this.events);
     }
 }

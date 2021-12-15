@@ -1,5 +1,6 @@
 package nl.softwarestrijders.waiter.delivery.infrastructure.driver.messaging.event;
 
+import nl.softwarestrijders.waiter.delivery.core.domain.DeliveryAddress;
 import nl.softwarestrijders.waiter.delivery.core.domain.Status;
 
 import java.time.Instant;
@@ -10,5 +11,7 @@ public class DeliveryStatusEvent {
     public String eventKey;
     public Instant eventDate;
     public UUID delivery;
-    public Enum<Status> status;
+    public Status status;
+    public DeliveryAddress address;
+    public UUID order;
 }
