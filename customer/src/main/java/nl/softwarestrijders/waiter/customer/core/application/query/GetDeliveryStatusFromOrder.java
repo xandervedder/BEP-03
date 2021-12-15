@@ -1,4 +1,6 @@
 package nl.softwarestrijders.waiter.customer.core.application.query;
 
-public class GetDeliveryStatusFromOrder {
+import java.util.UUID;
+
+public record GetDeliveryStatusFromOrder(UUID id) {
 }

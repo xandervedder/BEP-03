@@ -1,4 +1,6 @@
 package nl.softwarestrijders.waiter.customer.core.application.query;
 
-public class GetDeliveriesFromCustomer {
+import java.util.UUID;
+
+public record GetDeliveriesFromCustomer(UUID id) {
 }
