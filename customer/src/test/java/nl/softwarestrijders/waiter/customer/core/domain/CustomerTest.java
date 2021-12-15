@@ -150,5 +150,7 @@ class CustomerTest {
 		assertNotNull(customer.getLastName());
 		assertNotNull(customer.getEmail());
 		assertNotNull(customer.getAddress());
+		assertNull(customer.getReviews());
+		assertNull(customer.getOrders());
 	}
 }
