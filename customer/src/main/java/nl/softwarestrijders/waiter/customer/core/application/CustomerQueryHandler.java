@@ -14,11 +14,9 @@ import java.util.UUID;
 @Service
 public class CustomerQueryHandler {
 	private final CustomerRepository customerRepository;
-	private final AddressRepository addressRepository;
 
 	public CustomerQueryHandler(CustomerRepository customerRepository, AddressRepository addressRepository) {
 		this.customerRepository = customerRepository;
-		this.addressRepository = addressRepository;
 	}
 
 	public Address handle(GetAddressByCustomerId query) {

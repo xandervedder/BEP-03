@@ -6,6 +6,7 @@ import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameSt
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -150,7 +151,9 @@ class CustomerTest {
 		assertNotNull(customer.getLastName());
 		assertNotNull(customer.getEmail());
 		assertNotNull(customer.getAddress());
-		assertNull(customer.getReviews());
+		assertEquals(Collections.emptyList(), customer.getReviews());
 		assertNull(customer.getOrders());
+		assertNull(customer.listEvents());
+		assertDoesNotThrow(customer::clearEvents);
 	}
 }

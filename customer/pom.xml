@@ -25,7 +25,7 @@
 			**/application/query/**,
 			**/core/domain/event/**,
 			**/application/*.*,
-			**/application/exception/,
+			**/application/exception/*.*,
 		</sonar.exclusions>
 	</properties>
 	<dependencies>
