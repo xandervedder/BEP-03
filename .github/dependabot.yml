@@ -1,0 +1,27 @@
+version: 2
+updates:
+   - package-ecosystem: maven
+     directory: "./customer/"
+     schedule:
+        interval: daily
+     open-pull-requests-limit: 5
+   - package-ecosystem: maven
+     directory: "./delivery/"
+     schedule:
+        interval: daily
+     open-pull-requests-limit: 5
+   - package-ecosystem: maven
+     directory: "./order/"
+     schedule:
+        interval: daily
+     open-pull-requests-limit: 5
+   - package-ecosystem: maven
+     directory: "./product/"
+     schedule:
+        interval: daily
+     open-pull-requests-limit: 5
+   - package-ecosystem: maven
+     directory: "./review/"
+     schedule:
+        interval: daily
+     open-pull-requests-limit: 5
