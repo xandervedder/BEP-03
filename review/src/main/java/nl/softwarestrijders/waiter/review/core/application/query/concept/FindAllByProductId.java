@@ -1,4 +1,4 @@
-package nl.softwarestrijders.waiter.review.core.application.query;
+package nl.softwarestrijders.waiter.review.core.application.query.concept;
 
 import java.util.UUID;
 

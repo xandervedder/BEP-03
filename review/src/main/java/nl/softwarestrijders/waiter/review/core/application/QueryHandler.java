@@ -1,7 +1,7 @@
 package nl.softwarestrijders.waiter.review.core.application;
 
 import nl.softwarestrijders.waiter.review.core.application.exception.ReviewNotFoundException;
-import nl.softwarestrijders.waiter.review.core.application.query.FindAllByConcept;
+import nl.softwarestrijders.waiter.review.core.application.query.concept.FindAllByConcept;
 import nl.softwarestrijders.waiter.review.core.application.query.FindAllByCustomerId;
 import nl.softwarestrijders.waiter.review.core.application.query.FindReviewById;
 import nl.softwarestrijders.waiter.review.core.application.query.ListAll;
