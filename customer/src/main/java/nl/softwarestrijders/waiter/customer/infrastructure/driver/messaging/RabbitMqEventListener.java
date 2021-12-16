@@ -20,8 +20,9 @@ public class RabbitMqEventListener {
 	public void listen(ReviewEvent event) {
 		var customerId = event.customerId();
 		var reviewId = event.reviewId();
+		var type = event.type();
 		switch (event.eventKey()) {
-			case "customer.review.added" -> this.commandHandler.handleReviewAdded(customerId, reviewId);
+			case "customer.review.added" -> this.commandHandler.handleReviewAdded(customerId, reviewId, type);
 			case "customer.review.removed" -> this.commandHandler.handleReviewRemoved(customerId, reviewId);
 		}
 	}

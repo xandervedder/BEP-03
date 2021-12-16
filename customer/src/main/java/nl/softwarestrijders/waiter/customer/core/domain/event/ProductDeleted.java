@@ -1,4 +1,4 @@
 package nl.softwarestrijders.waiter.customer.core.domain.event;
 
-public class DeleteReviewFromCustomer {
+public class ProductDeleted {
 }

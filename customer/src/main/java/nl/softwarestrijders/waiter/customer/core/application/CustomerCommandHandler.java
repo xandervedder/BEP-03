@@ -4,7 +4,7 @@ import nl.softwarestrijders.waiter.customer.core.application.command.RegisterCus
 import nl.softwarestrijders.waiter.customer.core.application.exception.CustomerNotFoundException;
 import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
-import nl.softwarestrijders.waiter.customer.core.domain.event.CustomerEvent;
+import nl.softwarestrijders.waiter.customer.core.domain.event.CustomerDomainEvent;
 import nl.softwarestrijders.waiter.customer.core.port.messaging.CustomerEventPublisher;
 import nl.softwarestrijders.waiter.customer.core.port.storage.CustomerRepository;
 import org.springframework.stereotype.Service;
@@ -30,9 +30,9 @@ public class CustomerCommandHandler {
 		return this.customerRepository.save(customer);
 	}
 
-	public void handleReviewAdded(UUID customerId, UUID reviewId) {
+	public void handleReviewAdded(UUID customerId, UUID reviewId, String type) {
 		var customer = this.findCustomerById(customerId);
-		customer.addReview(reviewId);
+		customer.addReview(reviewId, type);
 		this.customerRepository.save(customer);
 	}
 
@@ -55,12 +55,12 @@ public class CustomerCommandHandler {
 	}
 
 	private void publishEventsFor(Customer customer) {
-		List<CustomerEvent> events = customer.listEvents();
+		List<CustomerDomainEvent> events = customer.listEvents();
 		events.forEach(eventPublisher::publish);
 		customer.clearEvents();
 	}
 
-	public Customer findCustomerById(UUID id) {
+	private Customer findCustomerById(UUID id) {
 		return this.customerRepository.findById(id)
 				.orElseThrow(() -> new CustomerNotFoundException(id.toString()));
 	}

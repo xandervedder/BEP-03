@@ -1,7 +1,7 @@
 package nl.softwarestrijders.waiter.customer.core.port.messaging;
 
-import nl.softwarestrijders.waiter.customer.core.domain.event.CustomerEvent;
+import nl.softwarestrijders.waiter.customer.core.domain.event.CustomerDomainEvent;
 
 public interface CustomerEventPublisher {
-	void publish(CustomerEvent event);
+	void publish(CustomerDomainEvent event);
 }

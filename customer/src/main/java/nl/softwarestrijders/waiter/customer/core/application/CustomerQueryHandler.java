@@ -8,7 +8,6 @@ import nl.softwarestrijders.waiter.customer.core.port.storage.AddressRepository;
 import nl.softwarestrijders.waiter.customer.core.port.storage.CustomerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,6 +17,9 @@ public class CustomerQueryHandler {
 	public CustomerQueryHandler(CustomerRepository customerRepository, AddressRepository addressRepository) {
 		this.customerRepository = customerRepository;
 	}
+
+	//Note: all of these query handlers that still need to be implemented are going to use
+	//HttpRepositories (as implementation), but we will have to wait for that to be available (just clarifying)
 
 	public Address handle(GetAddressByCustomerId query) {
 		return this.findCustomerById(query.id()).getAddress();
@@ -51,11 +53,7 @@ public class CustomerQueryHandler {
 		//TODO: implement
 	}
 
-	public List<UUID> handle(GetReviewsFromCustomer query) {
-		return this.findCustomerById(query.id()).getReviews();
-	}
-
-	public Customer findCustomerById(UUID id) {
+	private Customer findCustomerById(UUID id) {
 		return this.customerRepository.findById(id)
 				.orElseThrow(() -> new CustomerNotFoundException(id.toString()));
 	}

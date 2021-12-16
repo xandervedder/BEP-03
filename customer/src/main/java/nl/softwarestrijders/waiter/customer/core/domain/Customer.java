@@ -1,7 +1,7 @@
 package nl.softwarestrijders.waiter.customer.core.domain;
 
 import nl.softwarestrijders.waiter.customer.core.common.Utils;
-import nl.softwarestrijders.waiter.customer.core.domain.event.CustomerEvent;
+import nl.softwarestrijders.waiter.customer.core.domain.event.CustomerDomainEvent;
 import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidEmailException;
 import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameException;
 import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameStartException;
@@ -9,10 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Class containing {@link Customer} data like first name, last name and email.
@@ -26,9 +23,9 @@ public class Customer {
 	private String email;
 	private Address address;
 	private List<UUID> orders;
-	private List<UUID> reviews;
+	private HashMap<UUID, String> reviews; // String = type of review
 	@Transient
-	private List<CustomerEvent> events = new ArrayList<>();
+	private List<CustomerDomainEvent> events = new ArrayList<>();
 
 	/**
 	 * Constructor of the {@link Customer} class. This constructor calls
@@ -47,7 +44,7 @@ public class Customer {
 		setEmail(email);
 		this.address = address;
 		this.orders = new ArrayList<>();
-		this.reviews = new ArrayList<>();
+		this.reviews = new HashMap<>();
 	}
 
 	/**
@@ -144,17 +141,8 @@ public class Customer {
 	 *
 	 * @param reviewId reviewId
 	 */
-	public void addReview(UUID reviewId) {
-		this.reviews.add(reviewId);
-	}
-
-	/**
-	 * Function that adds the given reviewIds to the list of orderId's.
-	 *
-	 * @param reviewIds reviewIds
-	 */
-	public void addReviews(List<UUID> reviewIds) {
-		this.reviews.addAll(reviewIds);
+	public void addReview(UUID reviewId, String type) {
+		this.reviews.put(reviewId, type);
 	}
 
 	/**
@@ -167,16 +155,16 @@ public class Customer {
 	}
 
 	/**
-	 * Function that lists all {@link CustomerEvent CustomerEvents}
+	 * Function that lists all {@link CustomerDomainEvent CustomerEvents}
 	 *
-	 * @return list of {@link CustomerEvent CustomerEvents}
+	 * @return list of {@link CustomerDomainEvent CustomerEvents}
 	 */
-	public List<CustomerEvent> listEvents() {
-		return events;
+	public List<CustomerDomainEvent> listEvents() {
+		return Collections.unmodifiableList(events);
 	}
 
 	/**
-	 * Function that clears all {@link CustomerEvent CustomerEvents}
+	 * Function that clears all {@link CustomerDomainEvent CustomerEvents}
 	 */
 	public void clearEvents() {
 		this.events.clear();
@@ -215,7 +203,7 @@ public class Customer {
 		return Collections.unmodifiableList(orders);
 	}
 
-	public List<UUID> getReviews() {
-		return Collections.unmodifiableList(reviews);
+	public Map<UUID, String> getReviews() {
+		return Collections.unmodifiableMap(reviews);
 	}
 }

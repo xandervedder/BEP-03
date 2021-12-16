@@ -101,7 +101,7 @@ class CustomerTest {
 	void addReview() {
 		var uuid = UUID.randomUUID();
 		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
-		customer.addReview(uuid);
+		customer.addReview(uuid, "Test");
 		assertEquals(1, customer.getReviews().size());
 	}
 
@@ -124,20 +124,11 @@ class CustomerTest {
 		var uuid1 = UUID.randomUUID();
 		var uuid2 = UUID.randomUUID();
 		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
-		customer.addReviews(List.of(uuid, uuid1, uuid2));
+		customer.addReview(uuid, "TEST");
+		customer.addReview(uuid1, "TEST");
+		customer.addReview(uuid2, "TEST");
 		customer.removeReview(uuid1);
-		assertFalse(customer.getReviews().contains(uuid1));
-	}
-
-	@Test
-	@DisplayName("Should add multiple items to the list of reviews")
-	void addReviews() {
-		var uuid = UUID.randomUUID();
-		var uuid1 = UUID.randomUUID();
-		var uuid2 = UUID.randomUUID();
-		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
-		customer.addReviews(List.of(uuid, uuid1, uuid2));
-		assertEquals(3, customer.getReviews().size());
+		assertFalse(customer.getReviews().containsKey(uuid1));
 	}
 
 	@Test
@@ -151,9 +142,9 @@ class CustomerTest {
 		assertNotNull(customer.getLastName());
 		assertNotNull(customer.getEmail());
 		assertNotNull(customer.getAddress());
-		assertEquals(Collections.emptyList(), customer.getReviews());
-		assertNull(customer.getOrders());
-		assertNull(customer.listEvents());
+		assertEquals(Collections.emptyMap(), customer.getReviews());
+		assertEquals(Collections.emptyList(), customer.getOrders());
+		assertEquals(Collections.emptyList(), customer.listEvents());
 		assertDoesNotThrow(customer::clearEvents);
 	}
 }
