@@ -19,13 +19,9 @@
 		<sonar.organization>xandervedder</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io/</sonar.host.url>
 		<sonar.exclusions>
-			**/CustomerApplication.java,
+			**/application/**,
+			**/domain/event/**,
 			**/infrastructure/**,
-			**/application/command/**,
-			**/application/query/**,
-			**/core/domain/event/**,
-			**/application/*.*,
-			**/application/exception/*.*,
 		</sonar.exclusions>
 	</properties>
 	<dependencies>
