@@ -23,7 +23,7 @@ public class ReviewController {
     }
 
     @GetMapping("/{id}")
-    public ReviewDto findById(@PathVariable UUID id) {
+    public ReviewDto findByReview(@PathVariable UUID id) {
         return this.toDto(this.queryHandler.handle(new FindReviewById(id)));
     }
 
