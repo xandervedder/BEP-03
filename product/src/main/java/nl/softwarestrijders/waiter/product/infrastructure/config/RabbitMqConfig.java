@@ -64,7 +64,7 @@ public class RabbitMqConfig {
     public RabbitMqEventPublisher eventPublisher(RabbitTemplate template) {
         return new RabbitMqEventPublisher(template, this.waiterExchangeName);
     }
-    
+
     @Bean
     public Jackson2JsonMessageConverter messageConverter(Jackson2ObjectMapperBuilder builder) {
         var objectMapper = builder.createXmlMapper(false).build();

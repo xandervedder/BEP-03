@@ -17,7 +17,7 @@ public class CommandHandler {
     }
 
     public void handle(CreateProductEvent event) {
-        if(repository.existByPriceAndNameAndDescription(event.price(), event.name(), event.description())) {
+        if(repository.existsByPriceAndNameAndDescription(event.price(), event.name(), event.description())) {
             throw new ProductAlreadyExistsException(event.name());
         }
         repository.save(
