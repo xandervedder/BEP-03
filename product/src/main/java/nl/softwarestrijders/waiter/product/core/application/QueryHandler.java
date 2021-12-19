@@ -1,7 +1,7 @@
 package nl.softwarestrijders.waiter.product.core.application;
 
 import nl.softwarestrijders.waiter.product.core.application.exceptions.ProductNotFoundException;
-import nl.softwarestrijders.waiter.product.core.application.query.FindByProductIdQuery;
+import nl.softwarestrijders.waiter.product.core.application.query.FindProductByIdQuery;
 import nl.softwarestrijders.waiter.product.core.domain.Product;
 import nl.softwarestrijders.waiter.product.core.port.data.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class QueryHandler {
         this.repository = repository;
     }
 
-    public Product handle(FindByProductIdQuery query) {
+    public Product handle(FindProductByIdQuery query) {
         var id = query.id();
         return this.repository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException(id));

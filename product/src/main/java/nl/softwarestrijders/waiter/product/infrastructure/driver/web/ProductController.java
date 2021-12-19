@@ -1,7 +1,7 @@
 package nl.softwarestrijders.waiter.product.infrastructure.driver.web;
 
 import nl.softwarestrijders.waiter.product.core.application.QueryHandler;
-import nl.softwarestrijders.waiter.product.core.application.query.FindByProductIdQuery;
+import nl.softwarestrijders.waiter.product.core.application.query.FindProductByIdQuery;
 import nl.softwarestrijders.waiter.product.core.domain.Product;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +21,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductDto findById(@PathVariable UUID id){
-        return this.toDto(queryHandler.handle(new FindByProductIdQuery(id)));
+        return this.toDto(queryHandler.handle(new FindProductByIdQuery(id)));
     }
 
     private ProductDto toDto(Product product) {
