@@ -5,6 +5,7 @@ import nl.softwarestrijders.waiter.product.core.domain.NutritionalValue;
 import nl.softwarestrijders.waiter.product.core.domain.Product;
 import nl.softwarestrijders.waiter.product.core.port.data.ProductRepository;
 import nl.softwarestrijders.waiter.product.infrastructure.driver.messaging.CreateProductEvent;
+import nl.softwarestrijders.waiter.product.infrastructure.driver.messaging.DeleteProductEvent;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,5 +34,11 @@ public class CommandHandler {
                         event.salts()
                 )
         ));
+        //ToDo publish event
+    }
+
+    public void handle(DeleteProductEvent event) {
+        repository.deleteById(event.id());
+        //ToDo publish event
     }
 }

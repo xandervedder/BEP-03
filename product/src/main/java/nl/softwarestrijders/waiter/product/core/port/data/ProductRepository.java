@@ -7,4 +7,5 @@ import java.util.UUID;
 
 public interface ProductRepository extends MongoRepository<Product, UUID> {
     boolean existByPriceAndNameAndDescription(double price, String name, String description);
+    void deleteById(UUID id);
 }
