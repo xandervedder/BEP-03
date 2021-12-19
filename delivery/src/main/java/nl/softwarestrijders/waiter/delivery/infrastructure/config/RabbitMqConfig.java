@@ -24,9 +24,13 @@ public class RabbitMqConfig {
 
     @Value("${messaging.queue.delivery}")
     private String deliveryQueueName;
+    @Value("order")
+    private String orderQueueName;
 
     @Value("${messaging.routing-key.delivery}")
     private String deliveryRoutingKey;
+    @Value("order.#")
+    private String orderRoutingKey;
 
     @Bean
     public TopicExchange waiterExchange() {
@@ -41,6 +45,16 @@ public class RabbitMqConfig {
     @Bean
     public Binding deliveryBinding() {
         return BindingBuilder.bind(deliveryQueue()).to(waiterExchange()).with(deliveryRoutingKey);
+    }
+
+    @Bean
+    public Queue orderQueue() {
+        return QueueBuilder.durable(orderQueueName).build();
+    }
+
+    @Bean
+    public Binding orderBinding() {
+        return BindingBuilder.bind(orderQueue()).to(waiterExchange()).with(orderRoutingKey);
     }
 
     @Bean
