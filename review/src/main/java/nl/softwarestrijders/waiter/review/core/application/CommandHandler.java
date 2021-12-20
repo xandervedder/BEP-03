@@ -26,7 +26,7 @@ public class CommandHandler {
         this.repository = repository;
     }
 
-    public void handle(CreateReview command) {
+    public Review handle(CreateReview command) {
         var customer = command.customerId();
         var concept = command.conceptId();
         if (this.repository.existsByConceptIdAndCustomerId(customer, customer)) {
@@ -43,15 +43,16 @@ public class CommandHandler {
         );
         var entity = this.repository.save(review);
         this.eventPublisher.publish(new ReviewCreatedEvent(entity.getId(), entity.getType()));
+        return entity;
     }
 
-    public void handle(EditReview command) {
+    public Review handle(EditReview command) {
         var review = this.findReviewById(command.reviewId());
         review.setTitle(command.title());
         review.setDescription(command.description());
         review.setRating(new Rating(command.rating()));
 
-        this.repository.save(review);
+        return this.repository.save(review);
     }
 
     private Review findReviewById(UUID reviewId) {

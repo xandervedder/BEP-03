@@ -71,15 +71,15 @@ public class ReviewController {
     }
 
     @PatchMapping("/{id}")
-    public void editReview(@PathVariable UUID id, @RequestBody EditReviewDto request) {
-        this.commandHandler.handle(
+    public ReviewDto editReview(@PathVariable UUID id, @RequestBody EditReviewDto request) {
+        return this.toDto(this.commandHandler.handle(
                 new EditReview(id, request.title(), request.description(), request.rating())
-        );
+        ));
     }
 
     @PostMapping
-    public void createReview(@RequestBody CreateReviewDto request) {
-        this.commandHandler.handle(
+    public ReviewDto createReview(@RequestBody CreateReviewDto request) {
+        return this.toDto(this.commandHandler.handle(
                 new CreateReview(
                         request.customerId(),
                         request.conceptId(),
@@ -88,7 +88,7 @@ public class ReviewController {
                         request.type(),
                         request.rating()
                 )
-        );
+        ));
     }
 
     private List<ReviewDto> toDto(List<Review> reviews) {
