@@ -15,6 +15,6 @@ public class RabbitMqEventPublisher implements ProductEventPublisher {
 
     @Override
     public void publish(ProductEvent event) {
-        this.rabbitTemplate.convertAndSend(this.waiterExchange, event.getEventKey(), event);
+        this.rabbitTemplate.convertAndSend(this.waiterExchange, event.getRoutingKey(), event);
     }
 }
