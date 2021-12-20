@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.UUID;
 
 public record ReviewCreatedEvent(UUID reviewId, String reviewType) implements DomainEvent {
-    private static final String ROUTING_KEY = "customer.review.created";
+    private static final String ROUTING_KEY = "events.review.created";
 
     @Override
     @JsonIgnore
