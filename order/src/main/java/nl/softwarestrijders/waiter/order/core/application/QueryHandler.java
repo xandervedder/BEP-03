@@ -1,7 +1,12 @@
 package nl.softwarestrijders.waiter.order.core.application;
 
 import nl.softwarestrijders.waiter.order.core.domain.Order;
+import nl.softwarestrijders.waiter.order.core.domain.Price;
+import nl.softwarestrijders.waiter.order.core.domain.id.CustomerId;
 import nl.softwarestrijders.waiter.order.ports.storage.OrderRepository;
+
+import java.util.List;
+import java.util.UUID;
 
 public class QueryHandler {
     private final OrderRepository repository;
@@ -10,23 +15,23 @@ public class QueryHandler {
         this.repository = repository;
     }
 
-    public Order getOrderById() {
-        return null;
+    public Order getOrderById(UUID id) {
+        return this.repository.findById(id).orElseThrow();
     }
 
-    public Order getCustomerByOrderId() {
-        return null;
+    public CustomerId getCustomerByOrderId(UUID id) {
+        return this.repository.findById(id).orElseThrow().getCustomerId();
     }
 
-    public Order getTotalPriceByOrderId() {
-        return null;
+    public Price getTotalPriceByOrderId(UUID id) {
+        return this.repository.findById(id).orElseThrow().getPrice();
     }
 
-    public Order getAllOrdersByCustomerId() {
-        return null;
+    public List<Order> getAllOrdersByCustomerId(UUID id) {
+        return this.repository.findAllByCustomerId(new CustomerId(id)).orElseThrow();
     }
 
-    public Order getAllOrders() {
-        return null;
+    public List<Order> getAllOrders() {
+        return this.repository.findAll();
     }
 }
