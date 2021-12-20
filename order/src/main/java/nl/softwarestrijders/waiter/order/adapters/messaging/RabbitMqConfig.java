@@ -35,7 +35,7 @@ public class RabbitMqConfig {
     }
 
     @Bean
-    public Binding reviewBinding() {
+    public Binding orderBinding() {
         return BindingBuilder.bind(orderQueue()).to(waiterExchange()).with(this.orderRoutingKey);
     }
 

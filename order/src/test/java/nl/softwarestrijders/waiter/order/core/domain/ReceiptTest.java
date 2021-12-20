@@ -1,23 +1,23 @@
 package nl.softwarestrijders.waiter.order.core.domain;
 
-import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ReceiptTest {
 
     Receipt receipt;
-    ProductId productId;
+    UUID productId;
 
     @BeforeEach
     void initialize() {
         this.receipt = new Receipt();
-        this.productId = new ProductId(UUID.randomUUID());
+        this.productId = UUID.randomUUID();
         this.receipt.addItem(productId, 2);
 
     }
@@ -37,7 +37,7 @@ class ReceiptTest {
     @Test
     @DisplayName("Add product should add new product")
     void shouldAddNewProductToItemList() {
-        var product = new ProductId(UUID.randomUUID());
+        var product = UUID.randomUUID();
         this.receipt.addItem(product, 1);
 
         assertEquals(ReceiptItem.class, this.receipt.getItemByProductId(product).getClass());

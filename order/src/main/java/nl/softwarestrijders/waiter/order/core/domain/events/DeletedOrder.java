@@ -17,6 +17,6 @@ public class DeletedOrder extends OrderEvent {
 
     @Override
     public String getEventKey() {
-        return "order.created";
+        return "order.deleted";
     }
 }

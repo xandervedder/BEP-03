@@ -1,7 +1,6 @@
 package nl.softwarestrijders.waiter.order.adapters.messaging;
 
 import nl.softwarestrijders.waiter.order.core.domain.events.OrderEvent;
-import nl.softwarestrijders.waiter.order.ports.messaging.OutgoingOrderEvent;
 import nl.softwarestrijders.waiter.order.ports.messaging.OrderEventPublisher;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 

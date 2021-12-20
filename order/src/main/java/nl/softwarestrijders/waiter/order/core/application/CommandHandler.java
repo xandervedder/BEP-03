@@ -5,14 +5,13 @@ import nl.softwarestrijders.waiter.order.core.domain.events.CreatedOrder;
 import nl.softwarestrijders.waiter.order.core.domain.events.DeletedOrder;
 import nl.softwarestrijders.waiter.order.core.domain.events.ProductAddedToOrder;
 import nl.softwarestrijders.waiter.order.core.domain.events.ProductRemovedFromOrder;
-import nl.softwarestrijders.waiter.order.core.domain.id.CustomerId;
-import nl.softwarestrijders.waiter.order.core.domain.id.OrderId;
-import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
 import nl.softwarestrijders.waiter.order.ports.messaging.OrderEventPublisher;
 import nl.softwarestrijders.waiter.order.ports.storage.OrderRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class CommandHandler {
     private final OrderEventPublisher eventPublisher;
     private final OrderRepository repository;
@@ -23,32 +22,32 @@ public class CommandHandler {
     }
 
     public void handleCreateOrder(UUID customerId) {
-        var order = new Order(new OrderId(UUID.randomUUID()));
-        order.setCustomerId(new CustomerId(customerId));
+        var order = new Order(UUID.randomUUID(), customerId);
 
         this.repository.save(order);
 
-        this.eventPublisher.publish(new CreatedOrder(order.getId().id()));
+        this.eventPublisher.publish(new CreatedOrder(order.getId()));
+        System.out.println("ORDER ID: " + order.getId());
     }
 
     public void handleAddProductToOrder(UUID orderId, UUID productId, int amount) {
         var order = this.repository.findById(orderId).orElseThrow();
 
-        order.addProduct(new ProductId(productId), amount);
+        order.addProduct(productId, amount);
 
         this.repository.save(order);
 
-        this.eventPublisher.publish(new ProductAddedToOrder(order.getId().id(), productId, amount));
+        this.eventPublisher.publish(new ProductAddedToOrder(order.getId(), productId, amount));
     }
 
     public void handleRemoveProductFromOrder(UUID orderId, UUID productId, int amount) {
         var order = this.repository.findById(orderId).orElseThrow();
 
-        order.removeProduct(new ProductId(productId), amount);
+        order.removeProduct(productId, amount);
 
         this.repository.save(order);
 
-        this.eventPublisher.publish(new ProductRemovedFromOrder(order.getId().id(), productId, amount));
+        this.eventPublisher.publish(new ProductRemovedFromOrder(order.getId(), productId, amount));
     }
 
     public void handleDeleteOrder(UUID orderId) {
