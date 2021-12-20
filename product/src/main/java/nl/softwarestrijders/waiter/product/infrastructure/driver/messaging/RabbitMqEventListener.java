@@ -1,10 +1,16 @@
 package nl.softwarestrijders.waiter.product.infrastructure.driver.messaging;
 
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import nl.softwarestrijders.waiter.product.core.application.CommandHandler;
 import org.springframework.stereotype.Component;
+
+import java.util.logging.Logger;
 
 @Component
 public class RabbitMqEventListener {
-    @RabbitListener(queues = "#{'${messaging.queue.product}'}")
-    public void listen(){} //ToDo: Add listener implementation.
+    private static final Logger LOGGER = Logger.getLogger(RabbitMqEventListener.class.getName());
+    private final CommandHandler commandHandler;
+
+    public RabbitMqEventListener(CommandHandler commandHandler) {
+        this.commandHandler = commandHandler;
+    }
 }
