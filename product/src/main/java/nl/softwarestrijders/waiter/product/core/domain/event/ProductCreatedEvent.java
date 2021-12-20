@@ -6,7 +6,7 @@ public record ProductCreatedEvent(Product product) implements ProductEvent{
     private static final String ROUTING_KEY = "events.product.created";
 
     @Override
-    public String getRoutingKey() {
+    public String key() {
         return ROUTING_KEY;
     }
 }

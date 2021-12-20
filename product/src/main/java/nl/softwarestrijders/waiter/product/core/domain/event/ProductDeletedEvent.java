@@ -6,7 +6,7 @@ public record ProductDeletedEvent(UUID id) implements ProductEvent {
     private static final String ROUTING_KEY = "events.product.deleted";
 
     @Override
-    public String getRoutingKey() {
+    public String key() {
         return ROUTING_KEY;
     }
 }
