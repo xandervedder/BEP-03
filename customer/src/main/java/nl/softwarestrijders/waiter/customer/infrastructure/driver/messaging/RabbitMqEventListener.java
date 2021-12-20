@@ -22,8 +22,8 @@ public class RabbitMqEventListener {
 		var reviewId = event.reviewId();
 		var type = event.type();
 		switch (event.eventKey()) {
-			case "customer.review.added" -> this.commandHandler.handleReviewAdded(customerId, reviewId, type);
-			case "customer.review.removed" -> this.commandHandler.handleReviewRemoved(customerId, reviewId);
+			case "customer.review.created" -> this.commandHandler.handleReviewAdded(customerId, reviewId, type);
+			case "customer.review.deleted" -> this.commandHandler.handleReviewRemoved(customerId, reviewId);
 		}
 	}
 
@@ -32,7 +32,7 @@ public class RabbitMqEventListener {
 		var customerId = event.customerId();
 		var orderId = event.orderId();
 		switch (event.eventKey()) {
-			case "customer.order.added" -> this.commandHandler.handleOrderAdded(customerId, orderId);
+			case "customer.order.created" -> this.commandHandler.handleOrderAdded(customerId, orderId);
 			case "customer.order.deleted" -> this.commandHandler.handleOrderRemoved(customerId, orderId);
 		}
 	}
