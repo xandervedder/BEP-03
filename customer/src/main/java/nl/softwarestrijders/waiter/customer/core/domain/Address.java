@@ -10,7 +10,7 @@ import java.util.UUID;
  * Class containing {@link Address} data like the house number, addition, street,
  * postal code and city.
  */
-@Document(collation = "address")
+@Document(collection = "address")
 public class Address {
 	@Id
 	private UUID id;

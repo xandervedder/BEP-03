@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * Class containing {@link Customer} data like first name, last name and email.
  */
-@Document(collation = "customer")
+@Document(collection = "customer")
 public class Customer {
 	@Id
 	private UUID id;
