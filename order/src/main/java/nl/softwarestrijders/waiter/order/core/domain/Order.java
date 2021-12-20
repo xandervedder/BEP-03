@@ -17,7 +17,7 @@ public class Order {
 
     public Order(UUID id, UUID customerId) {
         this.id = id;
-        this.customerId = Objects.requireNonNull(customerId, "Weird error");
+        this.customerId = customerId;
         this.receipt = new Receipt();
         this.price = new Price(0.00, 0.00, 0.21);
     }

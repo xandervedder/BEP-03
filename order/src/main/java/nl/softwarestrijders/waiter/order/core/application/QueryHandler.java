@@ -22,21 +22,14 @@ public class QueryHandler {
                 () -> new OrderNotFoundException("Could not find order with id: " + id));
     }
 
-    public UUID getCustomerByOrderId(UUID id) {
-        return this.repository.findById(id).orElseThrow(
-                () -> new OrderNotFoundException("Could not find customer with order id: " + id))
-                .getCustomerId();
-    }
-
-    public Price getTotalPriceByOrderId(UUID id) {
-        return this.repository.findById(id).orElseThrow(
-                () -> new OrderNotFoundException("Could not find price with order id: " + id))
-                .getPrice();
-    }
-
     public List<Order> getAllOrdersByCustomerId(UUID id) {
         return this.repository.findAllByCustomerId(id).orElseThrow(
                 () -> new OrderNotFoundException("Could not find orders with customer id: " + id));
+    }
+
+    public List<Order> getAllOrdersByProductId(UUID product) {
+        var all = this.repository.findAll();
+        return all.stream().filter((item) -> item.getReceipt().getItemByProductId(product) != null).toList();
     }
 
     public List<Order> getAllOrders() {
