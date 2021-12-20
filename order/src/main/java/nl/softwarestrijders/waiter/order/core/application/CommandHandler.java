@@ -1,6 +1,9 @@
 package nl.softwarestrijders.waiter.order.core.application;
 
 import nl.softwarestrijders.waiter.order.core.domain.Order;
+import nl.softwarestrijders.waiter.order.core.domain.events.CreatedOrder;
+import nl.softwarestrijders.waiter.order.core.domain.id.CustomerId;
+import nl.softwarestrijders.waiter.order.core.domain.id.OrderId;
 import nl.softwarestrijders.waiter.order.ports.messaging.OrderEventPublisher;
 import nl.softwarestrijders.waiter.order.ports.storage.OrderRepository;
 
@@ -15,8 +18,13 @@ public class CommandHandler {
         this.repository = repository;
     }
 
-    public void handleCreateOrder() {
-        //TODO: Implement this
+    public void handleCreateOrder(UUID customerId) {
+        var order = new Order(new OrderId(UUID.randomUUID()));
+        order.setCustomerId(new CustomerId(customerId));
+
+        this.repository.save(order);
+
+        this.eventPublisher.publish(new CreatedOrder(order.getId().id()));
     }
 
     public void HandleChangeOrderStatus() {
