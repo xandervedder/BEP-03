@@ -4,8 +4,8 @@ import nl.softwarestrijders.waiter.product.core.application.exceptions.ProductAl
 import nl.softwarestrijders.waiter.product.core.domain.NutritionalValue;
 import nl.softwarestrijders.waiter.product.core.domain.Product;
 import nl.softwarestrijders.waiter.product.core.port.data.ProductRepository;
-import nl.softwarestrijders.waiter.product.infrastructure.driver.messaging.CreateProductEvent;
-import nl.softwarestrijders.waiter.product.infrastructure.driver.messaging.DeleteProductEvent;
+import nl.softwarestrijders.waiter.product.infrastructure.driver.messaging.CreateProductCommand;
+import nl.softwarestrijders.waiter.product.infrastructure.driver.messaging.DeleteProductCommand;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,29 +16,30 @@ public class CommandHandler {
         this.repository = repository;
     }
 
-    public void handle(CreateProductEvent event) {
-        if(repository.existsByPriceAndNameAndDescription(event.price(), event.name(), event.description())) {
-            throw new ProductAlreadyExistsException(event.name());
+    public Product handle(CreateProductCommand command) {
+        if(repository.existsByPriceAndNameAndDescription(command.price(), command.name(), command.description())) {
+            throw new ProductAlreadyExistsException(command.name());
         }
-        repository.save(
+        Product product =
                 new Product(
-                event.price(),
-                event.name(),
-                event.description(),
-                event.weight(),
+                command.price(),
+                command.name(),
+                command.description(),
+                command.weight(),
                 new NutritionalValue(
-                        event.kcal(),
-                        event.fats(),
-                        event.carbs(),
-                        event.proteins(),
-                        event.salts()
-                )
-        ));
+                        command.kcal(),
+                        command.fats(),
+                        command.carbs(),
+                        command.proteins(),
+                        command.salts()
+                ));
+        repository.save(product);
         //ToDo publish event
+        return product;
     }
 
-    public void handle(DeleteProductEvent event) {
-        repository.deleteById(event.id());
+    public void handle(DeleteProductCommand command) {
+        repository.deleteById(command.id());
         //ToDo publish event
     }
 }

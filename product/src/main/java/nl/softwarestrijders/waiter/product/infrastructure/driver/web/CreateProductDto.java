@@ -1,6 +1,8 @@
-package nl.softwarestrijders.waiter.product.infrastructure.driver.messaging;
+package nl.softwarestrijders.waiter.product.infrastructure.driver.web;
 
-public record CreateProductEvent(
+import java.util.UUID;
+
+public record CreateProductDto(
         double price,
         String name,
         String description,
