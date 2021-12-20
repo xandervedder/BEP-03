@@ -1,5 +1,8 @@
 package nl.softwarestrijders.waiter.review.core.application;
 
+import nl.softwarestrijders.waiter.review.core.application.command.CreateReview;
+import nl.softwarestrijders.waiter.review.core.application.command.DeleteReview;
+import nl.softwarestrijders.waiter.review.core.application.command.EditReview;
 import nl.softwarestrijders.waiter.review.core.application.exception.AlreadyReviewedException;
 import nl.softwarestrijders.waiter.review.core.application.exception.InvalidOperationException;
 import nl.softwarestrijders.waiter.review.core.application.exception.ReviewNotFoundException;
@@ -9,9 +12,6 @@ import nl.softwarestrijders.waiter.review.core.domain.event.ReviewCreatedEvent;
 import nl.softwarestrijders.waiter.review.core.domain.event.ReviewDeletedEvent;
 import nl.softwarestrijders.waiter.review.core.port.messaging.ReviewEventPublisher;
 import nl.softwarestrijders.waiter.review.core.port.storage.ReviewRepository;
-import nl.softwarestrijders.waiter.review.infrastructure.driver.messaging.event.CreateEvent;
-import nl.softwarestrijders.waiter.review.infrastructure.driver.messaging.event.DeleteEvent;
-import nl.softwarestrijders.waiter.review.infrastructure.driver.messaging.event.EditEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -26,9 +26,9 @@ public class CommandHandler {
         this.repository = repository;
     }
 
-    public void handle(CreateEvent event) {
-        var customer = event.customerId();
-        var concept = event.conceptId();
+    public Review handle(CreateReview command) {
+        var customer = command.customerId();
+        var concept = command.conceptId();
         if (this.repository.existsByConceptIdAndCustomerId(customer, customer)) {
             throw new AlreadyReviewedException(concept, customer);
         }
@@ -36,22 +36,23 @@ public class CommandHandler {
         var review = new Review(
                 concept,
                 customer,
-                event.reviewType(),
-                event.title(),
-                event.description(),
-                new Rating(event.rating())
+                command.reviewType(),
+                command.title(),
+                command.description(),
+                new Rating(command.rating())
         );
         var entity = this.repository.save(review);
         this.eventPublisher.publish(new ReviewCreatedEvent(entity.getId(), entity.getType()));
+        return entity;
     }
 
-    public void handle(EditEvent event) {
-        var review = this.findReviewById(event.reviewId());
+    public Review handle(EditReview command) {
+        var review = this.findReviewById(command.reviewId());
+        review.setTitle(command.title());
+        review.setDescription(command.description());
+        review.setRating(new Rating(command.rating()));
 
-        review.setTitle(event.title());
-        review.setDescription(event.description());
-        review.setRating(new Rating(event.rating()));
-        this.repository.save(review);
+        return this.repository.save(review);
     }
 
     private Review findReviewById(UUID reviewId) {
@@ -59,9 +60,9 @@ public class CommandHandler {
                 .orElseThrow(() -> new ReviewNotFoundException(reviewId));
     }
 
-    public void handle(DeleteEvent event) {
-        var review = this.findReviewById(event.reviewId());
-        if (!review.getCustomerId().equals(event.customerId())) {
+    public void handle(DeleteReview command) {
+        var review = this.findReviewById(command.reviewId());
+        if (!review.getCustomerId().equals(command.customerId())) {
             throw new InvalidOperationException();
         }
 

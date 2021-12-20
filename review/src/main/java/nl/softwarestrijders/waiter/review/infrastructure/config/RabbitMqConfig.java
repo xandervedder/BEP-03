@@ -21,52 +21,9 @@ public class RabbitMqConfig {
     @Value("${messaging.exchange.waiter}")
     private String waiterExchangeName;
 
-    @Value("${messaging.queue.create-review}")
-    private String createReviewMessageQueue;
-    @Value("${messaging.routing-key.create-review}")
-    private String createReviewRoutingKey;
-    @Value("${messaging.queue.delete-review}")
-    private String deleteReviewMessageQueue;
-    @Value("${messaging.routing-key.delete-review}")
-    private String deleteReviewRoutingKey;
-    @Value("${messaging.queue.edit-review}")
-    private String editReviewMessageQueue;
-    @Value("${messaging.routing-key.edit-review}")
-    private String editReviewRoutingKey;
-
     @Bean
     public TopicExchange waiterExchange() {
         return new TopicExchange(this.waiterExchangeName);
-    }
-
-    @Bean
-    public Queue createReviewQueue() {
-        return QueueBuilder.durable(this.createReviewMessageQueue).build();
-    }
-
-    @Bean
-    public Queue deleteReviewQueue() {
-        return QueueBuilder.durable(this.deleteReviewMessageQueue).build();
-    }
-
-    @Bean
-    public Queue editReviewQueue() {
-        return QueueBuilder.durable(this.editReviewMessageQueue).build();
-    }
-
-    @Bean
-    public Binding createReviewBinding() {
-        return BindingBuilder.bind(this.createReviewQueue()).to(waiterExchange()).with(this.createReviewRoutingKey);
-    }
-
-    @Bean
-    public Binding deleteReviewBinding() {
-        return BindingBuilder.bind(this.deleteReviewQueue()).to(waiterExchange()).with(this.deleteReviewRoutingKey);
-    }
-
-    @Bean
-    public Binding editReviewBinding() {
-        return BindingBuilder.bind(this.editReviewQueue()).to(waiterExchange()).with(this.editReviewRoutingKey);
     }
 
     @Bean
