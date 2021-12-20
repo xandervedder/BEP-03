@@ -2,8 +2,8 @@ package nl.softwarestrijders.waiter.order.core.application;
 
 import nl.softwarestrijders.waiter.order.common.exception.OrderNotFoundException;
 import nl.softwarestrijders.waiter.order.core.domain.Order;
-import nl.softwarestrijders.waiter.order.core.domain.events.CreatedOrder;
-import nl.softwarestrijders.waiter.order.core.domain.events.DeletedOrder;
+import nl.softwarestrijders.waiter.order.core.domain.events.OrderCreated;
+import nl.softwarestrijders.waiter.order.core.domain.events.OrderDeleted;
 import nl.softwarestrijders.waiter.order.core.domain.events.ProductAddedToOrder;
 import nl.softwarestrijders.waiter.order.core.domain.events.ProductRemovedFromOrder;
 import nl.softwarestrijders.waiter.order.ports.messaging.OrderEventPublisher;
@@ -27,13 +27,13 @@ public class CommandHandler {
 
         this.repository.save(order);
 
-        this.eventPublisher.publish(new CreatedOrder(order.getId()));
+        this.eventPublisher.publish(new OrderCreated(order.getId()));
 
         return order;
     }
 
     public Order handleAddProductToOrder(UUID orderId, UUID productId, int amount) {
-        var order = this.repository.findById(orderId).orElseThrow(() -> new OrderNotFoundException("Could not find order with id: " + orderId));
+        var order = this.findById(orderId);
 
         order.addProduct(productId, amount);
 
@@ -45,7 +45,7 @@ public class CommandHandler {
     }
 
     public void handleRemoveProductFromOrder(UUID orderId, UUID productId, int amount) {
-        var order = this.repository.findById(orderId).orElseThrow(() -> new OrderNotFoundException("Could not find order with id: " + orderId));
+        var order = this.findById(orderId);
 
         order.removeProduct(productId, amount);
 
@@ -55,10 +55,14 @@ public class CommandHandler {
     }
 
     public void handleDeleteOrder(UUID orderId) {
-        var order = this.repository.findById(orderId).orElseThrow(() -> new OrderNotFoundException("Could not find order with id: " + orderId));
+        var order = this.findById(orderId);
 
         this.repository.delete(order);
 
-        this.eventPublisher.publish(new DeletedOrder(order));
+        this.eventPublisher.publish(new OrderDeleted(order));
+    }
+
+    private Order findById(UUID id) {
+        return this.repository.findById(id).orElseThrow(() -> new OrderNotFoundException("Could not find order with id: " + id));
     }
 }

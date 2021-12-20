@@ -2,10 +2,10 @@ package nl.softwarestrijders.waiter.order.core.domain.events;
 
 import java.util.UUID;
 
-public class CreatedOrder extends OrderEvent {
+public class OrderCreated extends OrderEvent {
     private final UUID order;
 
-    public CreatedOrder(UUID order) {
+    public OrderCreated(UUID order) {
         this.order = order;
     }
 

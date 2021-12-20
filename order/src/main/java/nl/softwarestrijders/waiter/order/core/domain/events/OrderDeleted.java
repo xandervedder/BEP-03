@@ -4,10 +4,10 @@ import nl.softwarestrijders.waiter.order.core.domain.Order;
 
 import java.util.UUID;
 
-public class DeletedOrder extends OrderEvent {
+public class OrderDeleted extends OrderEvent {
     private final Order order;
 
-    public DeletedOrder(Order order) {
+    public OrderDeleted(Order order) {
         this.order = order;
     }
 

@@ -12,7 +12,8 @@ public class RabbitMqEventListener {
         this.commandHandler = commandHandler;
     }
 
-    @RabbitListener(queues = "#{'${messaging.queue.test}'}")
+    // Does not listen for now.
+    @RabbitListener(queues = "#{'${messaging.queue}'}")
     public void listen() {
 
     }
