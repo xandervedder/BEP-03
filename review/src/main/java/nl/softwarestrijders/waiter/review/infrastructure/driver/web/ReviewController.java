@@ -5,6 +5,9 @@ import nl.softwarestrijders.waiter.review.core.application.QueryHandler;
 import nl.softwarestrijders.waiter.review.core.application.command.CreateReview;
 import nl.softwarestrijders.waiter.review.core.application.command.DeleteReview;
 import nl.softwarestrijders.waiter.review.core.application.command.EditReview;
+import nl.softwarestrijders.waiter.review.core.application.exception.AlreadyReviewedException;
+import nl.softwarestrijders.waiter.review.core.application.exception.InvalidOperationException;
+import nl.softwarestrijders.waiter.review.core.application.exception.ReviewNotFoundException;
 import nl.softwarestrijders.waiter.review.core.application.query.FindAllByCustomerId;
 import nl.softwarestrijders.waiter.review.core.application.query.FindReviewById;
 import nl.softwarestrijders.waiter.review.core.application.query.ListAll;
@@ -15,14 +18,20 @@ import nl.softwarestrijders.waiter.review.infrastructure.driver.web.dto.CreateRe
 import nl.softwarestrijders.waiter.review.infrastructure.driver.web.dto.DeleteReviewDto;
 import nl.softwarestrijders.waiter.review.infrastructure.driver.web.dto.EditReviewDto;
 import nl.softwarestrijders.waiter.review.infrastructure.driver.web.dto.ReviewDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/review")
 public class ReviewController {
+    private static final Logger LOGGER =Logger.getLogger(ReviewController.class.getName());
+
     private final QueryHandler queryHandler;
     private final CommandHandler commandHandler;
 
@@ -96,5 +105,35 @@ public class ReviewController {
                 review.getDescription(),
                 review.getRating().value()
         );
+    }
+
+    @ExceptionHandler(AlreadyReviewedException.class)
+    public ResponseEntity<Void> handleAlreadyReviewed(Exception exception) {
+        return this.withLogging(HttpStatus.BAD_REQUEST, exception);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Void> handleIllegalArgument(Exception exception) {
+        return this.withLogging(HttpStatus.BAD_REQUEST, exception);
+    }
+
+    @ExceptionHandler(InvalidOperationException.class)
+    public ResponseEntity<Void> handleInvalidOperation(Exception exception) {
+       return this.withLogging(HttpStatus.BAD_REQUEST, exception);
+    }
+
+    @ExceptionHandler(ReviewNotFoundException.class)
+    public ResponseEntity<Void> handleNotFound(Exception exception) {
+        return this.withLogging(HttpStatus.NOT_FOUND, exception);
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<Void> handleNullPointer(Exception exception) {
+        return withLogging(HttpStatus.BAD_REQUEST, exception);
+    }
+
+    private ResponseEntity<Void> withLogging(HttpStatus status, Exception exception) {
+        LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
+        return ResponseEntity.status(status).build();
     }
 }
