@@ -2,8 +2,11 @@ package nl.softwarestrijders.waiter.order.core.application;
 
 import nl.softwarestrijders.waiter.order.core.domain.Order;
 import nl.softwarestrijders.waiter.order.core.domain.events.CreatedOrder;
+import nl.softwarestrijders.waiter.order.core.domain.events.ProductAddedToOrder;
+import nl.softwarestrijders.waiter.order.core.domain.events.ProductRemovedFromOrder;
 import nl.softwarestrijders.waiter.order.core.domain.id.CustomerId;
 import nl.softwarestrijders.waiter.order.core.domain.id.OrderId;
+import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
 import nl.softwarestrijders.waiter.order.ports.messaging.OrderEventPublisher;
 import nl.softwarestrijders.waiter.order.ports.storage.OrderRepository;
 
@@ -27,12 +30,24 @@ public class CommandHandler {
         this.eventPublisher.publish(new CreatedOrder(order.getId().id()));
     }
 
-    public void HandleChangeOrderStatus() {
-        //TODO: Implement this
+    public void handleAddProductToOrder(UUID orderId, UUID productId, int amount) {
+        var order = this.repository.findById(orderId).orElseThrow();
+
+        order.addProduct(new ProductId(productId), amount);
+
+        this.repository.save(order);
+
+        this.eventPublisher.publish(new ProductAddedToOrder(order.getId().id(), productId, amount));
     }
 
-    public void handleAddProductToOrder() {
-        //TODO: Implement this
+    public void handleRemoveProductFromOrder(UUID orderId, UUID productId, int amount) {
+        var order = this.repository.findById(orderId).orElseThrow();
+
+        order.removeProduct(new ProductId(productId), amount);
+
+        this.repository.save(order);
+
+        this.eventPublisher.publish(new ProductRemovedFromOrder(order.getId().id(), productId, amount));
     }
 
     public void handleDeleteOrder() {
