@@ -51,7 +51,7 @@ public class RabbitMqConfig {
 
     @Bean
     public Binding deleteProductBinding() {
-        return BindingBuilder.bind(this.createProductQueue()).to(this.waiterExchange()).with(this.deleteProductRoutingKey);
+        return BindingBuilder.bind(this.deleteProductQueue()).to(this.waiterExchange()).with(this.deleteProductRoutingKey);
     }
 
     @Bean
