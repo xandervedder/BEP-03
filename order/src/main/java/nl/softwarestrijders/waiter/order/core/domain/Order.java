@@ -2,7 +2,9 @@ package nl.softwarestrijders.waiter.order.core.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Document(collection = "orders")
@@ -10,16 +12,13 @@ public class Order {
 
     @Id
     private UUID id;
-
     private Receipt receipt;
-
     private UUID customerId;
-
     private Price price;
 
     public Order(UUID id, UUID customerId) {
         this.id = id;
-        this.customerId = customerId;
+        this.customerId = Objects.requireNonNull(customerId, "Weird error");
         this.receipt = new Receipt();
         this.price = new Price(0.00, 0.00, 0.21);
     }
@@ -43,11 +42,7 @@ public class Order {
     }
 
     public UUID getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(UUID customerId) {
-        this.customerId = customerId;
+        return this.customerId;
     }
 
     public Price getPrice() {
