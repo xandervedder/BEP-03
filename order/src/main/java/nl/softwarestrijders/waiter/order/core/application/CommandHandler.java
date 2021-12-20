@@ -2,6 +2,7 @@ package nl.softwarestrijders.waiter.order.core.application;
 
 import nl.softwarestrijders.waiter.order.core.domain.Order;
 import nl.softwarestrijders.waiter.order.core.domain.events.CreatedOrder;
+import nl.softwarestrijders.waiter.order.core.domain.events.DeletedOrder;
 import nl.softwarestrijders.waiter.order.core.domain.events.ProductAddedToOrder;
 import nl.softwarestrijders.waiter.order.core.domain.events.ProductRemovedFromOrder;
 import nl.softwarestrijders.waiter.order.core.domain.id.CustomerId;
@@ -50,11 +51,11 @@ public class CommandHandler {
         this.eventPublisher.publish(new ProductRemovedFromOrder(order.getId().id(), productId, amount));
     }
 
-    public void handleDeleteOrder() {
-        //TODO: Implement this
-    }
+    public void handleDeleteOrder(UUID orderId) {
+        var order = this.repository.findById(orderId).orElseThrow();
 
-    private Order getOrderById(UUID id) {
-        return this.repository.findById(id).orElseThrow();
+        this.repository.delete(order);
+
+        this.eventPublisher.publish(new DeletedOrder(order));
     }
 }
