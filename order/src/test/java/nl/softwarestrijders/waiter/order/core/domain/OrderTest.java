@@ -60,6 +60,32 @@ class OrderTest {
     }
 
     @Test
+    @DisplayName("Should return correct id")
+    void shouldReturnCorrectId() {
+        var uuid = UUID.randomUUID();
+        var order = new Order(uuid, UUID.randomUUID());
+
+        assertEquals(uuid, order.getId());
+    }
+
+    @Test
+    @DisplayName("Should return correct customer id")
+    void shouldReturnCorrectCustomerId() {
+        var uuid = UUID.randomUUID();
+        var order = new Order(UUID.randomUUID(), uuid);
+
+        assertEquals(uuid, order.getCustomerId());
+    }
+
+    @Test
+    @DisplayName("Should return correct price object")
+    void shouldReturnPriceObject() {
+        var order = new Order(UUID.randomUUID(), UUID.randomUUID());
+
+        assertEquals(Price.class, order.getPrice().getClass());
+    }
+
+    @Test
     @DisplayName("Should remove entry of product in order")
     void shouldRemoveProductInOrder() {
         this.order.removeProduct(this.productId, 2);
