@@ -11,8 +11,5 @@ import java.util.UUID;
 public class OrderApplication {
     public static void main(String[] args) {
         SpringApplication.run(OrderApplication.class, args);
-
-        System.out.println("CUSTOMER ID: " + UUID.randomUUID());
-
     }
 }

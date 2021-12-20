@@ -28,7 +28,6 @@ public class CommandHandler {
         this.repository.save(order);
 
         this.eventPublisher.publish(new CreatedOrder(order.getId()));
-        System.out.println("ORDER ID: " + order.getId());
 
         return order;
     }
