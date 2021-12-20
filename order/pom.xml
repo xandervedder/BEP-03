@@ -79,9 +79,9 @@
                                 <exclude>**/OrderApplication.**</exclude>
                                 <exclude>**/adapters/**/*</exclude>
                                 <exclude>**/ports/**/*</exclude>
-                                <exclude>**/core/common/**/*</exclude>
+                                <exclude>**/common/**/*</exclude>
                                 <exclude>**/core/application/**/*</exclude>
-                                <exclude>**/core/domain/events/*</exclude>
+                                <exclude>**/core/domain/events/**/*</exclude>
                             </excludes>
                             <rules>
                                 <rule>
