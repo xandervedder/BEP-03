@@ -1,7 +1,7 @@
 package nl.softwarestrijders.waiter.customer.infrastructure.driven.messaging;
 
 
-import nl.softwarestrijders.waiter.customer.core.domain.event.CustomerEvent;
+import nl.softwarestrijders.waiter.customer.core.domain.event.CustomerDomainEvent;
 import nl.softwarestrijders.waiter.customer.core.port.messaging.CustomerEventPublisher;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
@@ -15,7 +15,7 @@ public class RabbitMqEventPublisher implements CustomerEventPublisher {
 	}
 
 	@Override
-	public void publish(CustomerEvent event) {
+	public void publish(CustomerDomainEvent event) {
 		this.rabbitTemplate.convertAndSend(this.waiterExchange, event.key(), event);
 	}
 }

@@ -15,11 +15,13 @@
 	<description>Customer micro-service</description>
 	<properties>
 		<java.version>17</java.version>
+		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 		<sonar.organization>xandervedder</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io/</sonar.host.url>
 		<sonar.exclusions>
-			**/CustomerApplication.java,
-			**/infrastructure/**
+			**/application/**,
+			**/domain/event/**,
+			**/infrastructure/**,
 		</sonar.exclusions>
 	</properties>
 	<dependencies>
@@ -89,6 +91,7 @@
 								<exclude>**/CustomerApplication.**</exclude>
 								<exclude>**/infrastructure/**/*.**</exclude>
 								<exclude>**/domain/event/**/*.**</exclude>
+								<exclude>**/application/**/*.**</exclude>
 							</excludes>
 							<rules>
 								<rule>

@@ -25,11 +25,48 @@ public class RabbitMqConfig {
 	@Value("${messaging.routing-key.customer}")
 	private String customerRoutingKey;
 
+	@Value("${messaging.queue.customer.review}")
+	private String customerReviewMessageQueue;
+	@Value("${messaging.routing-key.customer.review}")
+	private String customerReviewRoutingKey;
+	@Value("${messaging.queue.customer.review.added}")
+	private String customerReviewAddedMessageQueue;
+	@Value("${messaging.routing-key.customer.review.added}")
+	private String customerReviewAddedRoutingKey;
+	@Value("${messaging.queue.customer.review.removed}")
+	private String customerReviewRemovedMessageQueue;
+	@Value("${messaging.routing-key.customer.review.removed}")
+	private String customerReviewRemovedRoutingKey;
+
+	@Value("${messaging.queue.customer.order}")
+	private String customerOrderMessageQueue;
+	@Value("${messaging.routing-key.customer.order}")
+	private String customerOrderRoutingKey;
+	@Value("${messaging.queue.customer.order.added}")
+	private String customerOrderAddedMessageQueue;
+	@Value("${messaging.routing-key.customer.order.added}")
+	private String customerOrderAddedRoutingKey;
+	@Value("${messaging.queue.customer.order.removed}")
+	private String customerOrderRemovedMessageQueue;
+	@Value("${messaging.routing-key.customer.order.removed}")
+	private String customerOrderRemovedRoutingKey;
+
+	@Value("${messaging.queue.customer.delivery}")
+	private String customerDeliveryMessageQueue;
+	@Value("${messaging.routing-key.customer.delivery}")
+	private String customerDeliveryRoutingKey;
+
+	@Value("${messaging.queue.customer.product}")
+	private String customerProductMessgaeQueue;
+	@Value("${messaging.routing-key.customer.product}")
+	private String customerProductRoutingKey;
+
 	@Bean
 	public TopicExchange waiterExchange() {
 		return new TopicExchange(this.waiterExchangeName);
 	}
 
+	//	Customer ---------------------------------------------------------------------------------------------
 	@Bean
 	public Queue customerQueue() {
 		return QueueBuilder.durable(this.customerMessageQueue).build();
@@ -39,6 +76,93 @@ public class RabbitMqConfig {
 	public Binding customerBinding() {
 		return BindingBuilder.bind(customerQueue()).to(waiterExchange()).with(this.customerRoutingKey);
 	}
+
+	//	Review -----------------------------------------------------------------------------------------------
+	@Bean
+	public Queue customerReviewQueue() {
+		return QueueBuilder.durable(this.customerReviewMessageQueue).build();
+	}
+
+	@Bean
+	public Binding customerReviewBinding() {
+		return BindingBuilder.bind(customerReviewQueue()).to(waiterExchange()).with(this.customerReviewRoutingKey);
+	}
+
+	@Bean
+	public Queue customerReviewAddedQueue() {
+		return QueueBuilder.durable(this.customerReviewAddedMessageQueue).build();
+	}
+
+	@Bean
+	public Binding customerReviewAddedBinding() {
+		return BindingBuilder.bind(customerReviewAddedQueue()).to(waiterExchange()).with(this.customerReviewAddedRoutingKey);
+	}
+
+	@Bean
+	public Queue customerReviewRemovedQueue() {
+		return QueueBuilder.durable(this.customerReviewRemovedMessageQueue).build();
+	}
+
+	@Bean
+	public Binding customerReviewRemovedBinding() {
+		return BindingBuilder.bind(customerReviewRemovedQueue()).to(waiterExchange()).with(this.customerReviewRemovedRoutingKey);
+	}
+
+	//	Order ------------------------------------------------------------------------------------------------
+	@Bean
+	public Queue customerOrderQueue() {
+		return QueueBuilder.durable(this.customerOrderMessageQueue).build();
+	}
+
+	@Bean
+	public Binding customerOrderBinding() {
+		return BindingBuilder.bind(customerOrderQueue()).to(waiterExchange()).with(this.customerOrderRoutingKey);
+	}
+
+	@Bean
+	public Queue customerOrderAddedQueue() {
+		return QueueBuilder.durable(this.customerOrderAddedMessageQueue).build();
+	}
+
+	@Bean
+	public Binding customerOrderAddedBinding() {
+		return BindingBuilder.bind(customerOrderAddedQueue()).to(waiterExchange()).with(this.customerOrderAddedRoutingKey);
+	}
+
+
+	@Bean
+	public Queue customerOrderRemovedQueue() {
+		return QueueBuilder.durable(this.customerOrderRemovedMessageQueue).build();
+	}
+
+	@Bean
+	public Binding customerOrderRemovedBinding() {
+		return BindingBuilder.bind(customerOrderRemovedQueue()).to(waiterExchange()).with(this.customerOrderRemovedRoutingKey);
+	}
+
+
+	//	Delivery ---------------------------------------------------------------------------------------------
+	@Bean
+	public Queue customerDeliveryQueue() {
+		return QueueBuilder.durable(this.customerDeliveryMessageQueue).build();
+	}
+
+	@Bean
+	public Binding customeDeliveryBinding() {
+		return BindingBuilder.bind(customerDeliveryQueue()).to(waiterExchange()).with(this.customerDeliveryRoutingKey);
+	}
+
+	//	Product ----------------------------------------------------------------------------------------------
+	@Bean
+	public Queue customerProductQueue() {
+		return QueueBuilder.durable(this.customerProductMessgaeQueue).build();
+	}
+
+	@Bean
+	public Binding customerProductBinding() {
+		return BindingBuilder.bind(customerProductQueue()).to(waiterExchange()).with(this.customerProductRoutingKey);
+	}
+	// ------------------------------------------------------------------------------------------------------
 
 	@Bean
 	public RabbitMqEventPublisher eventPublisher(RabbitTemplate template) {
