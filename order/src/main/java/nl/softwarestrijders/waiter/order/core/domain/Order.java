@@ -1,38 +1,36 @@
 package nl.softwarestrijders.waiter.order.core.domain;
 
-import nl.softwarestrijders.waiter.order.core.domain.id.CustomerId;
-import nl.softwarestrijders.waiter.order.core.domain.id.OrderId;
-import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.UUID;
 
 @Document(collection = "orders")
 public class Order {
 
     @Id
-    private OrderId id;
-
+    private UUID id;
     private Receipt receipt;
-
-    private CustomerId customerId;
-
+    private UUID customerId;
     private Price price;
 
-    public Order(OrderId id) {
+    public Order(UUID id, UUID customerId) {
         this.id = id;
+        this.customerId = customerId;
         this.receipt = new Receipt();
+        this.price = new Price(0.00, 0.00, 0.21);
     }
 
-    public OrderId getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void addProduct(ProductId product, int amount) {
+    public void addProduct(UUID product, int amount) {
         this.receipt.addItem(product, amount);
         this.price = this.calculatePrice();
     }
 
-    public void removeProduct(ProductId productId, int amount) {
+    public void removeProduct(UUID productId, int amount) {
         this.receipt.removeItem(productId, amount);
         this.price = this.calculatePrice();
     }
@@ -41,12 +39,8 @@ public class Order {
         return this.receipt;
     }
 
-    public CustomerId getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(CustomerId customerId) {
-        this.customerId = customerId;
+    public UUID getCustomerId() {
+        return this.customerId;
     }
 
     public Price getPrice() {

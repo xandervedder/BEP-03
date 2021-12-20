@@ -2,30 +2,30 @@ package nl.softwarestrijders.waiter.order.core.domain;
 
 import nl.softwarestrijders.waiter.order.common.annotation.TestExcludeGenerated;
 import nl.softwarestrijders.waiter.order.common.exception.InvalidModificationException;
-import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class ReceiptItem {
 
-    private ProductId productId;
+    private UUID productId;
 
     private int amount;
 
     public ReceiptItem() {
     }
 
-    public ReceiptItem(ProductId productId) {
+    public ReceiptItem(UUID productId) {
         this.productId = productId;
         this.amount = 1;
     }
 
-    public ReceiptItem(ProductId productId, int amount) {
+    public ReceiptItem(UUID productId, int amount) {
         this.productId = productId;
         this.amount = amount;
     }
 
-    public ProductId getProductId() {
+    public UUID getProductId() {
         return productId;
     }
 

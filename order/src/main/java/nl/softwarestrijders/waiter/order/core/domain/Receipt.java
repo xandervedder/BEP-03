@@ -1,10 +1,9 @@
 package nl.softwarestrijders.waiter.order.core.domain;
 
-import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class Receipt {
 
@@ -18,14 +17,16 @@ public class Receipt {
         return Collections.unmodifiableList(this.items);
     }
 
-    public void addItem(ProductId product, int amount) {
-        if (this.getItemByProductId(product) != null)
+    public void addItem(UUID product, int amount) {
+        if (this.getItemByProductId(product) != null) {
             this.getItemByProductId(product).addAmount(amount);
+            return;
+        }
 
         this.items.add(new ReceiptItem(product, amount));
     }
 
-    public void removeItem(ProductId productId, int amount) {
+    public void removeItem(UUID productId, int amount) {
         var item = this.getItemByProductId(productId);
 
         // If the amount in the list is more than the amount we need to remove, we remove the whole entry.
@@ -37,7 +38,7 @@ public class Receipt {
         item.removeAmount(amount);
     }
 
-    public ReceiptItem getItemByProductId(ProductId id) {
+    public ReceiptItem getItemByProductId(UUID id) {
         var item = this.items.stream().filter(i -> i.getProductId().equals(id)).findFirst();
         return item.orElse(null);
     }

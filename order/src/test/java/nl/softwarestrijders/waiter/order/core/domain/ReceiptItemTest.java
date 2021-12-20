@@ -1,7 +1,6 @@
 package nl.softwarestrijders.waiter.order.core.domain;
 
 import nl.softwarestrijders.waiter.order.common.exception.InvalidModificationException;
-import nl.softwarestrijders.waiter.order.core.domain.id.ProductId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,17 +11,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReceiptItemTest {
 
-    ProductId productId;
+    UUID productId;
     ReceiptItem item;
 
     @BeforeEach
     void initialize() {
-        this.productId = new ProductId(UUID.randomUUID());
+        this.productId = UUID.randomUUID();
         this.item = new ReceiptItem(this.productId, 2);
     }
 
     @Test
-    @DisplayName("Should create receiptitem with amount 1")
+    @DisplayName("Should create receipt item with amount 1")
     void shouldCreateNewItemWithAmount1() {
         var item = new ReceiptItem(this.productId);
 
