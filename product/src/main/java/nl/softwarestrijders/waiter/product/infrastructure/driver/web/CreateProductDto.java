@@ -1,7 +1,5 @@
 package nl.softwarestrijders.waiter.product.infrastructure.driver.web;
 
-import java.util.UUID;
-
 public record CreateProductDto(
         double price,
         String name,

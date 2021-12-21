@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public ProductDto createProduct(@RequestParam CreateProductDto dto) {
+    public ProductDto createProduct(@RequestBody CreateProductDto dto) {
         return this.toDto(this.commandHandler.handle(
                 new CreateProductCommand(
                         dto.price(),
@@ -43,7 +43,7 @@ public class ProductController {
         ));
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteProduct(@PathVariable String id) {
         this.commandHandler.handle(new DeleteProductCommand(UUID.fromString(id)));
     }
