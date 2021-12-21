@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public ProductDto createProduct(@RequestParam CreateProductDto dto) {
+    public ProductDto createProduct(@RequestBody CreateProductDto dto) {
         return this.toDto(this.commandHandler.handle(
                 new CreateProductCommand(
                         dto.price(),
