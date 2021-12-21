@@ -17,7 +17,7 @@ public class RabbitMqEventListener {
     @RabbitListener(queues = "#{'${messaging.queue.order}'}")
     void listen(DeliveryStatusEvent event) {
         if ("order.created".equals(event.eventKey)) {
-            this.commandHandler.handleRegisterDelivery(event.order);
+            this.commandHandler.handleRegisterDelivery(event.order, event.customer);
         }
     }
 }

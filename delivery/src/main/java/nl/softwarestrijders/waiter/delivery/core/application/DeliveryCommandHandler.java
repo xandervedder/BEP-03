@@ -41,8 +41,8 @@ public class DeliveryCommandHandler {
     }
 
     // Need to discuss with the boys how to handle fetches appropriately.
-    public void handleRegisterDelivery(UUID orderId) {
-        var customerDeliveryAddress = this.customerGateway.getCustomerDeliveryAddress(orderId);
+    public void handleRegisterDelivery(UUID orderId, UUID customerId) {
+        var customerDeliveryAddress = this.customerGateway.getCustomerDeliveryAddress(customerId);
 
         var address = new DeliveryAddress(
                 customerDeliveryAddress.street(),
