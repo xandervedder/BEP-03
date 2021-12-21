@@ -2,5 +2,5 @@ package nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging.eve
 
 import java.util.UUID;
 
-public record ReviewEvent(String eventKey, UUID customerId, UUID reviewId, String type) {
+public record ReviewEvent(UUID customerId, UUID reviewId, String type) {
 }

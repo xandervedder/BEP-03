@@ -42,7 +42,7 @@ public class CommandHandler {
                 new Rating(command.rating())
         );
         var entity = this.repository.save(review);
-        this.eventPublisher.publish(new ReviewCreatedEvent(entity.getId(), entity.getType()));
+        this.eventPublisher.publish(new ReviewCreatedEvent(entity.getId(), entity.getCustomerId(), entity.getType()));
         return entity;
     }
 
@@ -67,6 +67,6 @@ public class CommandHandler {
         }
 
         this.repository.delete(review);
-        this.eventPublisher.publish(new ReviewDeletedEvent(review.getId(), review.getType()));
+        this.eventPublisher.publish(new ReviewDeletedEvent(review.getId(), review.getCustomerId()));
     }
 }
