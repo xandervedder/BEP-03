@@ -13,7 +13,7 @@ public class RabbitMqEventListener {
     }
 
     // Does not listen for now.
-    @RabbitListener(queues = "#{'${messaging.queue}'}")
+    @RabbitListener(queues = "#{'${messaging.queue.order}'}")
     public void listen() {
 
     }
