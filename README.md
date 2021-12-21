@@ -13,6 +13,13 @@ Waiter will be a distributed system and will contain the following services:
 
 ## Documentation
 
+### [Customer micro-service](./customer/README.md)
+
+### [Delivery micro-service](./delivery/README.md)
+
+### [Order micro-service](./order/README.md)
+
+### [Product micro-service](./product/README.md)
+
 ### [Review micro-service](./review/README.md)
 
-### [Customer micro-service](./customer/README.md)
