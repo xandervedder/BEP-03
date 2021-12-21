@@ -83,9 +83,9 @@ public class ReviewController {
                 new CreateReview(
                         request.customerId(),
                         request.conceptId(),
+                        request.type(),
                         request.title(),
                         request.description(),
-                        request.type(),
                         request.rating()
                 )
         ));
