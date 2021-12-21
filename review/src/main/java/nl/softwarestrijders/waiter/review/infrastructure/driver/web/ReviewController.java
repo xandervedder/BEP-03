@@ -129,7 +129,7 @@ public class ReviewController {
 
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<Void> handleNullPointer(Exception exception) {
-        return withLogging(HttpStatus.BAD_REQUEST, exception);
+        return this.withLogging(HttpStatus.BAD_REQUEST, exception);
     }
 
     private ResponseEntity<Void> withLogging(HttpStatus status, Exception exception) {
