@@ -1,6 +1,6 @@
-# delivery
+# Delivery micro-service 
 
-micro-service This micro-service deals with (almost) everything related to deliveries. Most of the information here is
+This micro-service deals with (almost) everything related to deliveries. Most of the information here is
 valuable to the other developers (that are developing other micro-services).
 
 | **sonar**cloud                                                                                                                                                                                                                                   |
@@ -26,20 +26,20 @@ with the exact JSON that they deliver.
 
 This sections covers the few events that will be produced from the delivery micro-service.
 
-#### delivery
+#### Delivery
 
-CreatedEvent This very simple message only gives its `delivery Id` and `delivery Type`.
+DeliveryAddressChanged: This message gives its `deliveryId` and `deliveryAddress`. 
 
 ##### Routing key
 
-This event has the following routing key: `events.delivery .created`.
+This event has the following routing key: `delivery.address`. 
 
 ##### Fields
 
-| Key        | Value  | Extra Information              |
-|------------|--------|--------------------------------|
-| deliveryId   | UUID   | —                              |
-| deliveryType | String | can be `product` or `delivery` |
+| Key             | Value           | Extra Information              |
+|-----------------|-----------------|--------------------------------|
+| deliveryId      | UUID            | —                              |
+| deliveryAddress | DeliveryAddress | is an address object           |
 
 ##### JSON Example
 
@@ -47,74 +47,67 @@ The JSON that will be sent, will look like this:
 
 ```json
 {
-  "delivery
-  Id
-  ": "
-  62bc28c1-db80-4e4e-9bcd-8a9845943633
-  ",
-  "delivery
-  Type
-  ": "
-  product
-  "
+  "deliveryId": "62bc28c1-db80-4e4e-9bcd-8a9845943633",
+  "deliveryAddress": {
+    "streetName": "Spinozaweg",
+    "houseNumber": 71,
+    "addition": "B",
+    "postalCode": "3532SE",
+    "city": "Utrecht"
+  }
 }
 ```
 
-#### delivery
+#### Delivery
 
-DeletedEvent This message will be sent when a certain delivery is deleted.
+DeliveryStatusChanged: This message gives its `deliveryId` and `deliveryStatus`.
 
 ##### Routing key
 
-The event has the following routing key: `events.delivery .deleted`.
+This event has the following routing key: `delivery.status`.
 
 ##### Fields
 
-| Key        | Value  | Extra Information              |
-|------------|--------|--------------------------------|
-| deliveryId   | UUID   | —                              |
-| deliveryType | String | can be `product` or `delivery` |
+| Key            | Value  | Extra Information              |
+|----------------|--------|--------------------------------|
+| deliveryId     | UUID   | —                              |
+| deliveryStatus | Status | is an enum                     |
 
 #### JSON Example
 
 ```json
 {
-  "delivery
-  Id
-  ": "
-  62bc28c1-db80-4e4e-9bcd-8a9845943633
-  ",
-  "delivery
-  Type
-  ": "
-  product
-  "
+  "deliveryId": "62bc28c1-db80-4e4e-9bcd-8a9845943633",
+  "deliveryStatus": "Status.REGISTERED"
 }
 ```
+
+### Consumes
+
+This sections covers the few events that will be consumed by the delivery micro-service.
+
+#### Order
+
+OrderCreated: This message gives its `orderId` and `customerId`.
+
+##### Routing key
+
+This event has the following routing key: `order.created`.
+
+##### Fields
+
+| Key        | Value  | Extra Information              |
+|------------|--------|--------------------------------|
+| orderId    | UUID   | —                              |
+| customerId | UUID   | —                              |
 
 ## REST
 
 This micro-service has a couple different endpoints, these will be shown below.
 
-The base URL of this API is as follows: `http://localhost:8084/api/delivery
-`.
+The base URL of this API is as follows: `http://localhost:8081/delivery`.
 
 In the [postman](./postman) folder is a collection that can be used to quickly test the service.
-
-### DELETE
-
-This section covers the DELETE HTTP method.
-
-#### `/{delivery
-
-Id}`
-Expects the following body:
-
-```json
-{
-  "customerId": "62bc28c1-db80-4e4e-9bcd-8a9845943622"
-}
-```
 
 ### GET
 
@@ -124,69 +117,32 @@ This section covers the GET HTTP method.
 
 This will retrieve all delivery s.
 
-When doing a get request to the base url, you are expected to provide the following query params.
+When doing a get request to the base url, you'll receive a list of all the deliveries.
 
-`/api/delivery ?direction={direction}&sort={sort}`
-
-direction can be:
-
-- `desc`
-- `asc`
-
-sort can be:
-
-- `title`
-- `description`
-- `type`
-- `rating`
+`/delivery`
 
 **note**: these are not optional.
 
 #### `/{deliveryId}`
-This will retrieve a single delivery .
 
-#### `/customer/{customerId}`
+This will retrieve a single delivery.
 
-This will retrieve all delivery s made by a Customer.
+#### `/status/{id}`
 
-#### `/product/{productId}`
+This will retrieve the delivery status.
 
-This will retrieve all delivery s made on a Product.
+#### `/order/{id}`
+
+This will retrieve the delivery that belongs to the given order(id).
 
 #### `/delivery/{deliveryId}`
 
 This will retrieve all delivery s made on a Delivery.
 
-### PATCH
+## REST-CALL
 
-This section covers the PATCH HTTP method.
+The micro-service makes a rest-call to another microservice to retrieve some information.
 
-#### `/{deliveryId}`
-This endpoint expects the following body:
-
-```json
-{
-  "title": "<title here>",
-  "description": "<description here>",
-  "rating": 5
-}
-```
-
-### POST
-
-This section covers the HTTP POST method.
-
-#### `baseUrl`
-
-When POST'ing to this endpoint, the following body is expected:
-
-```json
-{
-  "customerId": "62bc28c1-db80-4e4e-9bcd-8a9845943622",
-  "conceptId": "62bc28c1-db80-4e4e-9bcd-8a9845943332",
-  "type": "product",
-  "title": "title",
-  "description": "description",
-  "rating": 5
-}
-```
+### GET
+The delivery service calls the `@GetMapping("/order/{orderId}/retrieve-address")` from the customer service,
+to get the address for registering a new delivery.
