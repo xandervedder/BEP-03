@@ -5,14 +5,20 @@ import nl.softwarestrijders.waiter.order.core.domain.Order;
 import java.util.UUID;
 
 public class OrderDeleted extends OrderEvent {
-    private final Order order;
+    private final UUID order;
+    private final UUID customer;
 
-    public OrderDeleted(Order order) {
+    public OrderDeleted(UUID order, UUID customer) {
         this.order = order;
+        this.customer = customer;
     }
 
-    public Order getOrder() {
+    public UUID getOrder() {
         return order;
+    }
+
+    public UUID getCustomer() {
+        return customer;
     }
 
     @Override

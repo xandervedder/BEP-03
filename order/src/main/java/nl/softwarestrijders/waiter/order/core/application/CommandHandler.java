@@ -31,7 +31,7 @@ public class CommandHandler {
 
         this.repository.save(order);
 
-        this.eventPublisher.publish(new OrderCreated(order.getId()));
+        this.eventPublisher.publish(new OrderCreated(order.getId(), order.getCustomerId()));
 
         return order;
     }
@@ -65,7 +65,7 @@ public class CommandHandler {
 
         this.repository.delete(order);
 
-        this.eventPublisher.publish(new OrderDeleted(order));
+        this.eventPublisher.publish(new OrderDeleted(orderId, order.getCustomerId()));
     }
 
     private Order findById(UUID id) {

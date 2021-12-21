@@ -34,14 +34,6 @@ public class RabbitMqConfig {
 	private String customerOrderMessageQueue;
 	@Value("${messaging.routing-key.customer.order}")
 	private String customerOrderRoutingKey;
-	@Value("${messaging.queue.customer.order.added}")
-	private String customerOrderAddedMessageQueue;
-	@Value("${messaging.routing-key.customer.order.added}")
-	private String customerOrderAddedRoutingKey;
-	@Value("${messaging.queue.customer.order.removed}")
-	private String customerOrderRemovedMessageQueue;
-	@Value("${messaging.routing-key.customer.order.removed}")
-	private String customerOrderRemovedRoutingKey;
 
 	@Bean
 	public TopicExchange waiterExchange() {
@@ -76,27 +68,6 @@ public class RabbitMqConfig {
 	@Bean
 	public Binding customerOrderBinding() {
 		return BindingBuilder.bind(customerOrderQueue()).to(waiterExchange()).with(this.customerOrderRoutingKey);
-	}
-
-	@Bean
-	public Queue customerOrderAddedQueue() {
-		return QueueBuilder.durable(this.customerOrderAddedMessageQueue).build();
-	}
-
-	@Bean
-	public Binding customerOrderAddedBinding() {
-		return BindingBuilder.bind(customerOrderAddedQueue()).to(waiterExchange()).with(this.customerOrderAddedRoutingKey);
-	}
-
-
-	@Bean
-	public Queue customerOrderRemovedQueue() {
-		return QueueBuilder.durable(this.customerOrderRemovedMessageQueue).build();
-	}
-
-	@Bean
-	public Binding customerOrderRemovedBinding() {
-		return BindingBuilder.bind(customerOrderRemovedQueue()).to(waiterExchange()).with(this.customerOrderRemovedRoutingKey);
 	}
 
 	@Bean

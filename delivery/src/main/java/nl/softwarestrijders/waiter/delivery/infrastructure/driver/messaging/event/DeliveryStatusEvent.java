@@ -7,9 +7,6 @@ import java.time.Instant;
 import java.util.UUID;
 
 public class DeliveryStatusEvent {
-    public UUID eventId;
-    public String eventKey;
-    public Instant eventDate;
     public UUID delivery;
     public Status status;
     public DeliveryAddress address;

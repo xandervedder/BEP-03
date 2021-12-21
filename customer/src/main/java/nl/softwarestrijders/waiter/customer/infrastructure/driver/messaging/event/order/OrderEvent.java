@@ -2,5 +2,5 @@ package nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging.eve
 
 import java.util.UUID;
 
-public record OrderEvent(String eventKey, UUID customerId, UUID orderId) {
+public record OrderEvent(UUID customer, UUID order) {
 }

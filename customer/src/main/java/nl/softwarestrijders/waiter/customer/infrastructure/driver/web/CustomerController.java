@@ -58,9 +58,8 @@ public class CustomerController {
 		return this.queryHandler.handle(new GetDeliveriesFromCustomer(customerId));
 	}
 
-	@GetMapping("/order/{orderId}/retrieve-address")
-	// TODO: change URL name
-	public Address getAddressByCustomerId(@PathVariable UUID orderId) {
-		return this.queryHandler.handle(new GetAddressByCustomerId(orderId));
+	@GetMapping("/{customerId}/retrieve-address")
+	public Address getAddressByCustomerId(@PathVariable UUID customerId) {
+		return this.queryHandler.handle(new GetAddressByCustomerId(customerId));
 	}
 }

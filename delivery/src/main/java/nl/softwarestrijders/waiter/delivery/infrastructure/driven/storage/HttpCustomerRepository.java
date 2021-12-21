@@ -17,9 +17,8 @@ public class HttpCustomerRepository implements CustomerRepository {
     }
 
     @Override
-    public CustomerDeliveryAddress getCustomerDeliveryAddress(UUID orderId) {
-        // TODO: change orderId to customerId
-        var uri = URI.create(this.rootPath + "/customer/order/" + orderId + "/retrieve-address");
+    public CustomerDeliveryAddress getCustomerDeliveryAddress(UUID customerId) {
+        var uri = URI.create(String.format("%s/customer/%s/retrieve-address", this.rootPath, customerId));
         var customerDeliveryAddress = this.client.getForObject(uri, CustomerDeliveryAddress.class);
         return Objects.requireNonNull(customerDeliveryAddress);
     }
