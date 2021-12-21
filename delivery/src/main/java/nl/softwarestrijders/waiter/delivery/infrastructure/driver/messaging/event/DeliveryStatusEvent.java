@@ -14,4 +14,5 @@ public class DeliveryStatusEvent {
     public Status status;
     public DeliveryAddress address;
     public UUID order;
+    public UUID customer;
 }

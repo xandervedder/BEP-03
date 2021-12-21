@@ -14,11 +14,10 @@ public class RabbitMqEventListener {
         this.commandHandler = commandHandler;
     }
 
-    @RabbitListener(queues = "#{'${messaging.queue.delivery}'}")
+    @RabbitListener(queues = "#{'${messaging.queue.order}'}")
     void listen(DeliveryStatusEvent event) {
-        switch (event.eventKey) {
-            case "delivery.status" -> this.commandHandler.handleStatusChange(event.delivery, event.status);
-            case "delivery.address" -> this.commandHandler.handleChangeDeliveryAddress(event.delivery, event.address);
+        if ("order.created".equals(event.eventKey)) {
+            this.commandHandler.handleRegisterDelivery(event.order, event.customer);
         }
     }
 }
