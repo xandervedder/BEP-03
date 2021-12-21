@@ -1,7 +1,6 @@
 package nl.softwarestrijders.waiter.customer.core.application;
 
 import nl.softwarestrijders.waiter.customer.core.application.exception.CustomerNotFoundException;
-import nl.softwarestrijders.waiter.customer.core.application.exception.OrderNotFoundException;
 import nl.softwarestrijders.waiter.customer.core.application.query.*;
 import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
@@ -62,12 +61,5 @@ public class CustomerQueryHandler {
 	private Customer findCustomerById(UUID id) {
 		return this.customerRepository.findById(id)
 				.orElseThrow(() -> new CustomerNotFoundException(id.toString()));
-	}
-
-	public Address handle(GetAddressByOrderId query) {
-		var id = query.id();
-		return this.customerRepository.findCustomerByOrder(id)
-				.orElseThrow(() -> new OrderNotFoundException(id))
-				.getAddress();
 	}
 }

@@ -3,7 +3,10 @@ package nl.softwarestrijders.waiter.customer.infrastructure.driver.web;
 import nl.softwarestrijders.waiter.customer.core.application.CustomerCommandHandler;
 import nl.softwarestrijders.waiter.customer.core.application.CustomerQueryHandler;
 import nl.softwarestrijders.waiter.customer.core.application.command.RegisterCustomer;
-import nl.softwarestrijders.waiter.customer.core.application.query.*;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetAddressByCustomerId;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetDeliveriesFromCustomer;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetOrdersFromCustomer;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetReviewsFromCustomer;
 import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
 import nl.softwarestrijders.waiter.customer.infrastructure.driver.web.request.RegisterCustomerRequest;
@@ -40,27 +43,23 @@ public class CustomerController {
 		);
 	}
 
-	@GetMapping("/reviews")
-	public Map<UUID, String> getReviewsFromCustomer(@RequestBody UUID customerId) {
+	@GetMapping("/reviews/{customerId}")
+	public Map<UUID, String> getReviewsFromCustomer(@PathVariable UUID customerId) {
 		return this.queryHandler.handle(new GetReviewsFromCustomer(customerId));
 	}
 
-	@GetMapping("/orders")
-	public List<UUID> getOrdersFromCustomer(@RequestBody UUID customerId) {
+	@GetMapping("/orders/{customerId}")
+	public List<UUID> getOrdersFromCustomer(@PathVariable UUID customerId) {
 		return this.queryHandler.handle(new GetOrdersFromCustomer(customerId));
 	}
 
-	@GetMapping("/deliveries")
-	public List<UUID> getDeliveriesFromCustomer(@RequestBody UUID customerId) {
+	@GetMapping("/deliveries/{customerId}")
+	public List<UUID> getDeliveriesFromCustomer(@PathVariable UUID customerId) {
 		return this.queryHandler.handle(new GetDeliveriesFromCustomer(customerId));
 	}
 
-	@GetMapping("/address")
-	public Address getAddressFromCustomer(@RequestBody UUID id, @RequestBody String findBy) {
-		return switch (findBy) {
-			case "customer" -> this.queryHandler.handle(new GetAddressByCustomerId(id));
-			case "order" -> this.queryHandler.handle(new GetAddressByOrderId(id));
-			default -> throw new IllegalStateException("Unexpected value: " + findBy);
-		};
+	@GetMapping("/order/{orderId}/retrieve-address")
+	public Address getAddressByCustomerId(@PathVariable UUID orderId) {
+		return this.queryHandler.handle(new GetAddressByCustomerId(orderId));
 	}
 }
