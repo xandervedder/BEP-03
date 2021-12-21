@@ -132,6 +132,29 @@ class CustomerTest {
 	}
 
 	@Test
+	@DisplayName("Should add item to list of deliveries")
+	void addDelivery() {
+		var uuid = UUID.randomUUID();
+		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
+		customer.addDelivery(uuid);
+		assertEquals(uuid, customer.getDeliveries().get(0));
+	}
+
+	@Test
+	@DisplayName("Should remove item from list of deliveries")
+	void removeDelivery() {
+		var uuid = UUID.randomUUID();
+		var uuid1 = UUID.randomUUID();
+		var uuid2 = UUID.randomUUID();
+		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
+		customer.addDelivery(uuid);
+		customer.addDelivery(uuid1);
+		customer.addDelivery(uuid2);
+		customer.removeDelivery(uuid1);
+		assertFalse(customer.getDeliveries().contains(uuid1));
+	}
+
+	@Test
 	@DisplayName("Getters and setters test for JaCoCo")
 	void getterSetterTests() {
 		var customer = new Customer("Test", "Test", "test@test.nl", address);

@@ -4,17 +4,18 @@ import nl.softwarestrijders.waiter.customer.core.application.exception.CustomerN
 import nl.softwarestrijders.waiter.customer.core.application.query.*;
 import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
-import nl.softwarestrijders.waiter.customer.core.port.storage.AddressRepository;
 import nl.softwarestrijders.waiter.customer.core.port.storage.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
 public class CustomerQueryHandler {
 	private final CustomerRepository customerRepository;
 
-	public CustomerQueryHandler(CustomerRepository customerRepository, AddressRepository addressRepository) {
+	public CustomerQueryHandler(CustomerRepository customerRepository) {
 		this.customerRepository = customerRepository;
 	}
 
@@ -33,8 +34,8 @@ public class CustomerQueryHandler {
 		return this.findCustomerById(query.id());
 	}
 
-	public void handle(GetDeliveriesFromCustomer query) {
-		//TODO: implement
+	public List<UUID> handle(GetDeliveriesFromCustomer query) {
+		return this.findCustomerById(query.id()).getDeliveries();
 	}
 
 	public void handle(GetDeliveryStatusFromOrder query) {
@@ -45,12 +46,16 @@ public class CustomerQueryHandler {
 		return this.findCustomerById(query.id()).getEmail();
 	}
 
-	public void handle(GetOrdersFromCustomer query) {
-		//TODO: implement
+	public List<UUID> handle(GetOrdersFromCustomer query) {
+		return this.findCustomerById(query.id()).getOrders();
 	}
 
 	public void handle(GetProductInfo query) {
 		//TODO: implement
+	}
+
+	public Map<UUID, String> handle(GetReviewsFromCustomer query) {
+		return this.findCustomerById(query.id()).getReviews();
 	}
 
 	private Customer findCustomerById(UUID id) {

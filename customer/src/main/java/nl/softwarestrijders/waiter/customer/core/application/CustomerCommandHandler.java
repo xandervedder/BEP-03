@@ -22,7 +22,7 @@ public class CustomerCommandHandler {
 		this.eventPublisher = eventPublisher;
 	}
 
-	public Customer handleReviewAdded(RegisterCustomer command) {
+	public Customer handleRegisterCustomer(RegisterCustomer command) {
 		var address = new Address(command.housenumber(), command.addition(), command.street(), command.postalCode(), command.city());
 		var customer = new Customer(command.firstname(), command.lastname(), command.email(), address);
 

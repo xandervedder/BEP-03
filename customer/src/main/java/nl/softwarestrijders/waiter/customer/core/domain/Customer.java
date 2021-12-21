@@ -24,6 +24,7 @@ public class Customer {
 	private Address address;
 	private List<UUID> orders;
 	private HashMap<UUID, String> reviews; // String = type of review
+	private List<UUID> deliveries;
 	@Transient
 	private List<CustomerDomainEvent> events = new ArrayList<>();
 
@@ -45,6 +46,7 @@ public class Customer {
 		this.address = address;
 		this.orders = new ArrayList<>();
 		this.reviews = new HashMap<>();
+		this.deliveries = new ArrayList<>();
 	}
 
 	/**
@@ -146,12 +148,30 @@ public class Customer {
 	}
 
 	/**
-	 * Function that removes the given orderId to the list of orderId's.
+	 * Function that removes the given orderId from the list of orderId's.
 	 *
 	 * @param reviewId reviewId
 	 */
 	public void removeReview(UUID reviewId) {
 		this.reviews.remove(reviewId);
+	}
+
+	/**
+	 * Function that adds the given deliveryId to the list of deliveryId's.
+	 *
+	 * @param deliveryId deliveryId
+	 */
+	public void addDelivery(UUID deliveryId) {
+		this.deliveries.add(deliveryId);
+	}
+
+	/**
+	 * Function that removes the given deliveryId from the list of deliveryId's.
+	 *
+	 * @param deliveryId deliveryId
+	 */
+	public void removeDelivery(UUID deliveryId) {
+		this.deliveries.remove(deliveryId);
 	}
 
 	/**
@@ -205,5 +225,9 @@ public class Customer {
 
 	public Map<UUID, String> getReviews() {
 		return Collections.unmodifiableMap(reviews);
+	}
+
+	public List<UUID> getDeliveries() {
+		return Collections.unmodifiableList(deliveries);
 	}
 }
