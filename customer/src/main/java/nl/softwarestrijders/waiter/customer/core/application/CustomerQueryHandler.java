@@ -1,10 +1,10 @@
 package nl.softwarestrijders.waiter.customer.core.application;
 
 import nl.softwarestrijders.waiter.customer.core.application.exception.CustomerNotFoundException;
+import nl.softwarestrijders.waiter.customer.core.application.exception.OrderNotFoundException;
 import nl.softwarestrijders.waiter.customer.core.application.query.*;
 import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
-import nl.softwarestrijders.waiter.customer.core.port.storage.AddressRepository;
 import nl.softwarestrijders.waiter.customer.core.port.storage.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.UUID;
 public class CustomerQueryHandler {
 	private final CustomerRepository customerRepository;
 
-	public CustomerQueryHandler(CustomerRepository customerRepository, AddressRepository addressRepository) {
+	public CustomerQueryHandler(CustomerRepository customerRepository) {
 		this.customerRepository = customerRepository;
 	}
 
@@ -62,5 +62,12 @@ public class CustomerQueryHandler {
 	private Customer findCustomerById(UUID id) {
 		return this.customerRepository.findById(id)
 				.orElseThrow(() -> new CustomerNotFoundException(id.toString()));
+	}
+
+	public Address handle(GetAddressByOrderId query) {
+		var id = query.id();
+		return this.customerRepository.findCustomerByOrder(id)
+				.orElseThrow(() -> new OrderNotFoundException(id))
+				.getAddress();
 	}
 }

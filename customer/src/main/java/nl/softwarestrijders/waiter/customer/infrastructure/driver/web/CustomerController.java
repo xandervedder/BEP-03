@@ -3,9 +3,8 @@ package nl.softwarestrijders.waiter.customer.infrastructure.driver.web;
 import nl.softwarestrijders.waiter.customer.core.application.CustomerCommandHandler;
 import nl.softwarestrijders.waiter.customer.core.application.CustomerQueryHandler;
 import nl.softwarestrijders.waiter.customer.core.application.command.RegisterCustomer;
-import nl.softwarestrijders.waiter.customer.core.application.query.GetDeliveriesFromCustomer;
-import nl.softwarestrijders.waiter.customer.core.application.query.GetOrdersFromCustomer;
-import nl.softwarestrijders.waiter.customer.core.application.query.GetReviewsFromCustomer;
+import nl.softwarestrijders.waiter.customer.core.application.query.*;
+import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
 import nl.softwarestrijders.waiter.customer.infrastructure.driver.web.request.RegisterCustomerRequest;
 import org.springframework.web.bind.annotation.*;
@@ -54,5 +53,14 @@ public class CustomerController {
 	@GetMapping("/deliveries")
 	public List<UUID> getDeliveriesFromCustomer(@RequestBody UUID customerId) {
 		return this.queryHandler.handle(new GetDeliveriesFromCustomer(customerId));
+	}
+
+	@GetMapping("/address")
+	public Address getAddressFromCustomer(@RequestBody UUID id, @RequestBody String findBy) {
+		return switch (findBy) {
+			case "customer" -> this.queryHandler.handle(new GetAddressByCustomerId(id));
+			case "order" -> this.queryHandler.handle(new GetAddressByOrderId(id));
+			default -> throw new IllegalStateException("Unexpected value: " + findBy);
+		};
 	}
 }
