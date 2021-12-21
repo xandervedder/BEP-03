@@ -19,9 +19,6 @@ public class CustomerQueryHandler {
 		this.customerRepository = customerRepository;
 	}
 
-	//Note: all of these query handlers that still need to be implemented are going to use
-	//HttpRepositories (as implementation), but we will have to wait for that to be available (just clarifying)
-
 	public Address handle(GetAddressByCustomerId query) {
 		return this.findCustomerById(query.id()).getAddress();
 	}
