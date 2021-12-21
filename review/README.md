@@ -16,103 +16,16 @@ This micro-service deals with (almost) everything related to reviewing. Most of 
 | [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=nl.softwarestrijders.waiter%3Areview&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=nl.softwarestrijders.waiter%3Areview)               |
 
 ## Events
-In this section it will become clear what events the Review micro-service consumes and produces. These events will be described with the exact JSON that they require or deliver. 
-
-### Consumes
-The events this micro-service consumes.
-
-#### CreateReviewEvent
-When recieving this event, this micro-service creates the Review with the given information.
-
-##### Queue name
-`create-review`.
-
-##### Routing key
-`review.create`.
-
-##### Fields
-| Key            | Value  | Extra information                               |
-|----------------|--------|-------------------------------------------------|
-| customerId     | UUID   | —                                               |
-| conceptId      | UUID   | Id of Product or Delivery                       |
-| reviewType     | String | Can be `product` or `delivery`                  |
-| title          | String | Minimum length of `3`, maximum length of `32`   |
-| description    | String | Minimum length of `32`, maximum length of `512` |
-| rating         | int    | Between `1` or `5`                              |
-
-##### JSON Example
-For example, the JSON looks like this:
-```json
-{
-    "customerId": "62bc28c1-db80-4e4e-9bcd-8a9845943633",
-    "conceptId": "bd72ef09-d700-4e6f-a3b3-96425cce6376",
-    "reviewType": "product",
-    "title": "Very good!",
-    "description": "This food is the most delicious food I have ever tasted!",
-    "rating": 5
-}
-```
-
-#### DeleteReviewEvent
-This message is simple. To delete a Review, simply provide the `reviewId`.
-
-##### Queue name
-`delete-review`.
-
-##### Routing key
-`review.delete`.
-
-##### Fields
-| Key        | Value | Extra Information |
-|------------|-------|-------------------|
-| customerId | UUID  | —                 |
-| reviewId   | UUID  | —                 |
-
-##### JSON Example
-For example, the JSON looks like this:
-```json
-{
-    "customerId": "62bc28c1-db80-4e4e-9bcd-8a9845943633",
-    "reviewId": "62bc28c1-db80-4e4e-9bcd-8a9845943633"
-}
-```
-
-#### EditReviewEvent
-This message is very similar to the [CreateReviewEvent](#createreviewevent). Though this event doesn't need a `customerId` or `conceptId`, but simply a `reviewId`. There is also no need for the `reviewType` field.
-
-##### Queue name
-`edit-review`.
-
-##### Routing key
-`review.edit`.
-
-##### Fields
-| Key         | Value  | Extra information                               |
-|-------------|--------|-------------------------------------------------|
-| reviewId    | UUID   | —                                               |
-| title       | String | Minimum length of `3`, maximum length of `32`   |
-| description | String | Minimum length of `32`, maximum length of `512` |
-| rating      | int    | between `1` or `5`                              |
-
-##### JSON Example
-For example the JSON looks like this:
-```json
-{
-    "reviewId": "62bc28c1-db80-4e4e-9bcd-8a9845943633",
-    "title": "Awful...",
-    "description": "This food is the worst food I have ever tasted!",
-    "rating": 1
-}
-```
+In this section it will become clear what events the Review micro-service produces. These events will be described with the exact JSON that they deliver.
 
 ### Produces
-This sections covers the few events the will be produced from the Review micro-service.
+This sections covers the few events that will be produced from the Review micro-service.
 
 #### ReviewCreatedEvent
 This very simple message only gives its `reviewId` and `reviewType`.
 
 ##### Routing key
-At the moment, It's not clear who will listen to what. It is also unclear if you can or can't send the same message to multiple routing keys.
+This event has the following routing key: `events.review.created`.
 
 ##### Fields
 | Key        | Value  | Extra Information              |
@@ -130,10 +43,10 @@ The JSON that will be sent, will look like this:
 ```
 
 #### ReviewDeletedEvent
-This message will be sent when a certain review is deleted, it sends the same information as the [ReviewCreatedEvent](#reviewcreatedevent).
+This message will be sent when a certain review is deleted.
 
 ##### Routing key
-Not clear at the moment.
+The event has the following routing key: `events.review.deleted`.
 
 ##### Fields
 | Key        | Value  | Extra Information              |
@@ -150,4 +63,83 @@ Not clear at the moment.
 ```
 
 ## REST
-—
+This micro-service has a couple different endpoints, these will be shown below.
+
+The base URL of this API is as follows: `http://localhost:8084/api/review`.
+
+In the [postman](./postman) folder is a collection that can be used to quickly test the service.
+
+### DELETE
+This section covers the DELETE HTTP method.
+
+#### `/{reviewId}`
+Expects the following body:
+```json
+{
+    "customerId": "62bc28c1-db80-4e4e-9bcd-8a9845943622"
+}
+```
+
+### GET
+This section covers the GET HTTP method.
+
+#### `baseUrl`
+This will retrieve all reviews.
+
+When doing a get request to the base url, you are expected to provide the following query params.
+
+`/api/review?direction={direction}&sort={sort}`
+
+direction can be:
+- `desc`
+- `asc`
+
+sort can be:
+- `title`
+- `description`
+- `type`
+- `rating`
+
+**note**: these are not optional.
+
+#### `/{reviewId}`
+This will retrieve a single Review.
+
+#### `/customer/{customerId}`
+This will retrieve all Reviews made by a Customer.
+
+#### `/product/{productId}`
+This will retrieve all Reviews made on a Product.
+
+#### `/delivery/{deliveryId}`
+This will retrieve all Reviews made on a Delivery.
+
+### PATCH
+This section covers the PATCH HTTP method.
+
+#### `/{reviewId}`
+This endpoint expects the following body:
+```json
+{
+    "title": "<title here>",
+    "description": "<description here>",
+    "rating": 5
+}
+```
+
+### POST
+This section covers the HTTP POST method.
+
+#### `baseUrl`
+When POST'ing to this endpoint, the following body is expected:
+```json
+{
+    "customerId": "62bc28c1-db80-4e4e-9bcd-8a9845943622",
+    "conceptId": "62bc28c1-db80-4e4e-9bcd-8a9845943332",
+    "type": "product",
+    "title": "title",
+    "description": "description",
+    "rating": 5
+}
+```
+

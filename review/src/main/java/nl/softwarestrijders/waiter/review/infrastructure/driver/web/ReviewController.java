@@ -45,6 +45,11 @@ public class ReviewController {
         this.commandHandler.handle(new DeleteReview(request.customerId(), id));
     }
 
+    @GetMapping
+    public List<ReviewDto> listAll(@RequestParam String direction, @RequestParam String sort) {
+        return this.toDto(this.queryHandler.handle(new ListAll(direction, sort)));
+    }
+
     @GetMapping("/{id}")
     public ReviewDto findByReview(@PathVariable UUID id) {
         return this.toDto(this.queryHandler.handle(new FindReviewById(id)));
@@ -65,11 +70,6 @@ public class ReviewController {
         return this.toDto(this.queryHandler.handle(new FindAllByDeliveryId(id)));
     }
 
-    @GetMapping
-    public List<ReviewDto> listAll(@RequestParam String direction, @RequestParam String sort) {
-        return this.toDto(this.queryHandler.handle(new ListAll(direction, sort)));
-    }
-
     @PatchMapping("/{id}")
     public ReviewDto editReview(@PathVariable UUID id, @RequestBody EditReviewDto request) {
         return this.toDto(this.commandHandler.handle(
@@ -83,9 +83,9 @@ public class ReviewController {
                 new CreateReview(
                         request.customerId(),
                         request.conceptId(),
+                        request.type(),
                         request.title(),
                         request.description(),
-                        request.type(),
                         request.rating()
                 )
         ));

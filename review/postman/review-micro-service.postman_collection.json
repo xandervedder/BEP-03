@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "2e3d8759-8bcc-4e78-8e8c-ce56bb21b22d",
+		"name": "Review Micro-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Requests",
+			"item": [
+				{
+					"name": "Find by Review Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8084/api/review/80c4cbc5-bc38-4ef0-975f-6f32e760a452",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"review",
+								"80c4cbc5-bc38-4ef0-975f-6f32e760a452"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find by Customer Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8084/api/review/customer/62bc28c1-d280-434e-9bcd-8a9845943633",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"review",
+								"customer",
+								"62bc28c1-d280-434e-9bcd-8a9845943633"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find by Delivery",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8084/api/review/delivery/bd72ef09-d700-4e6f-a3b3-96425cce6376",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"review",
+								"delivery",
+								"bd72ef09-d700-4e6f-a3b3-96425cce6376"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find by Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8084/api/review/product/bd72ef09-d700-4e6f-a3b3-96425cce6376",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"review",
+								"product",
+								"bd72ef09-d700-4e6f-a3b3-96425cce6376"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8084/api/review?direction=desc&sort=rating",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"review"
+							],
+							"query": [
+								{
+									"key": "direction",
+									"value": "desc"
+								},
+								{
+									"key": "sort",
+									"value": "rating"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PATCH Requests",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:8084/api/review/a6196076-a26d-42aa-b4ba-6fe0107625e6",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"review",
+								"a6196076-a26d-42aa-b4ba-6fe0107625e6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE Requests",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerId\": \"e5006ced-8de6-4925-b1bf-7aa0c18100da\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8084/api/review/a86399dd-a514-42b4-9d06-7ef863e103b5",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"review",
+								"a86399dd-a514-42b4-9d06-7ef863e103b5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST Requests",
+			"item": [
+				{
+					"name": "Create Review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerId\": \"e5006ced-8de6-4925-b1bf-7aa0c18100da\",\n    \"conceptId\": \"62bc28c1-db80-4e4e-9bcd-8a9845943332\",\n    \"type\": \"product\",\n    \"title\": \"This product is amazing\",\n    \"description\": \"It is incredible what todays technology is capable of, producing such good quality food!\",\n    \"rating\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8084/api/review",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"review"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
