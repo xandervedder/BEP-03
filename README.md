@@ -10,16 +10,25 @@ Waiter will be a distributed system and will contain the following services:
 
 ![Context Map](docs/images/context_map_transparent.png)
 
-
 ## Documentation
 
-### [Customer micro-service](./customer/README.md)
+### Architecture
+All of the different services make use of the [Hexagonal architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)).
 
-### [Delivery micro-service](./delivery/README.md)
+Implementation details are done by the outbound 'ports', this means that the application doesn't have care about the internal
+workings of the (for example) `Repository`.
 
-### [Order micro-service](./order/README.md)
+![Hexagonal](docs/images/hexagonal.png)
 
-### [Product micro-service](./product/README.md)
+### Events and REST calls of the services
 
-### [Review micro-service](./review/README.md)
+#### [Customer micro-service](./customer/README.md)
+
+#### [Delivery micro-service](./delivery/README.md)
+
+#### [Order micro-service](./order/README.md)
+
+#### [Product micro-service](./product/README.md)
+
+#### [Review micro-service](./review/README.md)
 
