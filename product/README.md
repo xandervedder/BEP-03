@@ -89,7 +89,7 @@ Expects a product id as path variable.
 ### GET
 This section covers the GET HTTP method.
 
-### `BaseUrl`
+#### `BaseUrl`
 This will retrieve all the products stored in the database.
 
 #### `/{id}`
