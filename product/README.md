@@ -77,7 +77,7 @@ This micro-service has a couple different endpoints, these will be shown below.
 
 The base URL of this API is as follows: `http://localhost:8083/api/product`.
 
-There is a postman collection in the root of the this micro-service.
+There is a postman collection in the root of this micro-service.
 
 ### DELETE
 This section covers the DELETE HTTP method.
@@ -90,7 +90,7 @@ Expects a product id as path variable.
 This section covers the GET HTTP method.
 
 #### `/{id}`
-This will retrieve a single Review.
+This will retrieve a single Product.
 Expects a product id as path variable.
 
 ### POST
