@@ -32,7 +32,7 @@ This event has the following routing key: review.created.
 |---------------|--------|--------------------|
 | customerId    | UUID   |      —             |
 | reviewId      | UUID   |      —             |
-| type          | String |  Delivery / Order  |
+| type          | String | delivery or product |
 
 ##### JSON Example
 
