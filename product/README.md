@@ -89,6 +89,9 @@ Expects a product id as path variable.
 ### GET
 This section covers the GET HTTP method.
 
+### `BaseUrl`
+This will retrieve all the products stored in the database.
+
 #### `/{id}`
 This will retrieve a single Product.
 Expects a product id as path variable.
