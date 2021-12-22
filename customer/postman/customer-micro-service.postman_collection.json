@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "84a52e79-e3a7-4a8a-bc5f-736c0ceb8dfb",
-		"name": "BEP03",
+		"_postman_id": "8c2c5bf5-dc13-4100-8de3-7f28245b602e",
+		"name": "Customer Micro-service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstname\": \"Milan\",\r\n\t\"lastname\": \"Dol\",\r\n\t\"email\": \"milandol321@gmail.com\",\r\n\t\"housenumber\": 14,\r\n\t\"addition\": \"A\",\r\n\t\"street\": \"Waalos\",\r\n\t\"postalCode\": \"2568DF\",\r\n\t\"city\": \"Wal\"\r\n}",
+							"raw": "{\r\n    \"firstname\": \"Xander\",\r\n\t\"lastname\": \"Vedder\",\r\n\t\"email\": \"xander.2@gmail.com\",\r\n\t\"housenumber\": 6,\r\n\t\"addition\": \"\",\r\n\t\"street\": \"don't dox me pls\",\r\n\t\"postalCode\": \"don't dox me pls\",\r\n\t\"city\": \"don't dox me pls\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -54,7 +54,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/customer/reviews/uuid_here",
+							"raw": "http://localhost:8080/customer/a444167b-478d-4f92-bb07-56ca8b7f47f5/reviews",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -62,8 +62,8 @@
 							"port": "8080",
 							"path": [
 								"customer",
-								"reviews",
-								"uuid_here"
+								"a444167b-478d-4f92-bb07-56ca8b7f47f5",
+								"reviews"
 							]
 						}
 					},
@@ -87,7 +87,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/customer/orders/uuid_here",
+							"raw": "http://localhost:8080/customer/a444167b-478d-4f92-bb07-56ca8b7f47f5/orders",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -95,8 +95,8 @@
 							"port": "8080",
 							"path": [
 								"customer",
-								"orders",
-								"uuid_here"
+								"a444167b-478d-4f92-bb07-56ca8b7f47f5",
+								"orders"
 							]
 						}
 					},
@@ -120,7 +120,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/customer/deliveries/uuid_here",
+							"raw": "http://localhost:8080/customer/a444167b-478d-4f92-bb07-56ca8b7f47f5/deliveries",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -128,8 +128,8 @@
 							"port": "8080",
 							"path": [
 								"customer",
-								"deliveries",
-								"uuid_here"
+								"a444167b-478d-4f92-bb07-56ca8b7f47f5",
+								"deliveries"
 							]
 						}
 					},
@@ -153,7 +153,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/customer/address/uuid_here",
+							"raw": "http://localhost:8080/customer/a444167b-478d-4f92-bb07-56ca8b7f47f5/retrieve-address",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -161,15 +161,15 @@
 							"port": "8080",
 							"path": [
 								"customer",
-								"address",
-								"uuid_here"
+								"a444167b-478d-4f92-bb07-56ca8b7f47f5",
+								"retrieve-address"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "address by orderId",
+					"name": "Find all customers",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -186,16 +186,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/customer/address/uuid_here",
+							"raw": "http://localhost:8080/customer",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"customer",
-								"address",
-								"uuid_here"
+								"customer"
 							]
 						}
 					},

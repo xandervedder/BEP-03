@@ -5,6 +5,7 @@ import nl.softwarestrijders.waiter.customer.core.application.query.*;
 import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
 import nl.softwarestrijders.waiter.customer.core.port.storage.CustomerRepository;
+import nl.softwarestrijders.waiter.customer.infrastructure.driver.web.dto.CustomerDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,36 +20,20 @@ public class CustomerQueryHandler {
 		this.customerRepository = customerRepository;
 	}
 
+	public List<Customer> handle() {
+		return this.customerRepository.findAll();
+	}
+
 	public Address handle(GetAddressByCustomerId query) {
 		return this.findCustomerById(query.id()).getAddress();
-	}
-
-	public void handle(GetAllProducts query) {
-		//TODO: implement
-	}
-
-	public Customer handle(GetCustomerById query) {
-		return this.findCustomerById(query.id());
 	}
 
 	public List<UUID> handle(GetDeliveriesFromCustomer query) {
 		return this.findCustomerById(query.id()).getDeliveries();
 	}
 
-	public void handle(GetDeliveryStatusFromOrder query) {
-		//TODO: implement
-	}
-
-	public String handle(GetEmailAddressFromCustomer query) {
-		return this.findCustomerById(query.id()).getEmail();
-	}
-
 	public List<UUID> handle(GetOrdersFromCustomer query) {
 		return this.findCustomerById(query.id()).getOrders();
-	}
-
-	public void handle(GetProductInfo query) {
-		//TODO: implement
 	}
 
 	public Map<UUID, String> handle(GetReviewsFromCustomer query) {
