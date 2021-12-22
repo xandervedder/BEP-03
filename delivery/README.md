@@ -119,10 +119,6 @@ This will retrieve all delivery s.
 
 When doing a get request to the base url, you'll receive a list of all the deliveries.
 
-`/delivery`
-
-**note**: these are not optional.
-
 #### `/{deliveryId}`
 
 This will retrieve a single delivery.
