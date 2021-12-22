@@ -75,7 +75,7 @@ The event has the following routing key: `events.product.deleted`.
 ## REST
 This micro-service has a couple different endpoints, these will be shown below.
 
-The base URL of this API is as follows: `http://localhost:8083/api/product`.
+The base URL of this API is as follows: `http://localhost:8083/product`.
 
 There is a postman collection in the root of this micro-service.
 
