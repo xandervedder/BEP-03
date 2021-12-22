@@ -46,7 +46,6 @@ public class DeliveryCommandHandler {
         this.repository.delete(delivery);
     }
 
-    // Need to discuss with the boys how to handle fetches appropriately.
     public void handleRegisterDelivery(UUID orderId, UUID customerId) {
         var customerDeliveryAddress = this.customerGateway.getCustomerDeliveryAddress(customerId);
 
