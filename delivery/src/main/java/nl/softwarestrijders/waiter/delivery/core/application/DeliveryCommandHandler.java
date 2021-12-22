@@ -40,6 +40,11 @@ public class DeliveryCommandHandler {
         this.publishEventsFor(delivery);
     }
 
+    public void handleDeleteDelivery(UUID order) {
+        var delivery = this.repository.findByOrderId(order).orElseThrow();
+        this.repository.delete(delivery);
+    }
+
     // Need to discuss with the boys how to handle fetches appropriately.
     public void handleRegisterDelivery(UUID orderId, UUID customerId) {
         var customerDeliveryAddress = this.customerGateway.getCustomerDeliveryAddress(customerId);

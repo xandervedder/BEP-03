@@ -1,6 +1,5 @@
 package nl.softwarestrijders.waiter.delivery.infrastructure.driver.web;
 
-import nl.softwarestrijders.waiter.delivery.core.application.DeliveryCommandHandler;
 import nl.softwarestrijders.waiter.delivery.core.application.DeliveryQueryHandler;
 import nl.softwarestrijders.waiter.delivery.core.domain.Delivery;
 import nl.softwarestrijders.waiter.delivery.infrastructure.driver.web.dto.DeliveryDto;
@@ -16,11 +15,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/delivery")
 public class DeliveryController {
-    private final DeliveryCommandHandler commandHandler;
     private final DeliveryQueryHandler queryHandler;
 
-    public DeliveryController(DeliveryCommandHandler commandHandler, DeliveryQueryHandler queryHandler) {
-        this.commandHandler = commandHandler;
+    public DeliveryController(DeliveryQueryHandler queryHandler) {
         this.queryHandler = queryHandler;
     }
 

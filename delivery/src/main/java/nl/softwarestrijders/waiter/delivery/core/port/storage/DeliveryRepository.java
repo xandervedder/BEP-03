@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface DeliveryRepository extends MongoRepository<Delivery, UUID> {
     Optional<Delivery> findDeliveryByOrderId(UUID orderId);
+    Optional<Delivery> findByOrderId(UUID orderId);
 }
