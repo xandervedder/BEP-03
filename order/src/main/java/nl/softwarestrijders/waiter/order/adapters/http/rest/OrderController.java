@@ -1,7 +1,7 @@
-package nl.softwarestrijders.waiter.order.adapters.http;
+package nl.softwarestrijders.waiter.order.adapters.http.rest;
 
-import nl.softwarestrijders.waiter.order.adapters.http.dto.ModifyProductOnOrderDto;
-import nl.softwarestrijders.waiter.order.adapters.http.dto.CreateOrderDto;
+import nl.softwarestrijders.waiter.order.adapters.http.rest.dto.ModifyProductOnOrderDto;
+import nl.softwarestrijders.waiter.order.adapters.http.rest.dto.CreateOrderDto;
 import nl.softwarestrijders.waiter.order.core.application.CommandHandler;
 import nl.softwarestrijders.waiter.order.core.application.QueryHandler;
 import nl.softwarestrijders.waiter.order.core.domain.Order;

@@ -1,11 +1,13 @@
 package nl.softwarestrijders.waiter.order.core.application;
 
+import nl.softwarestrijders.waiter.order.common.exception.InvalidModificationException;
 import nl.softwarestrijders.waiter.order.common.exception.OrderNotFoundException;
 import nl.softwarestrijders.waiter.order.core.domain.Order;
 import nl.softwarestrijders.waiter.order.core.domain.events.OrderCreated;
 import nl.softwarestrijders.waiter.order.core.domain.events.OrderDeleted;
 import nl.softwarestrijders.waiter.order.core.domain.events.ProductAddedToOrder;
 import nl.softwarestrijders.waiter.order.core.domain.events.ProductRemovedFromOrder;
+import nl.softwarestrijders.waiter.order.ports.http.ProductRepository;
 import nl.softwarestrijders.waiter.order.ports.messaging.OrderEventPublisher;
 import nl.softwarestrijders.waiter.order.ports.storage.OrderRepository;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,12 @@ import java.util.UUID;
 public class CommandHandler {
     private final OrderEventPublisher eventPublisher;
     private final OrderRepository repository;
+    private final ProductRepository productRepository;
 
-    public CommandHandler(OrderEventPublisher eventPublisher, OrderRepository repository) {
+    public CommandHandler(OrderEventPublisher eventPublisher, OrderRepository repository, ProductRepository productRepository) {
         this.eventPublisher = eventPublisher;
         this.repository = repository;
+        this.productRepository = productRepository;
     }
 
     public Order handleCreateOrder(UUID customerId) {
@@ -34,6 +38,10 @@ public class CommandHandler {
 
     public Order handleAddProductToOrder(UUID orderId, UUID productId, int amount) {
         var order = this.findById(orderId);
+
+        if(!this.productRepository.productExists(productId)) {
+            throw new InvalidModificationException(productId + " is not a valid product ID");
+        }
 
         order.addProduct(productId, amount);
 

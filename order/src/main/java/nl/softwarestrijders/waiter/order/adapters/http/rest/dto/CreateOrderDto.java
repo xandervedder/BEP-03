@@ -1,4 +1,4 @@
-package nl.softwarestrijders.waiter.order.adapters.http.dto;
+package nl.softwarestrijders.waiter.order.adapters.http.rest.dto;
 
 import java.util.UUID;
 
