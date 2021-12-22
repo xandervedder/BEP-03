@@ -6,6 +6,8 @@ import nl.softwarestrijders.waiter.product.core.domain.Product;
 import nl.softwarestrijders.waiter.product.core.port.data.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class QueryHandler {
     private final ProductRepository repository;
@@ -18,5 +20,9 @@ public class QueryHandler {
         var id = query.id();
         return this.repository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException(id));
+    }
+
+    public List<Product> handle() {
+        return this.repository.findAll();
     }
 }

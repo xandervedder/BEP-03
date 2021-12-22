@@ -8,6 +8,7 @@ import nl.softwarestrijders.waiter.product.infrastructure.driver.messaging.Creat
 import nl.softwarestrijders.waiter.product.infrastructure.driver.messaging.DeleteProductCommand;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -19,6 +20,11 @@ public class ProductController {
     public ProductController(QueryHandler queryHandler, CommandHandler commandHandler) {
         this.queryHandler = queryHandler;
         this.commandHandler = commandHandler;
+    }
+
+    @GetMapping
+    public List<ProductDto> findAllProducts() {
+        return this.toDto(queryHandler.handle());
     }
 
     @GetMapping("/{id}")
@@ -46,6 +52,10 @@ public class ProductController {
     @DeleteMapping("/delete/{id}")
     public void deleteProduct(@PathVariable String id) {
         this.commandHandler.handle(new DeleteProductCommand(UUID.fromString(id)));
+    }
+
+    private List<ProductDto> toDto(List<Product> products) {
+        return products.stream().map(this::toDto).toList();
     }
 
     private ProductDto toDto(Product product) {
