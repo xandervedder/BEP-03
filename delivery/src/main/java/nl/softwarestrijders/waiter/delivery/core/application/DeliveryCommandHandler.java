@@ -1,5 +1,6 @@
 package nl.softwarestrijders.waiter.delivery.core.application;
 
+import nl.softwarestrijders.waiter.delivery.core.application.exception.NotFoundException;
 import nl.softwarestrijders.waiter.delivery.core.domain.Delivery;
 import nl.softwarestrijders.waiter.delivery.core.domain.DeliveryAddress;
 import nl.softwarestrijders.waiter.delivery.core.domain.Status;
@@ -41,7 +42,7 @@ public class DeliveryCommandHandler {
     }
 
     public void handleDeleteDelivery(UUID order) {
-        var delivery = this.repository.findByOrderId(order).orElseThrow();
+        var delivery = this.repository.findByOrderId(order).orElseThrow(() -> new NotFoundException(order));
         this.repository.delete(delivery);
     }
 
@@ -62,7 +63,7 @@ public class DeliveryCommandHandler {
     }
 
     private Delivery getDeliveryById(UUID id) {
-        return this.repository.findById(id).orElseThrow();
+        return this.repository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
     private void publishEventsFor(Delivery delivery) {
