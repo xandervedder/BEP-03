@@ -23,7 +23,7 @@ public class Customer {
 	private String email;
 	private Address address;
 	private List<UUID> orders;
-	private HashMap<UUID, String> reviews; // String = type of review
+	private List<Review> reviews;
 	private List<UUID> deliveries;
 	@Transient
 	private List<CustomerDomainEvent> events = new ArrayList<>();
@@ -45,7 +45,7 @@ public class Customer {
 		setEmail(email);
 		this.address = address;
 		this.orders = new ArrayList<>();
-		this.reviews = new HashMap<>();
+		this.reviews = new ArrayList<>();
 		this.deliveries = new ArrayList<>();
 	}
 
@@ -143,8 +143,8 @@ public class Customer {
 	 *
 	 * @param reviewId reviewId
 	 */
-	public void addReview(UUID reviewId, String type) {
-		this.reviews.put(reviewId, type);
+	public void addReview(Review review) {
+		this.reviews.add(review);
 	}
 
 	/**
@@ -152,8 +152,15 @@ public class Customer {
 	 *
 	 * @param reviewId reviewId
 	 */
-	public void removeReview(UUID reviewId) {
-		this.reviews.remove(reviewId);
+	public void removeReview(Review review) {
+		this.reviews.remove(review);
+	}
+
+	public Review findByReviewId(UUID id) {
+		return this.getReviews().stream()
+				.filter(review -> review.reviewId() == id)
+				.findFirst()
+				.orElseThrow(() -> new RuntimeException("No review found"));
 	}
 
 	/**
@@ -223,8 +230,8 @@ public class Customer {
 		return Collections.unmodifiableList(orders);
 	}
 
-	public Map<UUID, String> getReviews() {
-		return Collections.unmodifiableMap(reviews);
+	public List<Review> getReviews() {
+		return Collections.unmodifiableList(reviews);
 	}
 
 	public List<UUID> getDeliveries() {

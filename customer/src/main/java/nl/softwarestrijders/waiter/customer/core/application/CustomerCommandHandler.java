@@ -4,6 +4,7 @@ import nl.softwarestrijders.waiter.customer.core.application.command.RegisterCus
 import nl.softwarestrijders.waiter.customer.core.application.exception.CustomerNotFoundException;
 import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
+import nl.softwarestrijders.waiter.customer.core.domain.Review;
 import nl.softwarestrijders.waiter.customer.core.domain.event.CustomerDomainEvent;
 import nl.softwarestrijders.waiter.customer.core.port.messaging.CustomerEventPublisher;
 import nl.softwarestrijders.waiter.customer.core.port.storage.CustomerRepository;
@@ -32,13 +33,13 @@ public class CustomerCommandHandler {
 
 	public void handleReviewAdded(UUID customerId, UUID reviewId, String type) {
 		var customer = this.findCustomerById(customerId);
-		customer.addReview(reviewId, type);
+		customer.addReview(new Review(reviewId, type));
 		this.customerRepository.save(customer);
 	}
 
 	public void handleReviewRemoved(UUID customerId, UUID reviewId) {
 		var customer = this.findCustomerById(customerId);
-		customer.removeReview(reviewId);
+		customer.removeReview(customer.findByReviewId(reviewId));
 		this.customerRepository.save(customer);
 	}
 

@@ -11,7 +11,7 @@ public record CustomerDto(
         String email,
         AddressDto address,
         List<UUID> orders,
-        Map<UUID, String> reviews,
+        List<ReviewDto> reviews,
         List<UUID> deliveries
 ) {
 }

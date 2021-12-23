@@ -7,6 +7,7 @@ import nl.softwarestrijders.waiter.customer.core.application.query.GetOrdersFrom
 import nl.softwarestrijders.waiter.customer.core.application.query.GetReviewsFromCustomer;
 import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
+import nl.softwarestrijders.waiter.customer.core.domain.Review;
 import nl.softwarestrijders.waiter.customer.core.port.storage.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class CustomerQueryHandler {
 		return this.findCustomerById(query.id()).getOrders();
 	}
 
-	public Map<UUID, String> handle(GetReviewsFromCustomer query) {
+	public List<Review> handle(GetReviewsFromCustomer query) {
 		return this.findCustomerById(query.id()).getReviews();
 	}
 

@@ -6,8 +6,10 @@ import nl.softwarestrijders.waiter.customer.core.application.command.RegisterCus
 import nl.softwarestrijders.waiter.customer.core.application.query.*;
 import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
+import nl.softwarestrijders.waiter.customer.core.domain.Review;
 import nl.softwarestrijders.waiter.customer.infrastructure.driver.web.dto.AddressDto;
 import nl.softwarestrijders.waiter.customer.infrastructure.driver.web.dto.CustomerDto;
+import nl.softwarestrijders.waiter.customer.infrastructure.driver.web.dto.ReviewDto;
 import nl.softwarestrijders.waiter.customer.infrastructure.driver.web.request.RegisterCustomerRequest;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,8 +55,8 @@ public class CustomerController {
 	}
 
 	@GetMapping("/{customerId}/reviews")
-	public Map<UUID, String> getReviewsFromCustomer(@PathVariable UUID customerId) {
-		return this.queryHandler.handle(new GetReviewsFromCustomer(customerId));
+	public List<ReviewDto> getReviewsFromCustomer(@PathVariable UUID customerId) {
+		return this.toReviewDto(this.queryHandler.handle(new GetReviewsFromCustomer(customerId)));
 	}
 
 	@GetMapping("/{customerId}/orders")
@@ -84,9 +86,13 @@ public class CustomerController {
 			customer.getEmail(),
 			this.toDto(customer.getAddress()),
 			customer.getOrders(),
-			customer.getReviews(),
+			this.toReviewDto(customer.getReviews()),
 			customer.getDeliveries()
 		);
+	}
+
+	private List<ReviewDto> toReviewDto(List<Review> reviews) {
+		return reviews.stream().map(review -> new ReviewDto(review.reviewId(), review.type())).toList();
 	}
 
 	private AddressDto toDto(Address address) {
