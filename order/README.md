@@ -150,7 +150,7 @@ Expects the following body:
 }
 ```
 
-#### `/{orderId}/product/{productId}`
+#### `/{orderId}/product`
 
 Removes amount of a product in a specified order.
 
@@ -161,6 +161,7 @@ Expects the following body:
 
 ```json
 {
+  "productId": "62bc28c1-db80-4e4e-9bcd-8a9845943622",
   "amount": 1
 }
 ```
@@ -259,13 +260,14 @@ When POSTing to this endpoint, the following body is expected:
 }
 ```
 
-#### `/{orderId}/product/{productId}`
+#### `/{orderId}/product`
 This command adds a new product adds an amount to an order.
 
 When POSTing to this endpoint, the following body is expected:
 
 ```json
 {
+  "productId": "62bc28c1-db80-4e4e-9bcd-8a9845943622",
   "amount": 2
 }
 ```
