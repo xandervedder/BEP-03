@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "messaging.exchange.waiter",
+      "type": "java.lang.String",
+      "description": "Description for messaging.exchange.waiter."
+    }
+  ]
+}
