@@ -1,11 +1,13 @@
 package nl.softwarestrijders.waiter.customer.core.application;
 
 import nl.softwarestrijders.waiter.customer.core.application.exception.CustomerNotFoundException;
-import nl.softwarestrijders.waiter.customer.core.application.query.*;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetAddressByCustomerId;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetDeliveriesFromCustomer;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetOrdersFromCustomer;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetReviewsFromCustomer;
 import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
 import nl.softwarestrijders.waiter.customer.core.port.storage.CustomerRepository;
-import nl.softwarestrijders.waiter.customer.infrastructure.driver.web.dto.CustomerDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
