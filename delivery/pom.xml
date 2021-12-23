@@ -21,7 +21,7 @@
             **/DeliveryApplication.java,
             **/infrastructure/**,
             **/core/domain/event/*,
-            **/core/application/*
+            **/application/**
         </sonar.exclusions>
     </properties>
     <dependencies>

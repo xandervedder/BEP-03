@@ -86,9 +86,9 @@ This event has the following routing key: `delivery.status`.
 
 This sections covers the few events that will be consumed by the delivery micro-service.
 
-#### Order
+#### OrderCreated
 
-OrderCreated: This message gives its `orderId` and `customerId`.
+Consumed when an Order has been created.
 
 ##### Routing key
 
@@ -100,6 +100,21 @@ This event has the following routing key: `order.created`.
 |------------|--------|--------------------------------|
 | orderId    | UUID   | —                              |
 | customerId | UUID   | —                              |
+
+#### OrderDeleted
+
+Consumed when an Order has been deleted.
+
+##### Routing key
+
+This event has the following routing key: `order.deleted`.
+
+##### Fields
+
+| Key        | Value  | Extra Information              |
+|------------|--------|--------------------------------|
+| orderId    | UUID   | —                              |
+
 
 ## REST
 
@@ -115,13 +130,9 @@ This section covers the GET HTTP method.
 
 #### `baseUrl`
 
-This will retrieve all delivery s.
+This will retrieve all deliveries.
 
 When doing a get request to the base url, you'll receive a list of all the deliveries.
-
-`/delivery`
-
-**note**: these are not optional.
 
 #### `/{deliveryId}`
 

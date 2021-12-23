@@ -1,9 +1,13 @@
 package nl.softwarestrijders.waiter.customer.core.application;
 
 import nl.softwarestrijders.waiter.customer.core.application.exception.CustomerNotFoundException;
-import nl.softwarestrijders.waiter.customer.core.application.query.*;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetAddressByCustomerId;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetDeliveriesFromCustomer;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetOrdersFromCustomer;
+import nl.softwarestrijders.waiter.customer.core.application.query.GetReviewsFromCustomer;
 import nl.softwarestrijders.waiter.customer.core.domain.Address;
 import nl.softwarestrijders.waiter.customer.core.domain.Customer;
+import nl.softwarestrijders.waiter.customer.core.domain.Review;
 import nl.softwarestrijders.waiter.customer.core.port.storage.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,42 +23,27 @@ public class CustomerQueryHandler {
 		this.customerRepository = customerRepository;
 	}
 
-	//Note: all of these query handlers that still need to be implemented are going to use
-	//HttpRepositories (as implementation), but we will have to wait for that to be available (just clarifying)
+	public Customer handle(UUID customerId) {
+		return this.findCustomerById(customerId);
+	}
+
+	public List<Customer> handle() {
+		return this.customerRepository.findAll();
+	}
 
 	public Address handle(GetAddressByCustomerId query) {
 		return this.findCustomerById(query.id()).getAddress();
-	}
-
-	public void handle(GetAllProducts query) {
-		//TODO: implement
-	}
-
-	public Customer handle(GetCustomerById query) {
-		return this.findCustomerById(query.id());
 	}
 
 	public List<UUID> handle(GetDeliveriesFromCustomer query) {
 		return this.findCustomerById(query.id()).getDeliveries();
 	}
 
-	public void handle(GetDeliveryStatusFromOrder query) {
-		//TODO: implement
-	}
-
-	public String handle(GetEmailAddressFromCustomer query) {
-		return this.findCustomerById(query.id()).getEmail();
-	}
-
 	public List<UUID> handle(GetOrdersFromCustomer query) {
 		return this.findCustomerById(query.id()).getOrders();
 	}
 
-	public void handle(GetProductInfo query) {
-		//TODO: implement
-	}
-
-	public Map<UUID, String> handle(GetReviewsFromCustomer query) {
+	public List<Review> handle(GetReviewsFromCustomer query) {
 		return this.findCustomerById(query.id()).getReviews();
 	}
 

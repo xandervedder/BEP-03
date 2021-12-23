@@ -32,7 +32,7 @@ public class ProductController {
         return this.toDto(queryHandler.handle(new FindProductByIdQuery(UUID.fromString(id))));
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ProductDto createProduct(@RequestBody CreateProductDto dto) {
         return this.toDto(this.commandHandler.handle(
                 new CreateProductCommand(

@@ -19,24 +19,10 @@ public class RabbitMqConfig {
 
     @Value("${messaging.exchange.waiter}")
     private String waiterExchangeName;
-    @Value("${messaging.queue.order}")
-    private String orderMessageQueue;
-    @Value("${messaging.routing-key.order}")
-    private String orderRoutingKey;
 
     @Bean
     public TopicExchange waiterExchange() {
         return new TopicExchange(this.waiterExchangeName);
-    }
-
-    @Bean
-    public Queue orderQueue() {
-        return QueueBuilder.durable(this.orderMessageQueue).build();
-    }
-
-    @Bean
-    public Binding orderBinding() {
-        return BindingBuilder.bind(orderQueue()).to(waiterExchange()).with(this.orderRoutingKey);
     }
 
     @Bean

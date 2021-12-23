@@ -1,5 +1,6 @@
 package nl.softwarestrijders.waiter.delivery.core.application;
 
+import nl.softwarestrijders.waiter.delivery.core.application.exception.NotFoundException;
 import nl.softwarestrijders.waiter.delivery.core.domain.Delivery;
 import nl.softwarestrijders.waiter.delivery.core.domain.Status;
 import nl.softwarestrijders.waiter.delivery.core.port.storage.DeliveryRepository;
@@ -17,11 +18,11 @@ public class DeliveryQueryHandler {
     }
 
     public Delivery handleGetDeliveryById(UUID id) {
-        return this.repository.findById(id).orElseThrow();
+        return this.repository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
     public Status handleGetDeliveryStatus(UUID id) {
-        return this.repository.findById(id).orElseThrow().getStatus();
+        return this.repository.findById(id).orElseThrow(() -> new NotFoundException(id)).getStatus();
     }
 
     public List<Delivery> handleGetAllDeliveries() {
@@ -29,6 +30,6 @@ public class DeliveryQueryHandler {
     }
 
     public Delivery handleGetDeliveryByOrder(UUID orderId) {
-        return this.repository.findDeliveryByOrderId(orderId).orElseThrow();
+        return this.repository.findDeliveryByOrderId(orderId).orElseThrow(() -> new NotFoundException(orderId));
     }
 }

@@ -26,20 +26,18 @@ public class OrderController {
         return this.commandHandler.handleCreateOrder(dto.customerId());
     }
 
-    @PostMapping("/{id}/product/{product}")
+    @PostMapping("/{id}/product/")
     public Order addProductToOrder(
             @PathVariable UUID id,
-            @PathVariable UUID product,
             @RequestBody ModifyProductOnOrderDto dto) {
-        return this.commandHandler.handleAddProductToOrder(id, product, dto.amount());
+        return this.commandHandler.handleAddProductToOrder(id, dto.productId(), dto.amount());
     }
 
-    @DeleteMapping("/{id}/product/{product}")
+    @DeleteMapping("/{id}/product")
     public void removeProductFromOrder(
             @PathVariable UUID id,
-            @PathVariable UUID product,
             @RequestBody ModifyProductOnOrderDto dto) {
-        this.commandHandler.handleRemoveProductFromOrder(id, product, dto.amount());
+        this.commandHandler.handleRemoveProductFromOrder(id, dto.productId(), dto.amount());
     }
 
     @DeleteMapping("/{id}")

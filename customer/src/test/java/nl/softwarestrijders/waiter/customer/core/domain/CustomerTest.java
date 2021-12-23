@@ -101,7 +101,7 @@ class CustomerTest {
 	void addReview() {
 		var uuid = UUID.randomUUID();
 		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
-		customer.addReview(uuid, "Test");
+		customer.addReview(new Review(uuid, "Test"));
 		assertEquals(1, customer.getReviews().size());
 	}
 
@@ -118,17 +118,39 @@ class CustomerTest {
 	}
 
 	@Test
+	@DisplayName("Should find a review by ID")
+	void shouldFindReview() {
+		var review = new Review(UUID.randomUUID(), "product");
+		var review1 = new Review(UUID.randomUUID(), "product");
+		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
+
+		customer.addReview(review1);
+		customer.addReview(review);
+
+		assertEquals(review.reviewId(), customer.findReviewById(review.reviewId()).reviewId());
+	}
+
+	@Test
+	@DisplayName("Should throw an exception if findReviewById has no reviews")
+	void shouldThrowWhenNoReviewFound() {
+		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
+		var reviewId = UUID.randomUUID();
+
+		assertThrows(RuntimeException.class, () -> customer.findReviewById(reviewId));
+	}
+
+	@Test
 	@DisplayName("Should remove item from list of reviews")
 	void removeReview() {
-		var uuid = UUID.randomUUID();
-		var uuid1 = UUID.randomUUID();
-		var uuid2 = UUID.randomUUID();
+		var review1 = new Review(UUID.randomUUID(), "delivery");
+		var review2 = new Review(UUID.randomUUID(), "delivery");
+		var review3 = new Review(UUID.randomUUID(), "delivery");
 		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
-		customer.addReview(uuid, "TEST");
-		customer.addReview(uuid1, "TEST");
-		customer.addReview(uuid2, "TEST");
-		customer.removeReview(uuid1);
-		assertFalse(customer.getReviews().containsKey(uuid1));
+		customer.addReview(review1);
+		customer.addReview(review2);
+		customer.addReview(review3);
+		customer.removeReview(review1);
+		assertFalse(customer.getReviews().contains(review1));
 	}
 
 	@Test
@@ -165,7 +187,7 @@ class CustomerTest {
 		assertNotNull(customer.getLastName());
 		assertNotNull(customer.getEmail());
 		assertNotNull(customer.getAddress());
-		assertEquals(Collections.emptyMap(), customer.getReviews());
+		assertEquals(Collections.emptyList(), customer.getReviews());
 		assertEquals(Collections.emptyList(), customer.getOrders());
 		assertEquals(Collections.emptyList(), customer.listEvents());
 		assertDoesNotThrow(customer::clearEvents);

@@ -8,6 +8,7 @@ import nl.softwarestrijders.waiter.review.core.application.command.EditReview;
 import nl.softwarestrijders.waiter.review.core.application.exception.AlreadyReviewedException;
 import nl.softwarestrijders.waiter.review.core.application.exception.InvalidOperationException;
 import nl.softwarestrijders.waiter.review.core.application.exception.ReviewNotFoundException;
+import nl.softwarestrijders.waiter.review.core.application.exception.UnknownConceptException;
 import nl.softwarestrijders.waiter.review.core.application.query.FindAllByCustomerId;
 import nl.softwarestrijders.waiter.review.core.application.query.FindReviewById;
 import nl.softwarestrijders.waiter.review.core.application.query.ListAll;
@@ -122,14 +123,19 @@ public class ReviewController {
        return this.withLogging(HttpStatus.BAD_REQUEST, exception);
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<Void> handleNullPointer(Exception exception) {
+        return this.withLogging(HttpStatus.BAD_REQUEST, exception);
+    }
+
     @ExceptionHandler(ReviewNotFoundException.class)
     public ResponseEntity<Void> handleNotFound(Exception exception) {
         return this.withLogging(HttpStatus.NOT_FOUND, exception);
     }
 
-    @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<Void> handleNullPointer(Exception exception) {
-        return withLogging(HttpStatus.BAD_REQUEST, exception);
+    @ExceptionHandler(UnknownConceptException.class)
+    public ResponseEntity<Void> handleUnknownConcept(Exception exception) {
+        return this.withLogging(HttpStatus.NOT_FOUND, exception);
     }
 
     private ResponseEntity<Void> withLogging(HttpStatus status, Exception exception) {

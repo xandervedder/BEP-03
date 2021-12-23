@@ -1,5 +1,6 @@
 package nl.softwarestrijders.waiter.delivery.core.application;
 
+import nl.softwarestrijders.waiter.delivery.core.application.exception.NotFoundException;
 import nl.softwarestrijders.waiter.delivery.core.domain.Delivery;
 import nl.softwarestrijders.waiter.delivery.core.domain.DeliveryAddress;
 import nl.softwarestrijders.waiter.delivery.core.domain.Status;
@@ -40,7 +41,11 @@ public class DeliveryCommandHandler {
         this.publishEventsFor(delivery);
     }
 
-    // Need to discuss with the boys how to handle fetches appropriately.
+    public void handleDeleteDelivery(UUID order) {
+        var delivery = this.repository.findByOrderId(order).orElseThrow(() -> new NotFoundException(order));
+        this.repository.delete(delivery);
+    }
+
     public void handleRegisterDelivery(UUID orderId, UUID customerId) {
         var customerDeliveryAddress = this.customerGateway.getCustomerDeliveryAddress(customerId);
 
@@ -57,7 +62,7 @@ public class DeliveryCommandHandler {
     }
 
     private Delivery getDeliveryById(UUID id) {
-        return this.repository.findById(id).orElseThrow();
+        return this.repository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
     private void publishEventsFor(Delivery delivery) {

@@ -68,7 +68,7 @@ The event has the following routing key: `events.product.deleted`.
 #### JSON Example
 ```json
 {
-    "id": "62bc28c1-db80-4e4e-9bcd-8a9845943633",
+    "id": "62bc28c1-db80-4e4e-9bcd-8a9845943633"
 }
 ```
 

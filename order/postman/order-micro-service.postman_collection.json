@@ -138,7 +138,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"amount\": 1\r\n}",
+					"raw": "{\r\n    \"productId\": \"{{Product ID}}\",\r\n    \"amount\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -146,7 +146,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8082/api/order/{{Order ID}}/product/{{Product ID}}",
+					"raw": "localhost:8082/api/order/{{Order ID}}/product",
 					"host": [
 						"localhost"
 					],
@@ -155,8 +155,7 @@
 						"api",
 						"order",
 						"{{Order ID}}",
-						"product",
-						"{{Product ID}}"
+						"product"
 					]
 				}
 			},
@@ -169,7 +168,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"amount\": 1\r\n}",
+					"raw": "{\r\n    \"productId\": \"{{Product ID}}\",\r\n    \"amount\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -177,7 +176,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8082/api/order/{{{{Order Id}}}}/product/{{productId}}",
+					"raw": "localhost:8082/api/order/{{{{Order Id}}}}/product",
 					"host": [
 						"localhost"
 					],
@@ -186,8 +185,7 @@
 						"api",
 						"order",
 						"{{{{Order Id}}}}",
-						"product",
-						"{{productId}}"
+						"product"
 					]
 				}
 			},

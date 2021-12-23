@@ -1,0 +1,24 @@
+{
+  "properties": [
+    {
+      "name": "messaging.exchange.waiter",
+      "type": "java.lang.String",
+      "description": "Description for messaging.exchange.waiter."
+    },
+    {
+      "name": "http-client.root-path.delivery",
+      "type": "java.lang.String",
+      "description": "Description for http-client.root-path.delivery."
+    },
+    {
+      "name": "http-client.root-path.product",
+      "type": "java.lang.String",
+      "description": "Description for http-client.root-path.product."
+    },
+    {
+      "name": "http-client.root-path.customer",
+      "type": "java.lang.String",
+      "description": "Description for http-client.root-path.customer."
+    }
+  ]
+}

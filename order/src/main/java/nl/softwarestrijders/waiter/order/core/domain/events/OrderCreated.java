@@ -4,13 +4,19 @@ import java.util.UUID;
 
 public class OrderCreated extends OrderEvent {
     private final UUID order;
+    private final UUID customer;
 
-    public OrderCreated(UUID order) {
+    public OrderCreated(UUID order, UUID customer) {
         this.order = order;
+        this.customer = customer;
     }
 
     public UUID getOrder() {
         return order;
+    }
+
+    public UUID getCustomer() {
+        return customer;
     }
 
     @Override

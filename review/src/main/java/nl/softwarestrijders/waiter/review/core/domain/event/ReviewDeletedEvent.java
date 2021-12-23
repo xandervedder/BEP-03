@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.UUID;
 
-public record ReviewDeletedEvent(UUID reviewId, String reviewType) implements DomainEvent {
+public record ReviewDeletedEvent(UUID reviewId, UUID customerId) implements DomainEvent {
     private static final String ROUTING_KEY = "events.review.deleted";
 
     @Override

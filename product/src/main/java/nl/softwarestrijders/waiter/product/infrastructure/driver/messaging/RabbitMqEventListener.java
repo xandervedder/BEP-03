@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 @Component
 public class RabbitMqEventListener {
-    private static final Logger LOGGER = Logger.getLogger(RabbitMqEventListener.class.getName());
     private final CommandHandler commandHandler;
 
     public RabbitMqEventListener(CommandHandler commandHandler) {
