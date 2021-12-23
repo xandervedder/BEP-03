@@ -156,9 +156,9 @@ public class Customer {
 		this.reviews.remove(review);
 	}
 
-	public Review findByReviewId(UUID id) {
+	public Review findReviewById(UUID id) {
 		return this.getReviews().stream()
-				.filter(review -> review.reviewId() == id)
+				.filter(review -> review.reviewId().equals(id))
 				.findFirst()
 				.orElseThrow(() -> new RuntimeException("No review found"));
 	}

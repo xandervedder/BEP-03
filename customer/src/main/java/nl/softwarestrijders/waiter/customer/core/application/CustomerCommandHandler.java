@@ -39,7 +39,7 @@ public class CustomerCommandHandler {
 
 	public void handleReviewRemoved(UUID customerId, UUID reviewId) {
 		var customer = this.findCustomerById(customerId);
-		customer.removeReview(customer.findByReviewId(reviewId));
+		customer.removeReview(customer.findReviewById(reviewId));
 		this.customerRepository.save(customer);
 	}
 

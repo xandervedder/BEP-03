@@ -120,14 +120,14 @@ class CustomerTest {
 	@Test
 	@DisplayName("Should find a review by ID")
 	void shouldFindReview() {
-		var review = new Review(UUID.randomUUID(), "PRODUCT");
-		var review1 = new Review(UUID.randomUUID(), "PRODUCT");
+		var review = new Review(UUID.randomUUID(), "product");
+		var review1 = new Review(UUID.randomUUID(), "product");
 		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
 
 		customer.addReview(review1);
 		customer.addReview(review);
 
-		assertEquals(review, customer.findByReviewId(review.reviewId()));
+		assertEquals(review.reviewId(), customer.findReviewById(review.reviewId()).reviewId());
 	}
 
 	@Test
@@ -136,15 +136,15 @@ class CustomerTest {
 		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
 		var reviewId = UUID.randomUUID();
 
-		assertThrows(RuntimeException.class, () -> customer.findByReviewId(reviewId));
+		assertThrows(RuntimeException.class, () -> customer.findReviewById(reviewId));
 	}
 
 	@Test
 	@DisplayName("Should remove item from list of reviews")
 	void removeReview() {
-		var review1 = new Review(UUID.randomUUID(), "TEST");
-		var review2 = new Review(UUID.randomUUID(), "TEST");
-		var review3 = new Review(UUID.randomUUID(), "TEST");
+		var review1 = new Review(UUID.randomUUID(), "delivery");
+		var review2 = new Review(UUID.randomUUID(), "delivery");
+		var review3 = new Review(UUID.randomUUID(), "delivery");
 		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
 		customer.addReview(review1);
 		customer.addReview(review2);
