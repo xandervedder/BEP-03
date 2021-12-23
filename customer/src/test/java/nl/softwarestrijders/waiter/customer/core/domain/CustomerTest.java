@@ -134,8 +134,9 @@ class CustomerTest {
 	@DisplayName("Should throw an exception if findReviewById has no reviews")
 	void shouldThrowWhenNoReviewFound() {
 		var customer = new Customer("Milan", "Dol", "milan321@gmail.com", address);
+		var reviewId = UUID.randomUUID();
 
-		assertThrows(RuntimeException.class, () -> customer.findByReviewId(UUID.randomUUID()));
+		assertThrows(RuntimeException.class, () -> customer.findByReviewId(reviewId));
 	}
 
 	@Test
