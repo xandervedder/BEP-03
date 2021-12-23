@@ -5,11 +5,12 @@ import nl.softwarestrijders.waiter.order.ports.http.ProductRepository;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.util.Optional;
 import java.util.UUID;
 
 public class HttpProductRepository implements ProductRepository {
-    private String rootPath;
-    private RestTemplate restTemplate;
+    private final String rootPath;
+    private final RestTemplate restTemplate;
 
     public HttpProductRepository(String rootPath, RestTemplate restTemplate) {
         this.rootPath = rootPath;
@@ -17,13 +18,12 @@ public class HttpProductRepository implements ProductRepository {
     }
 
     @Override
-    public boolean productExists(UUID productId) {
+    public Optional<ProductDto> findProduct(UUID productId) {
         var uri = URI.create(this.rootPath + "/" + productId);
         try {
-            this.restTemplate.getForObject(uri, ProductDto.class);
+            return Optional.ofNullable(this.restTemplate.getForObject(uri, ProductDto.class));
         } catch (Exception e) {
-            return false;
+            return Optional.empty();
         }
-        return true;
     }
 }

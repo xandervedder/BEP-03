@@ -9,20 +9,20 @@ import java.util.UUID;
 public class ReceiptItem {
 
     private UUID productId;
-
+    private double price;
     private int amount;
 
-    public ReceiptItem() {
-    }
-
-    public ReceiptItem(UUID productId) {
+    public ReceiptItem() {}
+    public ReceiptItem(UUID productId, double price) {
         this.productId = productId;
         this.amount = 1;
+        this.price = price;
     }
 
-    public ReceiptItem(UUID productId, int amount) {
+    public ReceiptItem(UUID productId, int amount, double price) {
         this.productId = productId;
         this.amount = amount;
+        this.price = price;
     }
 
     public UUID getProductId() {
@@ -31,6 +31,10 @@ public class ReceiptItem {
 
     public int getAmount() {
         return amount;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public void addAmount(int amount) {

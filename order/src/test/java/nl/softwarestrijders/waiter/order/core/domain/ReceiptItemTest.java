@@ -17,13 +17,13 @@ class ReceiptItemTest {
     @BeforeEach
     void initialize() {
         this.productId = UUID.randomUUID();
-        this.item = new ReceiptItem(this.productId, 2);
+        this.item = new ReceiptItem(this.productId, 2, 1.00);
     }
 
     @Test
     @DisplayName("Should create receipt item with amount 1")
     void shouldCreateNewItemWithAmount1() {
-        var item = new ReceiptItem(this.productId);
+        var item = new ReceiptItem(this.productId, 1.00);
 
         assertEquals(1, item.getAmount());
     }
@@ -71,7 +71,7 @@ class ReceiptItemTest {
     @Test
     @DisplayName("Should be same object")
     void shouldBeSameObject() {
-        var item = new ReceiptItem(this.productId);
+        var item = new ReceiptItem(this.productId, 1.00);
         assertEquals(this.item, item);
 
     }

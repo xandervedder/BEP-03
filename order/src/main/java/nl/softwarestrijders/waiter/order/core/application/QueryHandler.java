@@ -2,7 +2,6 @@ package nl.softwarestrijders.waiter.order.core.application;
 
 import nl.softwarestrijders.waiter.order.common.exception.OrderNotFoundException;
 import nl.softwarestrijders.waiter.order.core.domain.Order;
-import nl.softwarestrijders.waiter.order.core.domain.Price;
 import nl.softwarestrijders.waiter.order.ports.storage.OrderRepository;
 import org.springframework.stereotype.Service;
 
