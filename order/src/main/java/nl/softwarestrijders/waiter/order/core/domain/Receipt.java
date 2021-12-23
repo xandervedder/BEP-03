@@ -17,13 +17,17 @@ public class Receipt {
         return Collections.unmodifiableList(this.items);
     }
 
-    public void addItem(UUID product, int amount) {
+    public void addItem(UUID product, int amount, double price) {
         if (this.getItemByProductId(product) != null) {
-            this.getItemByProductId(product).addAmount(amount);
+            this.addToExistingItem(product, amount);
             return;
         }
 
-        this.items.add(new ReceiptItem(product, amount));
+        this.items.add(new ReceiptItem(product, amount, price));
+    }
+
+    public void addToExistingItem(UUID product, int amount) {
+        this.getItemByProductId(product).addAmount(amount);
     }
 
     public void removeItem(UUID productId, int amount) {

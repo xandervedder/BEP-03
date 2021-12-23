@@ -18,7 +18,7 @@ class ReceiptTest {
     void initialize() {
         this.receipt = new Receipt();
         this.productId = UUID.randomUUID();
-        this.receipt.addItem(productId, 2);
+        this.receipt.addItem(productId, 2, 1.00);
 
     }
 
@@ -38,7 +38,7 @@ class ReceiptTest {
     @DisplayName("Add product should add new product")
     void shouldAddNewProductToItemList() {
         var product = UUID.randomUUID();
-        this.receipt.addItem(product, 1);
+        this.receipt.addItem(product, 1, 1.00);
 
         assertEquals(ReceiptItem.class, this.receipt.getItemByProductId(product).getClass());
     }
@@ -46,7 +46,7 @@ class ReceiptTest {
     @Test
     @DisplayName("Add product should add amount product")
     void shouldAddProductToItemList() {
-        this.receipt.addItem(productId, 1);
+        this.receipt.addToExistingItem(productId, 1);
 
         assertEquals(3, this.receipt.getItemByProductId(productId).getAmount());
     }

@@ -25,14 +25,14 @@ public class Order {
         return id;
     }
 
-    public void addProduct(UUID product, int amount) {
-        this.receipt.addItem(product, amount);
-        this.price = this.calculatePrice();
+    public void addProduct(UUID product, int amount, double price) {
+        this.receipt.addItem(product, amount, price);
+        this.price.calculatePrice(this.receipt);
     }
 
     public void removeProduct(UUID productId, int amount) {
         this.receipt.removeItem(productId, amount);
-        this.price = this.calculatePrice();
+        this.price.calculatePrice(this.receipt);
     }
 
     public Receipt getReceipt() {
@@ -45,9 +45,5 @@ public class Order {
 
     public Price getPrice() {
         return price;
-    }
-
-    private Price calculatePrice() {
-        return Price.calculatePrice(this.receipt);
     }
 }

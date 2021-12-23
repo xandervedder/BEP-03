@@ -19,7 +19,7 @@ class OrderTest {
         this.order = new Order(UUID.randomUUID(), UUID.randomUUID());
 
         this.productId = UUID.randomUUID();
-        this.order.addProduct(this.productId, 2);
+        this.order.addProduct(this.productId, 2, 1.00);
     }
 
     @Test
@@ -32,7 +32,7 @@ class OrderTest {
     @DisplayName("Should add product with amount 1 to order")
     void shouldAddProductToOrder() {
         var product = UUID.randomUUID();
-        this.order.addProduct(product, 1);
+        this.order.addProduct(product, 1, 1.00);
 
         assertEquals(1, this.order.getReceipt().getItemByProductId(product).getAmount());
     }
@@ -40,7 +40,7 @@ class OrderTest {
     @Test
     @DisplayName("Should add amount to existing product in order")
     void shouldAddAmountToExistingProductInOrder() {
-        this.order.addProduct(this.productId, 1);
+        this.order.addProduct(this.productId, 1, 1.00);
 
         assertEquals(3, this.order.getReceipt().getItemByProductId(this.productId).getAmount());
     }
@@ -48,7 +48,7 @@ class OrderTest {
     @Test
     @DisplayName("Should throw exception when adding a negative amount")
     void shouldThrowAddProductNegativeAmount() {
-        assertThrows(InvalidModificationException.class, () -> this.order.addProduct(this.productId, -2));
+        assertThrows(InvalidModificationException.class, () -> this.order.addProduct(this.productId, -2, 1.00));
     }
 
     @Test

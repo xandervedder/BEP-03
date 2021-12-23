@@ -38,12 +38,10 @@ public class CommandHandler {
 
     public Order handleAddProductToOrder(UUID orderId, UUID productId, int amount) {
         var order = this.findById(orderId);
+        var product = this.productRepository.findProduct(productId).orElseThrow(
+                () -> new InvalidModificationException(productId + " is not a valid product ID"));
 
-        if(!this.productRepository.productExists(productId)) {
-            throw new InvalidModificationException(productId + " is not a valid product ID");
-        }
-
-        order.addProduct(productId, amount);
+        order.addProduct(productId, amount, product.price());
 
         this.repository.save(order);
 
