@@ -74,13 +74,11 @@ public class CommandHandler {
     }
 
     private boolean conceptDoesNotExist(String type, UUID id) {
-        if (type.equals(TYPE_DELIVERY)) {
-            return !this.deliveryRepository.existsById(id);
-        } else if (type.equals(TYPE_PRODUCT)) {
-            return !this.productRepository.existsById(id);
-        } else {
-            throw new IllegalArgumentException(String.format("Unknown option %s", type));
-        }
+        return switch (type) {
+            case TYPE_DELIVERY -> !this.deliveryRepository.existsById(id);
+            case TYPE_PRODUCT -> !this.productRepository.existsById(id);
+            default -> throw new IllegalArgumentException(String.format("Unknown option %s", type));
+        };
     }
 
     public Review handle(EditReview command) {
