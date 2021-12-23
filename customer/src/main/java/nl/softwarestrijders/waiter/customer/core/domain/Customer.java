@@ -5,6 +5,7 @@ import nl.softwarestrijders.waiter.customer.core.domain.event.CustomerDomainEven
 import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidEmailException;
 import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameException;
 import nl.softwarestrijders.waiter.customer.core.domain.exceptions.InvalidNameStartException;
+import nl.softwarestrijders.waiter.customer.core.domain.exceptions.ReviewNotFoundException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -160,7 +161,7 @@ public class Customer {
 		return this.getReviews().stream()
 				.filter(review -> review.reviewId().equals(id))
 				.findFirst()
-				.orElseThrow(() -> new RuntimeException("No review found"));
+				.orElseThrow(() -> new ReviewNotFoundException(id));
 	}
 
 	/**
