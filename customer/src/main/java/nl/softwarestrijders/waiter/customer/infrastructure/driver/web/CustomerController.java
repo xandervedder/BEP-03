@@ -47,6 +47,11 @@ public class CustomerController {
 		return this.toDto(this.queryHandler.handle());
 	}
 
+	@GetMapping("/{id}")
+	public CustomerDto findById(@PathVariable UUID id) {
+		return this.toDto(this.queryHandler.handle(id));
+	}
+
 	@GetMapping("/{customerId}/reviews")
 	public Map<UUID, String> getReviewsFromCustomer(@PathVariable UUID customerId) {
 		return this.queryHandler.handle(new GetReviewsFromCustomer(customerId));

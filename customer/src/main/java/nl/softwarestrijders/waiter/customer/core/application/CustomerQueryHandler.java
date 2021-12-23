@@ -22,6 +22,10 @@ public class CustomerQueryHandler {
 		this.customerRepository = customerRepository;
 	}
 
+	public Customer handle(UUID customerId) {
+		return this.findCustomerById(customerId);
+	}
+
 	public List<Customer> handle() {
 		return this.customerRepository.findAll();
 	}
