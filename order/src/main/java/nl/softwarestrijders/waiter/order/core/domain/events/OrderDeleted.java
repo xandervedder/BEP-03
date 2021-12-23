@@ -1,7 +1,5 @@
 package nl.softwarestrijders.waiter.order.core.domain.events;
 
-import nl.softwarestrijders.waiter.order.core.domain.Order;
-
 import java.util.UUID;
 
 public class OrderDeleted extends OrderEvent {
