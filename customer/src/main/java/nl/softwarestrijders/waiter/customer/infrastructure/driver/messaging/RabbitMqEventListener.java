@@ -1,8 +1,8 @@
 package nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging;
 
 import nl.softwarestrijders.waiter.customer.core.application.CustomerCommandHandler;
-import nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging.event.order.OrderEvent;
-import nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging.event.review.ReviewEvent;
+import nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging.event.OrderEvent;
+import nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging.event.ReviewEvent;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;

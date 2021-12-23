@@ -1,4 +1,4 @@
-package nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging.event.review;
+package nl.softwarestrijders.waiter.customer.infrastructure.driver.messaging.event;
 
 import java.util.UUID;
 
